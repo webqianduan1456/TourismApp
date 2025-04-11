@@ -1,0 +1,70 @@
+:root {
+  --van-font-size-md: 1.8667vw !important;
+  /* 修改搜索放大镜字体大小 */
+  --van-field-icon-size: var(--van-font-size-md) !important;
+  /* 修改A-Z的标题颜色 */
+  --van-index-anchor-text-color: red !important;
+  /* 修改入驻时间日期样式 */
+  --van-cell-value-color:#2196f3 !important;
+  /* 轻提示样式 */
+  --van-toast-background:rgba(0, 0, 0, 0.2) !important;
+  --van-toast-line-height:2.6667vw !important;
+  --van-toast-text-color:red !important;
+  /* 给<van-cell/>额外添加样式 */
+  .van-cell {
+    cursor: pointer;
+  }
+  /* 修改搜索放大镜颜色 */
+  .van-search__field .van-field__left-icon{
+    color: #ff1313 !important;
+  }
+}
+
+/* 媒体查询 */
+/* 手机配置 */
+@media screen and (max-width: 1000px) {
+  .van-tab__text--ellipsis {
+    height: 4.6667vw !important;
+    padding-top: 2.3333vw;
+  }
+}
+
+/* 电脑配置 */
+@media screen and (min-width: 1000px) {
+  :root {
+    --van-index-bar-index-line-height: 1.2vw !important;
+    --van-index-bar-index-font-size: 22px !important;
+  }
+
+  .van-tab__text--ellipsis {
+    height: 2.6667vw !important;
+    padding-top: 1.3333vw;
+  }
+
+  /* 按钮尺寸 */
+  .van-button {
+    height: 6.4vw !important;
+  }
+}
+
+/* 应用到 body 元素，设置整体页面的字体 */
+body {
+  font-size: 1.8667vw;
+  font-family: "楷体", "微软雅黑", "Microsoft YaHei", "宋体", SimSun, Arial, "Helvetica Neue", Helvetica, Times New Roman, sans-serif;
+  box-sizing: border-box;
+}
+
+/* 应用到 h1 标题元素 */
+h1 {
+  font-family: "黑体", "Microsoft JhengHei", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* 应用到段落 p 元素 */
+p {
+  font-family: "宋体", SimSun, Arial, "Helvetica Neue", Helvetica, Times New Roman, sans-serif;
+}
+
+/* 应用到代码 code 元素 */
+code {
+  font-family: Consolas, "Courier New", monospace;
+}
