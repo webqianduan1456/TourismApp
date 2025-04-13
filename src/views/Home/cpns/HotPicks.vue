@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { userHomeStore } from '@/stores/modules/home'
-import { useScroll } from '@/hooks/scroll'
 import HomeHouseV3 from '@/components/HomeHouse-v3/HomeHouse-v3.vue'
 import HomeHouseV9 from '@/components/HomeHouse-v9/HomeHouse-v9.vue'
 
 // 获取用户首页的 store
 const userHomeStores = userHomeStore()
 userHomeStores.fetchAllHomeHouseList()
-// 使用封装的 useScroll Hook，传入加载更多数据的方法
-useScroll(() => {
-  userHomeStores.fetchAllHomeHouseList()
-})
 
 </script>
 
@@ -27,6 +22,7 @@ useScroll(() => {
         <HomeHouseV9 v-else-if="item.discoveryContentType === 9" :item-data="item.data" />
       </template>
     </div>
+
   </div>
 </template>
 

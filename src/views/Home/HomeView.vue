@@ -1,43 +1,27 @@
 <script setup lang="ts">
 import router from '@/router';
-import { useCityStore } from '@/stores/modules/city';
 import getAssetUrl from '@/utils/getAssetUrl';
 import TNavBar from '@/views/Home/cpns/TNavBar.vue';
-import StayDays from '@/views/Home/cpns/StayDays.vue'
+import StayDays from '@/views/Home/cpns/StayDays.vue';
 import { ref } from 'vue';
-import { userHomeStore } from '@/stores/modules/home';
-import { storeToRefs } from 'pinia';
 import HotPicks from '@/views/Home/cpns/HotPicks.vue';
-const useCityStores = useCityStore()
-const userHomeStores = userHomeStore()
-userHomeStores.fetchAllHomeData()
-userHomeStores.fetchAllHomeCategories()
+import LocationView from '@/views/Home/cpns/LocationView.vue';
+import { storeToRefs } from 'pinia';
+import { userHomeStore } from '@/stores/modules/home';
+import HeadFixation from '@/views/Home/cpns/HeadFixation.vue';
+// stores
+const userHomeStores = userHomeStore();
+userHomeStores.fetchAllHomeData();
+userHomeStores.fetchAllHomeCategories();
 
-const { HomeStayDate } = storeToRefs(userHomeStores)
-// 获取当前用户位置
-const LocationInfo = () => {
-  navigator.geolocation.getCurrentPosition(
-    res => {
-      console.log(res);
-
-    },
-    err => {
-      console.log(err);
-    },
-  )
-}
-// 跳转指定城市
-const CityJump = () => {
-  router.push('/Search')
-}
-// defineEmits
+const { HomeStayDate } = storeToRefs(userHomeStores);
+// defineEmits数据
 const NewBeforeDates = ref('')
 const NewBehindDates = ref('')
 const StayDaysDates = (NewBeforeDate: string, NewBehindDate: string) => {
   NewBeforeDates.value = NewBeforeDate
   NewBehindDates.value = NewBehindDate
 }
-
 // 跳转住宿选着区
 const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
   router.push({
@@ -51,10 +35,11 @@ const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
 // 景点查询
 const getAttractions = ref('')
 
+
+
 </script>
 
 <template>
-
   <!-- 标题 -->
   <div>
     <TNavBar></TNavBar>
@@ -63,23 +48,13 @@ const getAttractions = ref('')
       <img :src="getAssetUrl('xjiang.jpg')" alt="">
     </div>
     <!-- 位置 -->
-    <div class="Location">
-
-      <div class="city" @click="CityJump">
-        <i :style="{ backgroundImage: `url(${getAssetUrl('Locations.svg')})` }"></i>
-        <span>{{ useCityStores.CurrentCity.cityName }}</span>
-      </div>
-      <div class="CurrentlyLocation" @click="LocationInfo()">
-        <span>位置</span>
-        <i :style="{ backgroundImage: `url(${getAssetUrl('Location.svg')})` }"></i>
-      </div>
-    </div>
+    <LocationView />
     <!-- 入驻时间,景点,便捷导航 -->
     <div class="Content">
       <!-- 入驻时间 -->
       <StayDays @StayDaysDate="StayDaysDates"></StayDays>
       <!-- 景点查询 -->
-      <van-search left-icon="" v-model="getAttractions" shape="round" placeholder="关键字/位置/民宿名" />
+      <van-search v-model="getAttractions" shape="round" placeholder="关键字/位置/民宿名" />
       <div class="SearchContent">
         <!-- 选着地区 -->
         <div class="Contents">
@@ -98,21 +73,28 @@ const getAttractions = ref('')
       </div>
       <!-- 便捷导航 -->
       <div class="Convenience">
-        <template v-for="(item, index) in userHomeStores.HomeCategories" :key="index">
+        <template v-for="(item, index) in userHomeStores?.HomeCategories" :key="index">
           <div class="ConvenienceContent">
             <img :src="item?.pictureUrl" alt="">
             <span>{{ item?.title }}</span>
           </div>
         </template>
-      </div>
-      <!-- 热门精选 -->
-      <HotPicks></HotPicks>
+       </div>
+
     </div>
+    <!-- 头部固定搜索栏 -->
+    <HeadFixation />
+    <!-- 热门精选 -->
+    <HotPicks></HotPicks>
   </div>
 </template>
 
 <style scoped lang="less">
 @import "@/common/less/Home/HomeVariable.less";
+
+.HomeView {
+  position: relative;
+}
 
 .imges {
   height: 35vw;
@@ -123,47 +105,6 @@ const getAttractions = ref('')
   }
 }
 
-.Location {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 7vw;
-  padding: @cpn_padding;
-
-  .city {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-
-    i {
-      display: block;
-      width: 2.4vw;
-      height: 2.4vw;
-      background-size: cover;
-    }
-
-    span {
-      transform: scale(0.7);
-      cursor: pointer;
-    }
-
-  }
-
-  .CurrentlyLocation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-
-    i {
-      display: block;
-      width: 2.4vw;
-      height: 2.4vw;
-      background-size: cover;
-    }
-  }
-}
 
 .Content {
 

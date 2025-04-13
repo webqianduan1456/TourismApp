@@ -1,7 +1,10 @@
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 // 自定义 Hook：监听滚动事件并触发传入的回调函数
-export function useScroll(fetchMoreData: () => void) {
+export function useScroll(fetchMoreData: () => void = () => {}) {
+  const clientHeight = ref(0)
+  const scrollTop = ref(0)
+  const scrollHeight = ref(0)
 
   if (typeof fetchMoreData !== 'function') {
     console.error('fetchMoreData 必须是一个函数')
@@ -15,12 +18,12 @@ export function useScroll(fetchMoreData: () => void) {
     if (isThrottled) return // 如果处于节流状态，直接返回
     isThrottled = true
     setTimeout(() => {
-      const clientHeight = document.documentElement.clientHeight // 可视区域高度
-      const scrollTop = document.documentElement.scrollTop // 滚动条距离顶部的距离
-      const scrollHeight = document.documentElement.scrollHeight // 文档总高度
+      clientHeight.value = document.documentElement.clientHeight // 可视区域高度
+      scrollTop.value = document.documentElement.scrollTop // 滚动条距离顶部的距离
+      scrollHeight.value = document.documentElement.scrollHeight // 文档总高度
 
       // 判断是否滚动到底部（考虑偏移量）
-      if (clientHeight + scrollTop >= scrollHeight) {
+      if (clientHeight.value + scrollTop.value >= scrollHeight.value) {
         fetchMoreData() // 调用传入的回调函数
       }
 
@@ -38,5 +41,6 @@ export function useScroll(fetchMoreData: () => void) {
     window.removeEventListener('scroll', handleScroll)
   })
 
+  return { clientHeight, scrollTop, scrollHeight }
 }
 

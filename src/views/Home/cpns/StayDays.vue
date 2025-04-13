@@ -3,6 +3,10 @@ import { StayCount, utilsDate } from '@/utils/dayjs';
 import dayjs from 'dayjs';
 import { computed, ref } from 'vue';
 import { showFailToast } from 'vant';
+
+import  UserMainStore  from '@/stores/common/mainStore';
+const UserMainStores = UserMainStore();
+// const UserMainStores = UserMainStore();
 const emit = defineEmits(['StayDaysDate'])
 //-----控制日期弹窗显示与隐藏-----
 const CurrentShow = ref(false)
@@ -16,6 +20,9 @@ const behindDate = ref(dayjs(dayjs().add(AddDefaultStay.value, 'day')).format('Y
 // 转化成(MM-DD)日期格式用于界面展示,(格式已转换)
 const NewBeforeDate = computed(() => utilsDate(beforeDate.value))
 const NewBehindDate = computed(() => utilsDate(behindDate.value))
+// 将公共数据存储到mainStore
+UserMainStores.MainBeforeDate = NewBeforeDate.value
+UserMainStores.MainBehindDate = NewBehindDate.value
 
 const Days = computed(() => StayCount(beforeDate.value, behindDate.value));
 
