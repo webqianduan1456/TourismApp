@@ -6,11 +6,9 @@ import UserMainStore from '@/stores/common/mainStore';
 // store
 const userHomeStores = userHomeStore();
 const UserMainStores = UserMainStore();
-
 // 对数据做转换(04月6日 ——> 4.6)
 const MainBefore = ref(UserMainStores.MainBeforeDate.replace("月", ".").replace("日", "").replace('0', ''))
 const MainBehind = ref(UserMainStores.MainBehindDate.replace("月", ".").replace("日", "").replace('0', ''))
-
 // @ts-expect-error (不需要检测)
 // 鼠标滚动到底部时触发
 const { scrollTop } = useScroll(() => {

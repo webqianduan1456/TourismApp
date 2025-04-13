@@ -35,8 +35,6 @@ const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
 // 景点查询
 const getAttractions = ref('')
 
-
-
 </script>
 
 <template>

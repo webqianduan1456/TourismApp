@@ -2,11 +2,9 @@
 import { userHomeStore } from '@/stores/modules/home'
 import HomeHouseV3 from '@/components/HomeHouse-v3/HomeHouse-v3.vue'
 import HomeHouseV9 from '@/components/HomeHouse-v9/HomeHouse-v9.vue'
-
 // 获取用户首页的 store
 const userHomeStores = userHomeStore()
 userHomeStores.fetchAllHomeHouseList()
-
 </script>
 
 <template>
