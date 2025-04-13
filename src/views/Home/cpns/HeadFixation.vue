@@ -41,7 +41,6 @@ const { scrollTop } = useScroll(() => {
     </div>
   </div>
 </template>
-
 <style scoped lang="less">
 @FontSize: 4vw;
 
