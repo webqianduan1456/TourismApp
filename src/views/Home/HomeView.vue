@@ -124,6 +124,7 @@ const getAttractions = ref('')
     }
   }
 }
+
 .Convenience {
   display: flex;
   justify-content: flex-start;
