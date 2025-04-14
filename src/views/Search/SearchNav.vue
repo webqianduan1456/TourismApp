@@ -19,7 +19,6 @@ CityStores.fetchAllCityDate()
 const { getCityAllD } = storeToRefs(CityStores)
 
 
-
 </script>
 
 <template>
@@ -30,7 +29,7 @@ const { getCityAllD } = storeToRefs(CityStores)
     <div class="vanTabs">
       <van-tabs v-model:active="activeName" color="red">
         <template v-for="(item, key) in getCityAllD" :key="key">
-          <van-tab :title="(item as any)?.title" :name="key">
+          <van-tab :title="item?.title" :name="key">
           </van-tab>
         </template>
       </van-tabs>

@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { TabBar_Navigation_Value } from '@/assets/LocalData/TabBar_Navigation_Data'
+
+import { TabBar_Navigation_Value, type TabBarNavigationItem } from '@/assets/LocalData/TabBar_Navigation_Data'
 import getAssetUrl from '@/utils/getAssetUrl.ts'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-
-
 const currentIndex = ref(0);
 const router = useRouter()
 // TabBar_Navigation状态切换
-const TN_Switch_Page: (item: any, index: number) => void = (item, index) => {
+const TN_Switch_Page: (item: TabBarNavigationItem, index: number) => void = (item, index) => {
   currentIndex.value = index
   router.push(item.path)
 }
@@ -23,7 +22,7 @@ const TN_Switch_Page: (item: any, index: number) => void = (item, index) => {
         <!-- 切换图片活跃与休眠状态 -->
         <img v-if="currentIndex === index" :src=getAssetUrl(item.TabBar_Navigation_ImgSrcS) alt="">
         <img v-else :src=getAssetUrl(item.TabBar_Navigation_ImgSrc) alt="">
-
+         <!-- 文本内容 -->
         <span>{{ item.TabBar_Navigation_Text }}</span>
       </div>
     </template>

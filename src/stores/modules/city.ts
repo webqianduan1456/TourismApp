@@ -3,7 +3,11 @@ import { getCityData } from "@/network";
 import { defineStore } from "pinia";
 // type
 interface City {
-  getCityAllD: object
+  getCityAllD: {
+    cityGroup:{
+      title:string,
+    }
+  }
   CurrentCity: {
     cityName?: string;
   }
@@ -12,7 +16,11 @@ interface City {
 const useCityStore = defineStore('city', {
   state: (): City => ({
     // 获取所有城市数据
-    getCityAllD: {},
+    getCityAllD: {
+      cityGroup:{
+        title: ''
+      }
+    },
     // 获取当前选择的城市数据
     CurrentCity: {
       cityName: '北京'

@@ -15,6 +15,5 @@
         "src/*"
       ]
     },
-    "noImplicitAny": false,
   }
 }

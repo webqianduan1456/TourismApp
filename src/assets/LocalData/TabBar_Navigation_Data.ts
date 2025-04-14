@@ -1,4 +1,14 @@
-const TabBar_Navigation_Value = [
+
+// type
+interface TabBarNavigationItem {
+  TabBar_Navigation_Text: string;
+  CssName: string;
+  TabBar_Navigation_ImgSrc: string;
+  TabBar_Navigation_ImgSrcS: string;
+  path: string;
+}
+// 切换栏数据
+const TabBar_Navigation_Value: TabBarNavigationItem[] = [
   {
     TabBar_Navigation_Text: "首页",
     CssName: "home",
@@ -32,3 +42,4 @@ const TabBar_Navigation_Value = [
 ]
 
 export { TabBar_Navigation_Value }
+export type { TabBarNavigationItem }
