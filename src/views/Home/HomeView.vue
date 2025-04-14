@@ -78,7 +78,6 @@ const getAttractions = ref('')
           </div>
         </template>
        </div>
-
     </div>
     <!-- 头部固定搜索栏 -->
     <HeadFixation />

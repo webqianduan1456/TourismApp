@@ -3,19 +3,62 @@ import { defineStore } from "pinia";
 // type
 
 interface Home {
-  HomeStayDate: Array<any>
-  HomeCategories: object
-  HomeHouseList: Array<any>
+  HomeStayDate: [
+    {
+      tagText: {
+        color: string
+        background: {
+          color: string
+        }
+        text: string
+      }
+
+    }
+  ]
+  HomeCategories: [
+    {
+      pictureUrl: string
+      title: string
+    }
+  ]
+  HomeHouseList: [
+    {
+      discoveryContentType: number,
+      data: object
+    }
+  ]
+
   PageNumber: number
 }
 const userHomeStore = defineStore('home', {
   state: (): Home => ({
     // 民宿数据获取
-    HomeStayDate: [],
+    HomeStayDate: [
+      {
+        tagText: {
+          color: '',
+          background: {
+            color: ''
+          },
+          text: '',
+        }
+
+      }
+    ],
     // 热门数据获取
-    HomeCategories: {},
+    HomeCategories: [
+      {
+        pictureUrl: '',
+        title: ''
+      }
+    ],
     // 热门精选
-    HomeHouseList: [],
+    HomeHouseList: [
+      {
+        discoveryContentType: 0,
+        data: {}
+      }
+    ],
     // 页数
     PageNumber: 1,
   }),
