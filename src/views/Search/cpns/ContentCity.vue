@@ -11,7 +11,7 @@ const props = defineProps({
   }
 })
 // 符号#
-const Symbol = computed(() => {
+const Symbols = computed(() => {
   // @ts-expect-error(item.group服务器响应的数据)
   const newSymbol = props.ContentCityDate?.cities?.map((item:string) => item.group)
   newSymbol.unshift("#")
@@ -27,7 +27,7 @@ const ObtainCity = (item:object) => {
 
 <template>
   <div class="Content">
-    <van-index-bar highlight-color="red" :index-list="Symbol" :sticky="false">
+    <van-index-bar highlight-color="red" :index-list="Symbols" :sticky="false">
       <!-- 1 -->
       <van-index-anchor :index="'热门'" />
       <div class="HotCity">

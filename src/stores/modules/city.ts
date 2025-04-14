@@ -5,6 +5,11 @@ import { defineStore } from "pinia";
 interface City {
   getCityAllD: {
     cityGroup:{
+      cities:[
+        {
+          group:string,
+        }
+      ]
       title:string,
     }
   }
@@ -18,6 +23,11 @@ const useCityStore = defineStore('city', {
     // 获取所有城市数据
     getCityAllD: {
       cityGroup:{
+        cities:[
+          {
+            group:'',
+          }
+        ],
         title: ''
       }
     },
