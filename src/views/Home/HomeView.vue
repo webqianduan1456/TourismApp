@@ -103,7 +103,6 @@ const getAttractions = ref('')
   }
 }
 
-
 .Content {
 
   .SearchContent {
@@ -125,7 +124,6 @@ const getAttractions = ref('')
     }
   }
 }
-
 .Convenience {
   display: flex;
   justify-content: flex-start;

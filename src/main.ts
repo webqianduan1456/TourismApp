@@ -11,7 +11,6 @@ import '@/assets/css/index.css'
 // (vant工具包)解决pc端一些方法无法调用问题
 import '@vant/touch-emulator';
 
-
 const app = createApp(App)
 
 app.use(router)
