@@ -19,7 +19,7 @@ const LocationInfo = () => {
 
 // 跳转指定城市
 const CityJump = () => {
-  const cityName = useCityStores.CurrentCity.cityName;
+  const cityName = useCityStores?.CurrentCity?.cityName;
   router.push({ path: '/Search', query: { city: cityName } });
 };
 </script>
@@ -28,7 +28,7 @@ const CityJump = () => {
   <div class="Location">
     <div class="city" @click="CityJump">
       <i :style="{ backgroundImage: `url(${getAssetUrl('Locations.svg')})` }"></i>
-      <span>{{ useCityStores.CurrentCity.cityName }}</span>
+      <span>{{ useCityStores?.CurrentCity?.cityName }}</span>
     </div>
     <div class="CurrentlyLocation" @click="LocationInfo()">
       <span>位置</span>
