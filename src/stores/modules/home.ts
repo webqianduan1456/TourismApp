@@ -1,35 +1,7 @@
 import { getHomeData, getHomeCategories, getHomeHouseList } from "@/network/modules/home";
 import { defineStore } from "pinia";
-// type
+import type { Home } from "../type/type";
 
-interface Home {
-  HomeStayDate: [
-    {
-      tagText: {
-        color: string
-        background: {
-          color: string
-        }
-        text: string
-      }
-
-    }
-  ]
-  HomeCategories: [
-    {
-      pictureUrl: string
-      title: string
-    }
-  ]
-  HomeHouseList: [
-    {
-      discoveryContentType: number,
-      data: object
-    }
-  ]
-
-  PageNumber: number
-}
 const userHomeStore = defineStore('home', {
   state: (): Home => ({
     // 民宿数据获取
@@ -56,11 +28,13 @@ const userHomeStore = defineStore('home', {
     HomeHouseList: [
       {
         discoveryContentType: 0,
-        data: {}
+        data: {
+          houseId: 0,
+        }
       }
     ],
     // 页数
-    PageNumber: 1,
+    PageNumber:1,
   }),
   actions: {
     // 民宿数据获取
@@ -75,12 +49,9 @@ const userHomeStore = defineStore('home', {
     },
     // 热门精选
     async fetchAllHomeHouseList() {
-
-      const res = await getHomeHouseList(this.PageNumber)
-      this.HomeHouseList.push(...res.data.data)
+      const res = await getHomeHouseList(this.PageNumber = 1)
+      this.HomeHouseList?.push(...res.data.data)
       this.PageNumber++ // 安全递增页数
-      console.log(this.PageNumber)
-
     }
   }
 })

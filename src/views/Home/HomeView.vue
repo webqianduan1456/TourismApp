@@ -9,7 +9,7 @@ import LocationView from '@/views/Home/cpns/LocationView.vue';
 import { storeToRefs } from 'pinia';
 import { userHomeStore } from '@/stores/modules/home';
 import HeadFixation from '@/views/Home/cpns/HeadFixation.vue';
-// stores
+
 const userHomeStores = userHomeStore();
 userHomeStores.fetchAllHomeData();
 userHomeStores.fetchAllHomeCategories();
@@ -24,6 +24,8 @@ const StayDaysDates = (NewBeforeDate: string, NewBehindDate: string) => {
 }
 // 跳转住宿选着区
 const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
+
+
   router.push({
     path: "/ResidenceSearch",
     query: {
@@ -32,6 +34,8 @@ const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
     }
   })
 }
+
+
 // 景点查询
 const getAttractions = ref('')
 
@@ -77,7 +81,7 @@ const getAttractions = ref('')
             <span>{{ item?.title }}</span>
           </div>
         </template>
-       </div>
+      </div>
     </div>
     <!-- 头部固定搜索栏 -->
     <HeadFixation />

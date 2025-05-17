@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import TabBar from '@/components/tabbar/tabbarView.vue'
 import { useRoute } from 'vue-router';
+import LoadingView from '@/views/Loading/LoadingView.vue'
+
+
 const route = useRoute()
+
+
+
 </script>
 
 <template>
-   <div class="app">
+  <div class="app">
     <router-view />
     <TabBar v-if="!route.meta.isHide"></TabBar>
-   </div>
+    <LoadingView ></LoadingView>
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped lang="less"></style>

@@ -1,6 +1,6 @@
 let BASE_URL:string = 'http://codercba.com:1888/api'
 const SET_TIMEOUT:number = 8000
-
+// http://codercba.com:1888/api
 if (import.meta.env.MODE === 'development') {
   // 开发环境
   BASE_URL = 'http://codercba.com:1888/api'

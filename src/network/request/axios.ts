@@ -2,15 +2,17 @@ import axios from "axios";
 import type { AxiosInstance } from "axios";
 import type { YQRequestconfig } from "./type";
 
+
+
 class YQaxios {
   instance: AxiosInstance;
   // 封装YQaxios实例
   constructor(config: YQRequestconfig) {
     this.instance = axios.create(config);
     // 拦截器
-    // use里面是两个成功和失败的函数
-    this.instance.interceptors.request.use(config.interceptor?.YQsucceedRequest, config.interceptor?.YQerrRequest);
-    this.instance.interceptors.response.use(config.interceptor?.YQsucceedRespones, config.interceptor?.YQerrRespones);
+    // use里面是两个成功和失败的初始默认函数(查看DefaultAxios一目了然)
+    this.instance.interceptors.request.use(config?.interceptor?.YQsucceedRequest, config.interceptor?.YQerrRequest);
+    this.instance.interceptors.response.use(config?.interceptor?.YQsucceedRespones, config.interceptor?.YQerrRespones);
   }
 
   // 二层封装
@@ -31,6 +33,7 @@ class YQaxios {
           resolve(res);
         })
         .catch((err) => {
+          // 改变加载状态
           reject(err);
         });
     });

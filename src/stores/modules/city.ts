@@ -1,31 +1,16 @@
 
 import { getCityData } from "@/network";
 import { defineStore } from "pinia";
-// type
-interface City {
-  getCityAllD: {
-    cityGroup:{
-      cities:[
-        {
-          group:string,
-        }
-      ]
-      title:string,
-    }
-  }
-  CurrentCity: {
-    cityName?: string;
-  }
-}
+import type { City } from "../type/type";
 
 const useCityStore = defineStore('city', {
   state: (): City => ({
     // 获取所有城市数据
     getCityAllD: {
-      cityGroup:{
-        cities:[
+      cityGroup: {
+        cities: [
           {
-            group:'',
+            group: '',
           }
         ],
         title: ''

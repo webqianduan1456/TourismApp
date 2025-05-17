@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { userHomeStore } from '@/stores/modules/home';
 import { useScroll } from '@/hooks/scroll';
-import { ref } from 'vue'
 import UserMainStore from '@/stores/common/mainStore';
+import dayjs from 'dayjs';
 // store
 const userHomeStores = userHomeStore();
 const UserMainStores = UserMainStore();
-// 对数据做转换(04月6日 ——> 4.6)
-const MainBefore = ref(UserMainStores.MainBeforeDate.replace("月", ".").replace("日", "").replace('0', ''))
-const MainBehind = ref(UserMainStores.MainBehindDate.replace("月", ".").replace("日", "").replace('0', ''))
 // @ts-expect-error (不需要检测)
 // 鼠标滚动到底部时触发
 const { scrollTop } = useScroll(() => {
@@ -17,16 +14,16 @@ const { scrollTop } = useScroll(() => {
 </script>
 
 <template>
-  <div class="HeadFixation" v-if="scrollTop >= 400">
+  <div class="HeadFixation" v-show="scrollTop >= 400">
     <!-- 居住和离开日期显示 -->
     <div class="date-picker">
       <div class="check-in">
         <span>住</span>
-        <span>{{ MainBefore }}</span>
+        <span>{{ dayjs(UserMainStores.MainBeforeDate).format('M.DD') }}</span>
       </div>
       <div class="check-out">
         <span>离</span>
-        <span>{{ MainBehind }}<i>◢</i></span>
+        <span>{{ dayjs(UserMainStores.MainBehindDate).format('M.DD') }}<i>◢</i></span>
       </div>
     </div>
     <!-- 搜索框和搜索图标 -->
@@ -94,7 +91,7 @@ const { scrollTop } = useScroll(() => {
       align-items: center;
       flex: 1;
       border: none;
-      border-radius: 4px;
+      border-radius: .5333vw;
       padding: 0 1vw;
       background-color: #fff;
 

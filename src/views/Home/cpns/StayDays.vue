@@ -4,33 +4,28 @@ import dayjs from 'dayjs';
 import { computed, ref } from 'vue';
 import { showFailToast } from 'vant';
 
-import  UserMainStore  from '@/stores/common/mainStore';
+import UserMainStore from '@/stores/common/mainStore';
 const UserMainStores = UserMainStore();
-// const UserMainStores = UserMainStore();
 const emit = defineEmits(['StayDaysDate'])
+
 //-----控制日期弹窗显示与隐藏-----
 const CurrentShow = ref(false)
 const EndShow = ref(false)
 
 // ------(停留天数,开始日期,结束日期)------
 const AddDefaultStay = ref(3)
-// 默认开始日期到结束日期,(格式未转换)
-const beforeDate = ref(dayjs(Date()).format('YYYY-MM-DD'))
-const behindDate = ref(dayjs(dayjs().add(AddDefaultStay.value, 'day')).format('YYYY-MM-DD'))
-// 转化成(MM-DD)日期格式用于界面展示,(格式已转换)
-const NewBeforeDate = computed(() => utilsDate(beforeDate.value))
-const NewBehindDate = computed(() => utilsDate(behindDate.value))
-// 将公共数据存储到mainStore
-UserMainStores.MainBeforeDate = NewBeforeDate.value
-UserMainStores.MainBehindDate = NewBehindDate.value
 
-const Days = computed(() => StayCount(beforeDate.value, behindDate.value));
+// 转化成(MM-DD)日期格式用于界面展示,(格式已转换)
+const NewBeforeDate = computed(() => utilsDate(UserMainStores.MainBeforeDate))
+const NewBehindDate = computed(() => utilsDate(UserMainStores.MainBehindDate))
+
+const Days = computed(() => StayCount(UserMainStores.MainBeforeDate, UserMainStores.MainBehindDate));
 
 // 重置数据
 const ResetDate = () => {
 
-  beforeDate.value = dayjs(Date()).format('YYYY-MM-DD')
-  behindDate.value = dayjs(dayjs().add(AddDefaultStay.value, 'day')).format('YYYY-MM-DD')
+  UserMainStores.MainBeforeDate = dayjs(Date()).format('YYYY-MM-DD')
+  UserMainStores.MainBehindDate = dayjs(dayjs().add(AddDefaultStay.value, 'day')).format('YYYY-MM-DD')
   showFailToast({
     message: '停留天数不能为负',
     duration: 3000
@@ -38,10 +33,10 @@ const ResetDate = () => {
 
 }
 // 选择开始日期执行回调
-const CurrentConfirm = (value: object) => {
+const CurrentConfirm = (value: string) => {
   CurrentShow.value = false
-  beforeDate.value = dayjs(String(value)).format('YYYY-MM-DD')
-
+  // 将公共数据存储到mainStore
+  UserMainStores.MainBeforeDate = dayjs(String(value)).format('YYYY-MM-DD')
   // 入驻天数出现负数重置数据
   if (Days.value <= 0) {
     ResetDate()
@@ -52,7 +47,7 @@ const CurrentConfirm = (value: object) => {
 // 选择结束日期执行回调
 const EndConfirm = (value: object) => {
   EndShow.value = false
-  behindDate.value = dayjs(String(value)).format('YYYY-MM-DD')
+  UserMainStores.MainBehindDate = dayjs(String(value)).format('YYYY-MM-DD')
   // 入驻天数出现负数重置数据
   if (Days.value <= 0) {
     ResetDate()
@@ -60,7 +55,7 @@ const EndConfirm = (value: object) => {
 
 }
 // 发出事件
-emit('StayDaysDate',NewBeforeDate.value,NewBehindDate.value)
+emit('StayDaysDate', NewBeforeDate.value, NewBehindDate.value)
 </script>
 
 <template>

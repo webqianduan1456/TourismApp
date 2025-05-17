@@ -20,4 +20,12 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  // server:{
+  //  port:5173,
+  //  proxy:{
+  //   '/user':{
+  //     target:'http://47.122.47.101:8889'
+  //   }
+  //  }
+  // }
 })

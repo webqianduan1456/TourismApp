@@ -4,12 +4,8 @@
 
 <template>
   <div>
-    居住
-    <div>{{  $route.query.BeforeDate}}</div>
-    <div>{{  $route.query.BehindDate }}</div>
+     11111
   </div>
 </template>
 
-<style scoped lang="less">
-
-</style>
+<style scoped lang="less"></style>

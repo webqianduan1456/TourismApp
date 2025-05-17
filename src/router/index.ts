@@ -50,6 +50,14 @@ const router = createRouter({
       meta:{
         isHide:true,
       }
+    },
+    {
+      name:'DetailsView',
+      path:'/DetailsView/:id',
+      component: ()=> import('@/views/Details/DetailsView.vue'),
+      meta:{
+        isHide:true,
+      }
     }
   ]
 })
