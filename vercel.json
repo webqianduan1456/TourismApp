@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/swiper/img",
-      "destination": "http://47.122.47.101:8889/swiper/img"
+      "source": "/home/:path*",
+      "destination": "http://47.122.47.101:8889/home/:path*"
     }
   ]
 }
