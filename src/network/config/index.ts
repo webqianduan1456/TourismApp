@@ -6,7 +6,7 @@ if (import.meta.env.MODE === 'development') {
   BASE_URL = 'http://47.122.47.101:8889'
 }else{
   // 生产环境
-  BASE_URL = ''
+  BASE_URL = 'http://47.122.47.101:8889'
 }
 export  {
   BASE_URL,

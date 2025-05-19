@@ -24,7 +24,8 @@ export default defineConfig({
    port:3000,
    proxy:{
     '/swiper':{
-      target:'http://47.122.47.101:8889'
+      target:'http://47.122.47.101:8889',
+      changeOrigin:true,
     }
    }
   }
