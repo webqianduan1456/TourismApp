@@ -1,4 +1,4 @@
-let BASE_URL:string = 'http://47.122.47.101:8889/api'
+let BASE_URL:string = 'http://47.122.47.101:8889'
 const SET_TIMEOUT:number = 8000
 // http://codercba.com:1888/api
 if (import.meta.env.MODE === 'development') {
@@ -6,7 +6,7 @@ if (import.meta.env.MODE === 'development') {
   BASE_URL = '/swiper'
 }else{
   // 生产环境
-  BASE_URL = 'https://47.122.47.101:8889/api/swiper'
+  BASE_URL = 'https://47.122.47.101:8889'
 }
 export  {
   BASE_URL,
