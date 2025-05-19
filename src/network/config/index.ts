@@ -6,7 +6,7 @@ if (import.meta.env.MODE === 'development') {
   BASE_URL = '/swiper'
 }else{
   // 生产环境
-  BASE_URL = 'http://47.122.47.101:8889'
+  BASE_URL = 'https://47.122.47.101:8889/swiper'
 }
 export  {
   BASE_URL,
