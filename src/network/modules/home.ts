@@ -4,7 +4,7 @@ import { DefaultAxios } from ".."
 // 获取轮播图数据
 export function getSwiperImg() {
   return DefaultAxios.get({
-    url: "swiper/img",
+    url: "home/swiperimg",
     headers: new AxiosHeaders(),
   }).then(res => {
     return res; // 返回响应数据
