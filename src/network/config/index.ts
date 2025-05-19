@@ -3,10 +3,10 @@ const SET_TIMEOUT:number = 8000
 // http://codercba.com:1888/api
 if (import.meta.env.MODE === 'development') {
   // 开发环境
-  BASE_URL = '/swiper'
+  BASE_URL = ''
 }else{
   // 生产环境
-  BASE_URL = 'https://47.122.47.101:8889'
+  BASE_URL = 'http://47.122.47.101:8889'
 }
 export  {
   BASE_URL,
