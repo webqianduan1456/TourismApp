@@ -19,10 +19,10 @@ import getAssetUrl from '@/utils/getAssetUrl';
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 6vw;
-  color: red;
+  height: 10vw;
+  color: #ff5722;
   font-weight: 600;
-  background-color: aqua;
+  background:linear-gradient(90deg, rgb(146 165 232) 0%, rgb(70 255 116) 100%);
   padding: @cpn_padding;
 
   .nva_bar_text {

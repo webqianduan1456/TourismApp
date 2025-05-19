@@ -15,6 +15,13 @@ export interface City {
 }
 
 export interface Home {
+  SwiperImg?: [
+    {
+      id: number;
+      img_url: string;
+      img_message: string;
+    }
+  ];
   HomeStayDate?: [
     {
       tagText: {
@@ -270,8 +277,8 @@ export interface detail {
           ];
         };
         positionModule: {
-          latitude:number;
-          longitude:number;
+          latitude: number;
+          longitude: number;
         };
       };
       introductionModule?: {
@@ -292,3 +299,5 @@ export interface detail {
     };
   };
 }
+
+// 轮播图

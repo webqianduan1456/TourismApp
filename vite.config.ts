@@ -23,8 +23,8 @@ export default defineConfig({
   // server:{
   //  port:5173,
   //  proxy:{
-  //   '/user':{
-  //     target:'http://47.122.47.101:8889'
+  //   '/swiper':{
+  //     target:'http://127.0.0.1:3000'
   //   }
   //  }
   // }

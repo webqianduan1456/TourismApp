@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import router from '@/router';
-import getAssetUrl from '@/utils/getAssetUrl';
+// import getAssetUrl from '@/utils/getAssetUrl';
 import TNavBar from '@/views/Home/cpns/TNavBar.vue';
 import StayDays from '@/views/Home/cpns/StayDays.vue';
 import { ref } from 'vue';
@@ -9,12 +9,14 @@ import LocationView from '@/views/Home/cpns/LocationView.vue';
 import { storeToRefs } from 'pinia';
 import { userHomeStore } from '@/stores/modules/home';
 import HeadFixation from '@/views/Home/cpns/HeadFixation.vue';
-
+import SwiperView from '@/views/Home/cpns/SwiperView.vue';
+// 请求首页数据
 const userHomeStores = userHomeStore();
 userHomeStores.fetchAllHomeData();
 userHomeStores.fetchAllHomeCategories();
-
-const { HomeStayDate } = storeToRefs(userHomeStores);
+userHomeStores.fetchAllSwiperDate();
+// 获取stores数据
+const { HomeStayDate, SwiperImg } = storeToRefs(userHomeStores);
 // defineEmits数据
 const NewBeforeDates = ref('')
 const NewBehindDates = ref('')
@@ -34,8 +36,6 @@ const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
     }
   })
 }
-
-
 // 景点查询
 const getAttractions = ref('')
 
@@ -46,9 +46,7 @@ const getAttractions = ref('')
   <div>
     <TNavBar></TNavBar>
     <!-- 轮播图 -->
-    <div class="imges">
-      <img :src="getAssetUrl('xjiang.jpg')" alt="">
-    </div>
+    <SwiperView :SwiperData="SwiperImg || []"></SwiperView>
     <!-- 位置 -->
     <LocationView />
     <!-- 入驻时间,景点,便捷导航 -->
@@ -179,5 +177,13 @@ const getAttractions = ref('')
       white-space: nowrap;
     }
   }
+}
+
+.my-swipe .van-swipe-item {
+  color: #fff;
+  font-size: 7.7333vw;
+  line-height: 45vw;
+  text-align: center;
+  background-color: #39a9ed;
 }
 </style>

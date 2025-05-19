@@ -1,6 +1,17 @@
 // 导入默认的 Axios 实例
 import { AxiosHeaders } from "axios";
 import { DefaultAxios } from ".."
+// 获取轮播图数据
+export function getSwiperImg() {
+  return DefaultAxios.get({
+    url: "/swiper/img",
+    headers: new AxiosHeaders(),
+  }).then(res => {
+    return res; // 返回响应数据
+  }).catch(err => {
+    return err; // 返回错误信息
+  });
+}
 
 // 获取民宿数据
 export function getHomeData() {
@@ -40,5 +51,6 @@ export function getHomeHouseList(PageNumber:number) {
     return err; // 返回错误信息
   });
 }
+
 
 
