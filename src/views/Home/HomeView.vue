@@ -44,7 +44,7 @@ const getAttractions = ref('')
 <template>
   <!-- 标题 -->
   <div>
-    <TNavBar></TNavBar>
+    <TNavBar v-once></TNavBar>
     <!-- 轮播图 -->
     <SwiperView :SwiperData="SwiperImg || []"></SwiperView>
     <!-- 位置 -->

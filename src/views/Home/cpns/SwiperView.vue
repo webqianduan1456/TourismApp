@@ -30,9 +30,4 @@ img {
   width: 100%;
   height: 100%;
 }
-
-.my-swipe .van-swipe-item {
-  height: 28.6667vh;
-  text-align: center
-}
 </style>

@@ -1,14 +1,37 @@
 export interface City {
   getCityAllD: {
-    cityGroup?: {
-      cities?: [
+    Domestic: {
+      id: number;
+      title: string;
+      cityInfo: [
         {
-          group?: string;
+          cityId: number;
+          cityName: "string";
+          gangAoTai: string;
+          hot: string;
+          latitude: string;
+          longitude: string;
+          pinYin: string;
         }
       ];
-      title?: string;
+    };
+    Abroad: {
+      id: number;
+      title: string;
+      cityInfo: [
+        {
+          cityId: number;
+          cityName: "string";
+          gangAoTai: string;
+          hot: string;
+          latitude: string;
+          longitude: string;
+          pinYin: string;
+        }
+      ];
     };
   };
+
   CurrentCity?: {
     cityName?: string;
   };

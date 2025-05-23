@@ -3,7 +3,7 @@ import { DefaultAxios } from ".."
 
 export function getCityData(){
  return DefaultAxios.get({
-   url:"/city/all",
+   url:"home/city",
    headers: new AxiosHeaders(),
  }).then(res =>{
  return res

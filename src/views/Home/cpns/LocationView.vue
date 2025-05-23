@@ -26,10 +26,12 @@ const CityJump = () => {
 
 <template>
   <div class="Location">
+    <!-- 左侧位置跳转 -->
     <div class="city" @click="CityJump">
       <i :style="{ backgroundImage: `url(${getAssetUrl('Locations.svg')})` }"></i>
       <span>{{ useCityStores?.CurrentCity?.cityName }}</span>
     </div>
+    <!-- 右侧获取当前位置 -->
     <div class="CurrentlyLocation" @click="LocationInfo()">
       <span>位置</span>
       <i :style="{ backgroundImage: `url(${getAssetUrl('Location.svg')})` }"></i>
@@ -42,38 +44,39 @@ const CityJump = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 7vw;
-  padding: 1vw;
+  text-align: center;
+  padding: 3vw;
 
   .city {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    font-size: 3.6667vw;
     cursor: pointer;
 
     i {
       display: block;
-      width: 2.4vw;
-      height: 2.4vw;
+      width: 3.3333vw;
+      height: 3.3333vw;
       background-size: cover;
     }
 
     span {
-      transform: scale(0.7);
       cursor: pointer;
     }
   }
 
   .CurrentlyLocation {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    font-size: 3.6667vw;
+
+
 
     i {
       display: block;
-      width: 2.4vw;
-      height: 2.4vw;
+      width: 3.3333vw;
+      height: 3.3333vw;
       background-size: cover;
     }
   }

@@ -1,37 +1,54 @@
-
 import { getCityData } from "@/network";
 import { defineStore } from "pinia";
-import type { City } from "../type/type";
 
-const useCityStore = defineStore('city', {
-  state: (): City => ({
+const useCityStore = defineStore("city", {
+  state: () => ({
     // 获取所有城市数据
     getCityAllD: {
-      cityGroup: {
-        cities: [
+      Domestic: {
+        id: 1,
+        title: "",
+        cityInfo: [
           {
-            group: '',
-          }
+            cityId: 0,
+            cityName: "",
+            gangAoTai: "",
+            hot: "true",
+            latitude: "",
+            longitude: "",
+            pinYin: "",
+          },
         ],
-        title: ''
-      }
-    },
-    // 获取当前选择的城市数据
-    CurrentCity: {
-      cityName: '北京'
+      },
+      Abroad: {
+        id: 1,
+        title: "",
+        cityInfo: [
+          {
+            cityId: 0,
+            cityName: "",
+            gangAoTai: "",
+            hot: "true",
+            latitude: "",
+            longitude: "",
+            pinYin: "",
+          },
+        ],
+      },
     },
 
+    // 获取当前选择的城市数据
+    CurrentCity: {
+      cityName: "北京",
+    },
   }),
   actions: {
     // 获取所有城市数据
     async fetchAllCityDate() {
-      const res = await getCityData()
-      this.getCityAllD = res.data.data
-    }
-  }
-})
+      const res = await getCityData();
+      this.getCityAllD = res.data;
+    },
+  },
+});
 
-
-export {
-  useCityStore
-}
+export { useCityStore };

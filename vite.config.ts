@@ -26,7 +26,8 @@ export default defineConfig({
     '/home':{
       target:'http://47.122.47.101:8889',
       changeOrigin:true,
-    }
+    },
+
    }
   }
 })

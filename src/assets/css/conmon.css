@@ -5,35 +5,55 @@
   /* 修改A-Z的标题颜色 */
   --van-index-anchor-text-color: red !important;
   /* 修改入驻时间日期样式 */
-  --van-cell-value-color:#2196f3 !important;
+  --van-cell-value-color: #2196f3 !important;
   /* 轻提示样式 */
-  --van-toast-background:rgba(0, 0, 0, 0.2) !important;
-  --van-toast-line-height:2.6667vw !important;
-  --van-toast-text-color:red !important;
+  --van-toast-background: rgba(0, 0, 0, 0.2) !important;
+  --van-toast-line-height: 2.6667vw !important;
+  --van-toast-text-color: red !important;
+
   /* 给<van-cell/>额外添加样式 */
   .van-cell {
     cursor: pointer;
   }
+
   /* 修改搜索放大镜颜色 */
-  .van-search__field .van-field__left-icon{
+  .van-search__field .van-field__left-icon {
     color: #ff1313 !important;
   }
 }
 
 /* 媒体查询 */
 /* 手机配置 */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 500px) {
+  :root {
+    --van-font-size: 3.446vw !important;
+    --van-search-action-font-size: 3.446vw !important;
+  }
+
   .van-tab__text--ellipsis {
     height: 4.6667vw !important;
     padding-top: 2.3333vw;
   }
+
+  .my-swipe .van-swipe-item {
+    height: 28.6667vh;
+    text-align: center
+  }
+
+  /* 地理位置样式 */
+  .van-cell,
+  .van-index-anchor,
+  .van-tab__text--ellipsis {
+    font-size: 3.446vw !important;
+  }
+
 }
 
 /* 电脑配置 */
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 800px) {
   :root {
-    --van-index-bar-index-line-height: 1.2vw !important;
-    --van-index-bar-index-font-size: 22px !important;
+    --van-index-bar-index-font-size: 16px !important;
+    --van-font-size: 1.446vw !important;
   }
 
   .van-tab__text--ellipsis {
@@ -45,6 +65,31 @@
   .van-button {
     height: 6.4vw !important;
   }
+
+  /* 轮播图高度 */
+  .my-swipe .van-swipe-item {
+    text-align: center
+  }
+
+
+  /* 地理位置样式 */
+  .van-cell,
+  .van-index-anchor,
+  .van-search__action,
+  .van-tab__text--ellipsis {
+    font-size: 1.45vw !important;
+  }
+
+  .HotCity {
+    span {
+      width: 10.6667vw !important;
+      height: 4vw !important;
+      border-radius: 1.3333vw !important;
+      line-height: 4vw !important;
+      margin: .6667vw !important;
+    }
+  }
+
 }
 
 /* 应用到 body 元素，设置整体页面的字体 */
