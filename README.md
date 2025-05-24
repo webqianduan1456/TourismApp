@@ -1,39 +1,54 @@
-# E_Commerce_project
+# 项目技术架构说明
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+### 技术栈
+- **核心框架**：Vue 3 (组合式API开发模式)
+- **状态管理**：Pinia (Vue官方推荐的状态管理库)
+- **UI组件库**：Vant (移动端优先的组件库)
+- **样式处理**：Less 预处理器
+- **HTTP客户端**：Axios (封装HTTP请求)
+- **类型系统**：TypeScript (增强代码类型安全)
+- **代码规范**：ESLint + Prettier (保证代码风格统一)
+- **部署平台**：Vercel (自动化部署前端应用)
+- 
+### 开发流程
+1. **本地开发**：基于Vue3组合式API进行组件开发
+2. **状态管理**：使用Pinia管理全局应用状态
+3. **UI构建**：采用Vant组件库快速搭建移动端界面
+4. **代码提交**：通过GitHub进行版本控制
+5. **自动化部署**：代码推送触发Vercel自动部署
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### 技术亮点
+- **类型安全**：全面采用TypeScript开发，减少运行时错误
+- **移动优先**：Vant组件库提供良好的移动端体验
+- **高效协作**：ESLint+Prettier统一团队代码风格
+- **自动化**：Vercel实现从代码提交到部署的全自动化
 
-## Type Support for `.vue` Imports in TS
+- ## 协作流程
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### 代码管理
+- **版本控制**：GitHub仓库管理
+- **自动化**：
+  - Webhook监听代码提交事件
+  - GitHub Actions实现CI/CD流程
 
-## Customize configuration
+### 部署流程
+1. **前端**：代码提交后触发Vercel自动部署
+2. **后端**：Docker镜像构建并部署到阿里云服务器
+3. **数据库**：通过MySQL Workbench进行数据维护
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### 团队协作
+- **角色分工**：明确的前端/后端开发人员(均一人完成)
+- **开发环境**：Windows开发环境
+- **流程自动化**：最大程度减少人工干预
 
-## Project Setup
+## 项目优势
+1. **全栈TypeScript**：前后端统一使用TS，提高开发效率
+2. **完善的自动化**：从代码提交到部署全链路自动化
+3. **云原生架构**：结合Docker和云服务，保证系统可靠性
+4. **移动优先**：前端针对移动端体验优化
+5. **标准化流程**：规范的代码管理和部署流程
 
-```sh
-npm install
-```
+## 全栈架构图
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+![1 drawio](https://github.com/user-attachments/assets/20991899-e9c9-464d-90ed-47228c2aa26b)
