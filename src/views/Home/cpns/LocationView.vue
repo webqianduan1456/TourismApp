@@ -45,7 +45,8 @@ const CityJump = () => {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding: 3vw;
+  padding: 4vw;
+  margin-bottom: .2667vw;
 
   .city {
     display: flex;

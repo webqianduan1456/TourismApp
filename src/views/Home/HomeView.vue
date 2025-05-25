@@ -58,11 +58,8 @@ const getAttractions = ref('')
       <div class="SearchContent">
         <!-- 选着地区 -->
         <div class="Contents">
-          <template v-for="(item, index) in HomeStayDate" :key="index">
-            <span :style="{
-              color: item.tagText.color,
-              background: item.tagText.background.color
-            }">{{ item.tagText.text }}</span>
+          <template v-for="(item, index) in HomeStayDate?.citiesArea" :key="index">
+            <span>{{ item.area }}</span>
           </template>
         </div>
         <!-- 搜索按钮 -->
@@ -115,7 +112,7 @@ const getAttractions = ref('')
 
       span {
         cursor: pointer;
-        font-size: 2.4vw;
+        font-size:4.4vw ;
         margin: 2vw;
       }
     }

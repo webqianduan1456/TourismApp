@@ -1,3 +1,4 @@
+// 城市类型
 export interface City {
   getCityAllD: {
     Domestic: {
@@ -45,17 +46,16 @@ export interface Home {
       img_message: string;
     }
   ];
-  HomeStayDate?: [
-    {
-      tagText: {
-        color: string;
-        background: {
-          color: string;
-        };
-        text: string;
-      };
-    }
-  ];
+  HomeStayDate?: {
+    cityId: number;
+    cityName: string;
+    citiesArea: [
+      {
+        id: number;
+        area: string;
+      }
+    ];
+  };
   HomeCategories?: [
     {
       pictureUrl: string;

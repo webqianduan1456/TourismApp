@@ -15,7 +15,7 @@ defineProps<{
 
 <template>
   <div>
-    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#skyblue">
       <template v-for="(item, index) in SwiperData" :key="index">
         <van-swipe-item>
           <img :src="item.img_url" alt="">
@@ -26,6 +26,9 @@ defineProps<{
 </template>
 
 <style scoped lang="less">
+.my-swipe{
+    height: var(--my-swipe) ;
+ }
 img {
   width: 100%;
   height: 100%;

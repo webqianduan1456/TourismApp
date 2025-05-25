@@ -10,23 +10,24 @@ import type { Home } from "../type/type";
 const userHomeStore = defineStore("home", {
   state: (): Home => ({
     // 轮播图数据
-    SwiperImg: [{
-      id: 0,
-      img_url: "",
-      img_message: "",
-    }],
-    // 民宿数据获取
-    HomeStayDate: [
+    SwiperImg: [
       {
-        tagText: {
-          color: "",
-          background: {
-            color: "",
-          },
-          text: "",
-        },
+        id: 0,
+        img_url: "",
+        img_message: "",
       },
     ],
+    // 民宿数据获取
+    HomeStayDate: {
+      cityId: 0,
+      cityName: "",
+      citiesArea: [
+        {
+          id: 0,
+          area: "",
+        },
+      ],
+    },
     // 热门数据获取
     HomeCategories: [
       {
@@ -47,10 +48,15 @@ const userHomeStore = defineStore("home", {
     PageNumber: 1,
   }),
   actions: {
+    // 获取轮播图
+    async fetchAllSwiperDate() {
+      const res = await getSwiperImg();
+      this.SwiperImg = res.data;
+    },
     // 民宿数据获取
     async fetchAllHomeData() {
       const res = await getHomeData();
-      this.HomeStayDate = res.data.data;
+      this.HomeStayDate = res.data;
     },
     // 热门数据获取
     async fetchAllHomeCategories() {
@@ -62,10 +68,6 @@ const userHomeStore = defineStore("home", {
       const res = await getHomeHouseList((this.PageNumber = 1));
       this.HomeHouseList?.push(...res.data.data);
       this.PageNumber++; // 安全递增页数
-    },
-    async fetchAllSwiperDate() {
-      const res = await getSwiperImg();
-      this.SwiperImg = res.data;
     },
   },
 });

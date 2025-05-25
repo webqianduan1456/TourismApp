@@ -10,21 +10,55 @@
   --van-toast-background: rgba(0, 0, 0, 0.2) !important;
   --van-toast-line-height: 2.6667vw !important;
   --van-toast-text-color: red !important;
+  /* 首页轮播图高度 */
+  --my-swipe: 32.6667vh !important;
+  /* 表单内容高度 */
+  --van-search-input-height: 5.0667vw !important;
+  /* 表单取消大小 */
+  --van-font-size-md: 3.2vw !important;
+
 
   /* 给<van-cell/>额外添加样式 */
   .van-cell {
     cursor: pointer;
   }
 
-  /* 修改搜索放大镜颜色 */
-  .van-search__field .van-field__left-icon {
+  /* 修改搜索放大镜颜色,大小,文本 */
+  .van-icon {
     color: #ff1313 !important;
+  }
+
+  .van-field__left-icon>i {
+    font-size: 5vw !important;
+  }
+
+  /* 表单样式 */
+  .van-search,
+  .van-field__control {
+    height: 10vh !important;
+  }
+
+  .van-van-cell__value,
+  .van-field__body {
+    height: 1vh !important;
+  }
+
+  /* 修改日期年份 */
+  .van-calendar__header-subtitle,
+  .van-calendar__month-title {
+    font-size: 4.6667vw !important;
+  }
+
+  /* 修改入驻和离开日期文字大小 */
+  .van-cell__value {
+    font-size: 4.6667vw !important;
+    margin: 0.2604vw 0;
   }
 }
 
 /* 媒体查询 */
 /* 手机配置 */
-@media screen and (max-width: 500px) {
+@media screen and (min-width: 700px) {
   :root {
     --van-font-size: 3.446vw !important;
     --van-search-action-font-size: 3.446vw !important;
@@ -35,9 +69,15 @@
     padding-top: 2.3333vw;
   }
 
+
   .my-swipe .van-swipe-item {
-    height: 28.6667vh;
     text-align: center
+  }
+
+  /* 首页轮播图圆点按钮 */
+  .van-swipe__indicator {
+    width: 2vw !important;
+    height: 2vw !important;
   }
 
   /* 地理位置样式 */
@@ -50,10 +90,11 @@
 }
 
 /* 电脑配置 */
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 700px) and (max-width: 1920px) {
   :root {
     --van-index-bar-index-font-size: 16px !important;
     --van-font-size: 1.446vw !important;
+
   }
 
   .van-tab__text--ellipsis {
@@ -66,11 +107,20 @@
     height: 6.4vw !important;
   }
 
-  /* 轮播图高度 */
+  /* 首页轮播图 */
+  .my-swipe {
+    height: 50vw !important;
+  }
+
   .my-swipe .van-swipe-item {
     text-align: center
   }
 
+  /* 首页轮播图圆点按钮 */
+  .van-swipe__indicator {
+    width: 2vw !important;
+    height: 2vw !important;
+  }
 
   /* 地理位置样式 */
   .van-cell,
@@ -79,6 +129,8 @@
   .van-tab__text--ellipsis {
     font-size: 1.45vw !important;
   }
+
+
 
   .HotCity {
     span {

@@ -16,7 +16,7 @@ export function getSwiperImg() {
 // 获取民宿数据
 export function getHomeData() {
   return DefaultAxios.get({
-    url: "/home/hotSuggests",
+    url: "/home/citiesArea",
     headers: new AxiosHeaders(),
   }).then(res => {
     return res; // 返回响应数据

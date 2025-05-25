@@ -83,7 +83,7 @@ emit('StayDaysDate', NewBeforeDate.value, NewBehindDate.value)
 </template>
 
 <style scoped lang="less">
-@CommeWidth: 3.1333vw;
+@CommeWidth: 5.1333vw;
 
 .CheckInTime {
   display: flex;
@@ -93,14 +93,14 @@ emit('StayDaysDate', NewBeforeDate.value, NewBehindDate.value)
   .Days,
   span,
   i {
-    font-size: 2.4vw;
+    font-size: 3.4vw;
   }
 
   .DateOne {
 
     span,
     i {
-      color: #aaaaaa;
+      color: #1d1d1d;
       display: block;
       padding-right: .4vw;
     }
@@ -114,7 +114,7 @@ emit('StayDaysDate', NewBeforeDate.value, NewBehindDate.value)
 
     span,
     i {
-      color: #aaaaaa;
+      color: #1d1d1d;
     }
 
     i {
