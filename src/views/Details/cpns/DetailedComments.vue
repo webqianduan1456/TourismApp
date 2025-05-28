@@ -5,8 +5,9 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 const HomeHouseLists = userHomeStore()
 const { HomeHouseList } = storeToRefs(HomeHouseLists)
+// 保持响应
 const star = computed(()=>{
-  return HomeHouseList?.value?.SelectedS[0 + 1]?.commentScore
+  return Number(HomeHouseList?.value?.SelectedS[0 + 1].commentScore)
 })
 
 defineProps({
@@ -30,8 +31,8 @@ defineProps({
       </div>
       <!-- 评分星数 -->
       <div class="DetailedCommentsContent">
-        <span>{{ Comments?.housMessage[0].scoreTitle }}</span>
-        <span>{{ Comments?.housMessage[0].totalCount }}条评论</span>
+        <span>{{ Comments?.housMessage[0]?.scoreTitle }}</span>
+        <span>{{ Comments?.housMessage[0]?.totalCount }}条评论</span>
         <van-rate v-model="star" size="3.3333vw" allow-half color="#ffeb3b" />
       </div>
       <!-- 评分描述 -->

@@ -1,4 +1,4 @@
-import { getDetailsDate } from "@/network/modules/Details";
+import { getDetaHouseKeyImg, getDetailsDate } from "@/network/modules/Details";
 import { defineStore } from "pinia";
 import type { HousingResourceS } from "../type/type";
 
@@ -34,13 +34,6 @@ const UserDetailStore = defineStore("Detail", {
                 Benefits4: "",
               },
             ],
-          },
-        ],
-        houseKeyimg: [
-          {
-            orderIndex: 0,
-            url: "",
-            title: "",
           },
         ],
         houserNotice: [
@@ -98,12 +91,33 @@ const UserDetailStore = defineStore("Detail", {
         ],
       },
     },
+    // 商品数据轮播图
+    HouseKeyImgs: {
+      HouseKeyImg: [
+        {
+          orderIndex: 0,
+          title: "",
+          orderSum: 0,
+          houseimg: [
+            {
+              id: 0,
+              url: "",
+            },
+          ],
+        },
+      ],
+    },
   }),
   actions: {
-    // 详情商品数据请求
+    // 热门详情商品数据请求
     async fetchAllDetailsDate(id: number) {
       const res = await getDetailsDate(id);
       this.HousingResourceData = res.data;
+    },
+    // 热门详情商品数据轮播图请求
+    async fetchAllHouseKeyImg(id: number) {
+      const res = await getDetaHouseKeyImg(id);
+      this.HouseKeyImgs = res.data;
     },
   },
 });

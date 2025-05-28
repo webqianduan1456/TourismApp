@@ -16,10 +16,11 @@ import { useCityStore } from '@/stores/modules/city';
 
 const route = useRoute()
 const UserDetailStores = UserDetailStore()
-const { HousingResourceData } = storeToRefs(UserDetailStores)
+const { HousingResourceData, HouseKeyImgs } = storeToRefs(UserDetailStores)
 
 const useCityStoreS = useCityStore()
 const { CurrentCity } = storeToRefs(useCityStoreS)
+
 
 // 回到上一页
 const Rollback = () => {
@@ -28,6 +29,7 @@ const Rollback = () => {
 // 刷新获取当前数据
 onBeforeMount(async () => {
   await UserDetailStores.fetchAllDetailsDate(Number(route.params.id))
+  await UserDetailStores.fetchAllHouseKeyImg(Number(route.params.id))
 })
 
 
@@ -43,7 +45,7 @@ onBeforeMount(async () => {
       </template>
     </van-nav-bar>
     <!-- 轮播图 -->
-    <VanWipe :Detail="HousingResourceData?.HousingResource.houseKeyimg"></VanWipe>
+    <VanWipe :Detail="HouseKeyImgs.HouseKeyImg"></VanWipe>
     <!-- 简述描述 -->
     <DetailedMessage :Detail="HousingResourceData?.HousingResource"></DetailedMessage>
     <!-- 房屋设施 -->

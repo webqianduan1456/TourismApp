@@ -12,6 +12,8 @@ userHomeStores.fetchAllHomeHouseList()
 // 跳转详情界面
 const Details = async (item: { id: number }) => {
   await UserDetailStores.fetchAllDetailsDate(item.id)
+  console.log(item.id);
+
   router.push("/DetailsView/" + item.id)
 }
 </script>

@@ -4,7 +4,11 @@ import { onMounted, ref, } from 'vue';
 interface HouseKeyImgSection {
   orderIndex: number;
   title: string;
-  url: string;
+  orderSum: number;
+  houseimg: [{
+    id: number,
+    url: string
+  }]
 }
 defineProps({
   Detail: {
@@ -26,21 +30,40 @@ onMounted(() => {
   <div class="Swipe">
     <!-- 轮播图 -->
     <van-swipe class="my-swipe" :autoplay="2500" indicator-color="white" :touchable="isMobile" :show-indicators="false">
+      <!-- 图片 -->
       <template v-for="item in Detail" :key="item.orderIndex">
-        <van-swipe-item>
-          <img style="width: 100%; height: 100%;" :src="item.url" alt="轮播图" />
-        </van-swipe-item>
+        <template v-for="ite in item.houseimg" :key="ite.id">
+          <van-swipe-item>
+            <img style="width: 100%; height: 100%;" :src="ite.url" alt="">
+          </van-swipe-item>
+        </template>
       </template>
       <!-- 自定义指示器 -->
+      <template #indicator="{ active, total }">
+        <div class="indicator">
+          <template v-for="item in Detail" :key="item.orderIndex">
+            <div
+              :class="{ activeItem: (active + 1) + item.houseimg.length > item.orderSum && (active + 1) < item.orderSum || (active + 1) == item.orderSum }">
+              {{ item.title }}
+              <span
+                v-if="(active + 1) + item.houseimg.length > item.orderSum && (active + 1) < item.orderSum || (active + 1) == item.orderSum">{{
+                active + 1 }}/{{ item.orderSum }}</span>
+
+            </div>
+          </template>
+        </div>
+      </template>
+
     </van-swipe>
   </div>
 </template>
 
 <style scoped lang="less">
-.my-swipe{
+.my-swipe {
   width: 100%;
   height: 30vh;
 }
+
 .indicator {
   display: flex;
   justify-content: space-evenly;
@@ -48,7 +71,18 @@ onMounted(() => {
   bottom: 1.3333vw;
   right: 0;
   color: #ffffff;
-  background-color: black;
+  background-color: #515555;
+
+  div {
+    height: 4.6667vw;
+    margin: 1.3333vw 2.3333vw 1.3333vw 0;
+    line-height: 4.6667vw;
+    text-align: center;
+  }
+
+  div:first-child {
+    margin-left: 2.3333vw;
+  }
 }
 
 .ItemChild {
@@ -58,7 +92,10 @@ onMounted(() => {
 }
 
 .activeItem {
-  background-color: #515555;
-  border-radius: 50%;
+  border-radius: 45%;
+  background-color: rgb(42, 186, 243);
+  font-weight: 600;
+  padding: 0 5px;
+  transform: scale(1.1);
 }
 </style>

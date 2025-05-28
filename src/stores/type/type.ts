@@ -36,8 +36,8 @@ export interface City {
   CurrentCity: {
     id: number;
     cityName: string;
-    longitude:string;
-    latitude:string;
+    longitude: string;
+    latitude: string;
   };
 }
 
@@ -104,7 +104,6 @@ export interface HousingResourceS {
       hotelName: string;
       houseAllone: HouseAllone[];
       housefacilities: HouseFacility[];
-      houseKeyimg: HouseKeyImg[];
       houserNotice: HouseNotice[];
       houseText1: HouseText1[];
       houseThree: HouseTag[];
@@ -112,6 +111,22 @@ export interface HousingResourceS {
       houseUser: HouseUser[];
       housMessage: HouseMessage[];
     };
+  };
+  // 轮播图
+  HouseKeyImgs: {
+    HouseKeyImg: [
+      {
+        orderIndex: number;
+        title: string;
+        orderSum: number;
+        houseimg: [
+          {
+            id: number;
+            url: string;
+          }
+        ];
+      }
+    ];
   };
 }
 
@@ -134,12 +149,6 @@ interface HouseFacility {
     Benefits3: string;
     Benefits4: string;
   }[];
-}
-
-interface HouseKeyImg {
-  orderIndex: number;
-  title: string;
-  url: string;
 }
 
 interface HouseNotice {
@@ -186,4 +195,3 @@ interface HouseMessage {
   address: string;
   introduction: string;
 }
-// 轮播图

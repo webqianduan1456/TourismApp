@@ -24,7 +24,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/home": {
-        target: "http://127.0.0.1:3000i",
+        target: "http://127.0.0.1:3000",
         changeOrigin: true,
       },
     },
