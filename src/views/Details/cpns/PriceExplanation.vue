@@ -11,8 +11,8 @@ defineProps({
 
 <template>
   <div class="PriceExplanation">
-    <h1>{{Price?.title  }}</h1>
-    <div>{{ Price?.introduction }}</div>
+    <h1>价格说明</h1>
+    <div>{{ Price[0]?.introduction }}</div>
   </div>
 </template>
 

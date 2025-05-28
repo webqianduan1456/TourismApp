@@ -14,7 +14,7 @@ defineProps({
   <div class="HomeHouse-v3">
     <div class="image-container">
       <!-- 显示房屋图片 -->
-      <img class="imgs" :src="itemData?.image?.url" alt="">
+      <img class="imgs" :src="itemData?.url" alt="">
       <div class="info-overlay">
         <!-- 房屋名称 -->
         <!-- 位置 -->
@@ -30,7 +30,7 @@ defineProps({
           <!-- 过去价格 -->
           <div class="old-price">¥{{ itemData?.productPrice }}</div>
           <!-- 最新价格 -->
-          <div class="new-price">{{ itemData?.priceTipBadge?.text }}</div>
+          <div class="new-price">{{ itemData?.text }}</div>
         </div>
       </div>
     </div>

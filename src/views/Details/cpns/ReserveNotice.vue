@@ -7,17 +7,17 @@ defineProps({
     default: () => ({})
   }
 })
+
+
 </script>
 
 <template>
   <div class="ReserveNotice">
-    <template v-for="(item, index) in note?.checkInRules" :key="index">
-      <h1>{{ item.title }}</h1>
-    </template>
+    <h1>入驻须知</h1>
     <i></i>
     <div>
       <!-- 须知内容 -->
-      <template v-for="(item, index) in note?.orderRules" :key="index">
+      <template v-for="(item, index) in note" :key="index">
         <div class="notice">
           <!-- 内容区 -->
           <div class="notice-item">

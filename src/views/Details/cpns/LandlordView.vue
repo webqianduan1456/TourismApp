@@ -5,6 +5,7 @@ defineProps({
     type: Object,
   }
 })
+
 </script>
 
 <template>
@@ -16,7 +17,7 @@ defineProps({
       <!-- 房屋 -->
       <div class="LandlordHouse">
         <!-- 房屋图片和房屋介绍 -->
-        <img :src="Landlord?.topScroll" alt="" v-if="Landlord?.topScroll">
+        <img :src="Landlord?.topScroll" alt="">
         <div class="landlord-house-1">
           <div class="landlord-house-2">
             <img :src="Landlord?.hotelLogo" alt="">
@@ -24,9 +25,9 @@ defineProps({
             <div class="Content">
               <h1>{{ Landlord?.hotelName }}</h1>
               <div class="landlord-house-3">
-                <template v-for="(item, index) in Landlord?.hotelTags" :key="index">
-                  <span>{{ item.tagText.text }}</span>
-                  <i v-if="index !== Landlord?.hotelTags.length - 1">|</i>
+                <template v-for="(item, index) in Landlord?.houseAllone" :key="index">
+                  <span>{{ item.text }}</span>
+                  <i v-if="index !== 3 - 1">|</i>
                 </template>
               </div>
             </div>
@@ -37,7 +38,7 @@ defineProps({
       </div>
       <!-- 三项评价 -->
       <div class="landlord-Evaluation">
-        <template v-for="(item, index) in Landlord?.hotelSummary" :key="index">
+        <template v-for="item in Landlord?.houseAllone" :key="item.id">
           <div class="EvaluationChild">
             <span>{{ item.title }}</span>
             <h1>{{ item.introduction }}</h1>
@@ -53,16 +54,19 @@ defineProps({
 
 <style scoped lang="less">
 .landlord-view {
-  &>span{
+  &>span {
     display: inline-block;
     width: 100%;
     height: .1333vw;
     background-color: #03a9f4;
   }
+
   .landlord {
     font-size: 3.6667vw;
+
     .LandlordHouse {
       margin-top: 3.3333vw;
+
       &>img {
         width: 100%;
         height: 9.6667vw;
@@ -98,8 +102,9 @@ defineProps({
     align-items: center;
 
     .Content {
-      margin-left:.6667vw ;
+      margin-left: .6667vw;
       flex: 1;
+
       &>h1 {
         margin-bottom: 4.3333vw;
         overflow: hidden;

@@ -1,12 +1,12 @@
 import { AxiosHeaders } from "axios";
 import {DefaultAxios} from "..";
 
-export function getDetailsDate(houseId: number) {
+export function getDetailsDate(id: number) {
   return DefaultAxios.get({
-    url: "/detail/infos",
+    url: "/home/cityHouse",
     headers: new AxiosHeaders(),
     params: {
-      houseId
+      id
     },
   }).then(res => {
     return res; // 返回响应数据

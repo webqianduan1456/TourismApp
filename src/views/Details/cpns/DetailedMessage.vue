@@ -1,36 +1,47 @@
 <script setup lang="ts">
-
+import { userHomeStore } from '@/stores/modules/home';
+import { storeToRefs } from 'pinia';
+import { onBeforeMount } from 'vue';
+const userHomeStoreData = userHomeStore()
+const { HomeHouseList } = storeToRefs(userHomeStoreData)
 
 defineProps({
   Detail: {
     type: Object,
-    default: () => {}
+    default: () => { }
   }
+})
+// 刷新获取当前数据
+onBeforeMount(async () => {
+  await userHomeStoreData.fetchAllHomeHouseList()
 })
 </script>
 
 <template>
   <div class="container">
-    <h1>{{ Detail?.houseName }}</h1>
+    <h1>{{ HomeHouseList?.SelectedS[0 + 1]?.houseName }}</h1>
     <!-- 地理位置优势描述 -->
     <div class="Description">
       <!-- 描述 -->
-      <template v-for="(item, index) in Detail?.houseTags" :key="index">
-        <span :class="{blueKey:item?.tagText?.text?.startsWith('有')}">{{ item?.tagText?.text }}</span>
+      <template v-for="(item, index) in Detail?.houseText1" :key="index">
+        <span>{{ item?.Recruitment }}</span>
+        <template v-for="ite in item.houseText" :key="ite">
+          <span :class="{ blueKey:ite?.text.startsWith('有')   }">{{ ite?.text }}</span>
+        </template>
       </template>
     </div>
     <!-- 评价 -->
     <div class="Evaluation1">
       <div class="EvaluationMessage">
-        <span style="font-size:5.7777vw ;">{{ Detail?.commentBrief?.overall }}</span>
-        <i>{{ Detail?.commentBrief?.scoreTitle }}</i>
-        <i style="color: #8e8484;">{{ Detail?.commentBrief?.commentBrief }}</i>
+        <span style="font-size:5.7777vw ;">{{ HomeHouseList?.SelectedS[0 + 1]?.commentScore }}</span>
+        <i>{{ Detail?.housMessage[0].scoreTitle }}</i>
+        <i style="color: #8e8484;">{{ Detail?.housMessage[0].commentBrief }}</i>
       </div>
-      <span class="Direction">{{ Detail?.commentBrief?.totalCount }}条评论 ></span>
+      <span class="Direction">{{ Detail?.housMessage[0].totalCount }}条评论 ></span>
     </div>
     <!-- 地址 -->
     <div class="Evaluation2">
-      <i>{{ Detail?.nearByPosition?.address }}</i>
+      <i>{{ Detail?.housMessage[0].address }}</i>
       <span class="Direction">地图•周边 ></span>
     </div>
   </div>
@@ -48,14 +59,15 @@ defineProps({
     flex-wrap: wrap;
     margin: 2.6667vw 0;
 
-     span{
+    span {
       border-radius: 1.3333vw;
       margin: 0 .6667vw;
-     }
+    }
+
     span:first-child {
-      border-radius:none;
+      border-radius: none;
       color: #ffeb3b;
-      font-family:"楷体";
+      font-family: "楷体";
       background-color: rgb(0, 0, 0);
     }
 
@@ -64,9 +76,9 @@ defineProps({
       background-color: #ffe0a7;
     }
 
-    .blueKey{
-        color:#2196f3;
-        background-color: #c1ecff;
+    .blueKey {
+      color: #2196f3;
+      background-color: #c1ecff;
     }
   }
 

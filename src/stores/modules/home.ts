@@ -6,7 +6,8 @@ import {
 } from "@/network/modules/home";
 import { defineStore } from "pinia";
 import type { Home } from "../type/type";
-
+import { useCityStore } from "./city";
+const cityStore = useCityStore();
 const userHomeStore = defineStore("home", {
   state: (): Home => ({
     // 轮播图数据
@@ -19,7 +20,7 @@ const userHomeStore = defineStore("home", {
     ],
     // 民宿数据获取
     HomeStayDate: {
-      cityId: 0,
+      cityId: 1,
       cityName: "",
       citiesArea: [
         {
@@ -28,24 +29,37 @@ const userHomeStore = defineStore("home", {
         },
       ],
     },
-    // 热门数据获取
-    HomeCategories: [
-      {
-        pictureUrl: "",
-        title: "",
-      },
-    ],
-    // 热门精选
-    HomeHouseList: [
-      {
-        discoveryContentType: 0,
-        data: {
-          houseId: 0,
+    // 获取海量房源数据图片
+    HomeCategories: {
+      mergedData: [
+        {
+          id: 0,
+          title: "",
+          img: "",
         },
-      },
-    ],
+      ],
+    },
+    // 热门精选
+    HomeHouseList: {
+      SelectedS: [
+        {
+          id: 0,
+          productPrice: 0,
+          houseId: 0,
+          text: "",
+          houseName: "",
+          commentScore: 0,
+          summaryText: "",
+          location: "",
+          finalPrice: 0,
+          url: "",
+          discoveryContentType: 0,
+        },
+      ],
+    },
     // 页数
     PageNumber: 1,
+    id: cityStore?.CurrentCity.id, // 获取当前城市ID
   }),
   actions: {
     // 获取轮播图
@@ -54,19 +68,19 @@ const userHomeStore = defineStore("home", {
       this.SwiperImg = res.data;
     },
     // 民宿数据获取
-    async fetchAllHomeData() {
-      const res = await getHomeData();
+    async fetchAllHomeData(id: number) {
+      const res = await getHomeData(id);
       this.HomeStayDate = res.data;
     },
-    // 热门数据获取
+    // 海量房源数据图片
     async fetchAllHomeCategories() {
       const res = await getHomeCategories();
-      this.HomeCategories = res.data.data;
+      this.HomeCategories = res.data;
     },
-    // 热门精选
+    // 热门精选List
     async fetchAllHomeHouseList() {
-      const res = await getHomeHouseList((this.PageNumber = 1));
-      this.HomeHouseList?.push(...res.data.data);
+      const res = await getHomeHouseList(this.id, this.PageNumber);
+      this.HomeHouseList?.SelectedS.push(...res.data.SelectedS);
       this.PageNumber++; // 安全递增页数
     },
   },

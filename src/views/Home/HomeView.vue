@@ -10,9 +10,11 @@ import { storeToRefs } from 'pinia';
 import { userHomeStore } from '@/stores/modules/home';
 import HeadFixation from '@/views/Home/cpns/HeadFixation.vue';
 import SwiperView from '@/views/Home/cpns/SwiperView.vue';
+import { useCityStore } from '@/stores/modules/city';
+const useCityStores = useCityStore();
 // 请求首页数据
 const userHomeStores = userHomeStore();
-userHomeStores.fetchAllHomeData();
+userHomeStores.fetchAllHomeData(useCityStores.CurrentCity.id);
 userHomeStores.fetchAllHomeCategories();
 userHomeStores.fetchAllSwiperDate();
 // 获取stores数据
@@ -26,8 +28,6 @@ const StayDaysDates = (NewBeforeDate: string, NewBehindDate: string) => {
 }
 // 跳转住宿选着区
 const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
-
-
   router.push({
     path: "/ResidenceSearch",
     query: {
@@ -70,9 +70,9 @@ const getAttractions = ref('')
       </div>
       <!-- 便捷导航 -->
       <div class="Convenience">
-        <template v-for="(item, index) in userHomeStores?.HomeCategories" :key="index">
+        <template v-for="(item, index) in userHomeStores?.HomeCategories?.mergedData" :key="index">
           <div class="ConvenienceContent">
-            <img :src="item?.pictureUrl" alt="">
+            <img :src="item?.img" alt="">
             <span>{{ item?.title }}</span>
           </div>
         </template>
@@ -112,7 +112,7 @@ const getAttractions = ref('')
 
       span {
         cursor: pointer;
-        font-size:4.4vw ;
+        font-size: 4.4vw;
         margin: 2vw;
       }
     }

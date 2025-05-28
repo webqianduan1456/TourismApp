@@ -3,14 +3,16 @@ import { userHomeStore } from '@/stores/modules/home'
 import HomeHouseV3 from '@/components/HomeHouse-v3/HomeHouse-v3.vue'
 import HomeHouseV9 from '@/components/HomeHouse-v9/HomeHouse-v9.vue'
 import router from '@/router'
-
-
+import UserDetailStore from '@/stores/modules/detail'
+const UserDetailStores = UserDetailStore()
 // 获取用户首页的 store
 const userHomeStores = userHomeStore()
 userHomeStores.fetchAllHomeHouseList()
+
 // 跳转详情界面
-const Details = (item: { houseId: number }) => {
-  router.push("/DetailsView/" + item.houseId)
+const Details = async (item: { id: number }) => {
+  await UserDetailStores.fetchAllDetailsDate(item.id)
+  router.push("/DetailsView/" + item.id)
 }
 </script>
 
@@ -20,11 +22,11 @@ const Details = (item: { houseId: number }) => {
     <h1>热门精选</h1>
     <div class="hot-picks">
       <!-- 遍历 HomeHouseList，根据 discoveryContentType 渲染不同组件 -->
-      <template v-for="(item, index) in userHomeStores.HomeHouseList" :key="index">
+      <template v-for="(item, index) in userHomeStores?.HomeHouseList?.SelectedS" :key="index">
         <!-- 如果 discoveryContentType 为 3，渲染 HomeHouseV3 -->
-        <HomeHouseV3 v-if="item.discoveryContentType === 3" :item-data="item.data" @click="Details(item.data)" />
+        <HomeHouseV3 v-if="item.discoveryContentType === 3" :item-data="item" @click="Details(item)" />
         <!-- 如果 discoveryContentType 为 9，渲染 HomeHouseV9 -->
-        <HomeHouseV9 v-else-if="item.discoveryContentType === 9" :item-data="item.data" @click="Details(item.data)" />
+        <HomeHouseV9 v-else-if="item.discoveryContentType === 9" :item-data="item" @click="Details(item)" />
       </template>
     </div>
 

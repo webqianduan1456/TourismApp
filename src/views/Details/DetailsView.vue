@@ -11,18 +11,26 @@ import DetailedComments from '@/views/Details/cpns/DetailedComments.vue'
 import ReserveNotice from "@/views/Details/cpns/ReserveNotice.vue"
 import MapDisplay from "@/views/Details/cpns/MapDisplay.vue"
 import PriceExplanation from "@/views/Details/cpns/PriceExplanation.vue"
+import { storeToRefs } from 'pinia';
+import { useCityStore } from '@/stores/modules/city';
 
 const route = useRoute()
 const UserDetailStores = UserDetailStore()
-UserDetailStores.fetchAllDetailsDate(Number(route.params.id))
+const { HousingResourceData } = storeToRefs(UserDetailStores)
+
+const useCityStoreS = useCityStore()
+const { CurrentCity } = storeToRefs(useCityStoreS)
 
 // 回到上一页
 const Rollback = () => {
   router.back()
 }
-onBeforeMount(() => {
-  UserDetailStores.fetchAllDetailsDate(Number(route.params.id))
+// 刷新获取当前数据
+onBeforeMount(async () => {
+  await UserDetailStores.fetchAllDetailsDate(Number(route.params.id))
 })
+
+
 
 </script>
 
@@ -35,55 +43,47 @@ onBeforeMount(() => {
       </template>
     </van-nav-bar>
     <!-- 轮播图 -->
-    <VanWipe :Detail="UserDetailStores?.DetailsDate?.mainPart?.topModule?.housePicture?.housePics || []"></VanWipe>
-    <!-- 详情内容 -->
-    <DetailedMessage :Detail="UserDetailStores?.DetailsDate?.mainPart?.topModule || {}"></DetailedMessage>
+    <VanWipe :Detail="HousingResourceData?.HousingResource.houseKeyimg"></VanWipe>
+    <!-- 简述描述 -->
+    <DetailedMessage :Detail="HousingResourceData?.HousingResource"></DetailedMessage>
     <!-- 房屋设施 -->
     <HouseFacilities>
-      <!-- left -->
       <template #top>
         <span>房屋设施</span>
       </template>
-      <!-- center  -->
       <template #center>
-        <template
-          v-for="(item, index) in UserDetailStores?.DetailsDate?.mainPart?.dynamicModule?.facilityModule?.houseFacility?.houseFacilitys"
-          :key="index">
-          <div class="FacilitiesChild" v-if="UserDetailStores?.DetailsDate?.mainPart?.dynamicModule?.facilityModule?.houseFacility?.facilitySort?.includes(index)">
-              <!-- 设施 -->
-            <span class="basis">
-              <span>{{ item?.groupName }}</span>
-              <img :src="item?.icon">
-            </span>
-              <!-- 设施描述 -->
+        <template v-for="item in HousingResourceData?.HousingResource.housefacilities" :key="item.id">
+          <div class="FacilitiesChild">
+            <div class="basis">
+              <div>{{ item.name }}</div>
+              <img :src="item.url" alt="">
+            </div>
             <div class="Child">
-              <template v-for="(items,index) in item.facilitys?.slice(0,4)" :key="index">
-                <div>
-                  <van-icon name="certificate" color="#03a9f4" /><span>{{ items.name }}</span>
-                </div>
+              <template v-for="(ite, index) in item.housefacilitieses" :key="index">
+                <div><van-icon name="checked" />{{ ite.Benefits1 }}</div>
+                <div><van-icon name="checked" />{{ ite.Benefits2 }}</div>
+                <div><van-icon name="checked" />{{ ite.Benefits3 }}</div>
+                <div><van-icon name="checked" />{{ ite.Benefits4 }}</div>
               </template>
             </div>
           </div>
         </template>
       </template>
-      <!-- right  -->
       <template #bottom>
-        <span> 查看全部内容 ></span>
+        查看全部
       </template>
     </HouseFacilities>
-    <!-- 房东介绍 -->
-    <LandlordView :Landlord = "UserDetailStores?.DetailsDate?.mainPart?.dynamicModule?.landlordModule" ></LandlordView>
-     <!-- 详细内容评论 -->
-    <DetailedComments :Comments = "UserDetailStores?.DetailsDate?.mainPart?.dynamicModule?.commentModule"></DetailedComments>
-     <!-- 预定须知 -->
-    <ReserveNotice :note="UserDetailStores?.DetailsDate?.mainPart?.dynamicModule?.rulesModule "></ReserveNotice>
-     <!-- 地图展示 -->
-    <MapDisplay :positionMaps="UserDetailStores?.DetailsDate?.mainPart?.dynamicModule?.positionModule "></MapDisplay>
-    <!-- 价格说明 -->
-    <PriceExplanation :Price="UserDetailStores?.DetailsDate?.mainPart?.introductionModule"></PriceExplanation>
+    <!-- 房东介绍界面 -->
+    <LandlordView :Landlord="HousingResourceData?.HousingResource"></LandlordView>
+    <!-- 评分区域界面 -->
+    <DetailedComments :Comments="HousingResourceData?.HousingResource"></DetailedComments>
+    <!-- 用户评论区 -->
+    <ReserveNotice :note="HousingResourceData?.HousingResource.houserNotice"></ReserveNotice>
+    <!-- 高德地图 -->
+    <MapDisplay :positionMaps="CurrentCity"></MapDisplay>
+    <!-- 底部其他信息补充 -->
+    <PriceExplanation :Price="HousingResourceData?.HousingResource.housMessage"></PriceExplanation>
   </div>
 </template>
 
-<style scoped lang="less">
-
-</style>
+<style scoped lang="less"></style>

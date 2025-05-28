@@ -20,10 +20,13 @@ const newSymbol = computed(() => {
   return newSymbol
 })
 
-
 // 更改当前城市返回上一级
-const ObtainCity = (item: string) => {
-  useCityStores.CurrentCity.cityName = item
+const ObtainCity = (item:{cityName:string,id:number,longitude:string,latitude:string}) => {
+  // 返回城市名字和id
+  useCityStores.CurrentCity.cityName = item.cityName
+  useCityStores.CurrentCity.id = item.id
+  useCityStores.CurrentCity.longitude = item.longitude
+  useCityStores.CurrentCity.latitude = item.latitude
   router.back()
 }
 </script>
@@ -37,7 +40,7 @@ const ObtainCity = (item: string) => {
       <div class="HotCity">
         <template v-for="(item, index) in ContentCityDate?.cityInfo" :key="index">
           <template v-for="ite in item" :key="ite.id">
-            <span v-if="ite.hot == 'True'" @click="ObtainCity(ite.cityName)">{{ ite.cityName }}</span>
+            <span v-if="ite.hot == 'True'" @click="ObtainCity(ite)">{{ ite.cityName }}</span>
           </template>
         </template>
       </div>
@@ -47,7 +50,7 @@ const ObtainCity = (item: string) => {
         <van-index-anchor :index="ite[0].group" />
         <!-- 展示所有城市 -->
         <template v-for="(item) in ite" :key="item">
-          <van-cell :title="item.cityName" @click="ObtainCity(item.cityName)" />
+          <van-cell :title="item.cityName" @click="ObtainCity(item)" />
         </template>
       </template>
 

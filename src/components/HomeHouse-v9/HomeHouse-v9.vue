@@ -14,7 +14,7 @@ defineProps({
   <div class="HomeHouse-v9">
     <div class="image-container">
       <!-- 显示房屋图片 -->
-      <img :src="itemData?.image?.url" alt="">
+      <img :src="itemData?.url" alt="">
       <div class="info-overlay">
         <!-- 房屋名称 -->
         <div class="title">{{ itemData?.houseName }}</div>

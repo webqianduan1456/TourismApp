@@ -11,6 +11,7 @@ const UserMainStores = UserMainStore();
 const { scrollTop } = useScroll(() => {
   userHomeStores.fetchAllHomeHouseList();
 });
+
 </script>
 
 <template>

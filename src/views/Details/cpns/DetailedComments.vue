@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 
-// 星星评分
-const Star = ref(5);
+import { userHomeStore } from '@/stores/modules/home';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+const HomeHouseLists = userHomeStore()
+const { HomeHouseList } = storeToRefs(HomeHouseLists)
+const star = computed(()=>{
+  return HomeHouseList?.value?.SelectedS[0 + 1]?.commentScore
+})
+
 defineProps({
   Comments: {
     type: Object,
@@ -19,43 +25,43 @@ defineProps({
     <div class="InformationDes">
       <!-- 评分 -->
       <div class="DetailedCommentsNumber">
-        <div>{{ Comments.overall }}</div>
+        <div>{{ HomeHouseList?.SelectedS[0 + 1]?.commentScore }}</div>
         <i></i>
       </div>
       <!-- 评分星数 -->
       <div class="DetailedCommentsContent">
-        <span>{{ Comments.scoreTitle }}</span>
-        <span>{{ Comments.totalCountStr }}条评论</span>
-        <van-rate v-model="Star" size="3.3333vw" color="rgb(255 204 0)" void-icon="star" void-color="#eee" />
+        <span>{{ Comments?.housMessage[0].scoreTitle }}</span>
+        <span>{{ Comments?.housMessage[0].totalCount }}条评论</span>
+        <van-rate v-model="star" size="3.3333vw" allow-half color="#ffeb3b" />
       </div>
       <!-- 评分描述 -->
       <div class="DetailedCommentsContents">
-        <template v-for="(item, index) in Comments.subScores" :key="index">
-          <div>{{ item }}</div>
+        <template v-for="item in Comments.houseTwo" :key="item.id">
+          <div>{{ item.text }} {{ item.textId }}</div>
         </template>
       </div>
     </div>
     <!-- 用户点评信息 -->
     <div class="Commentary">
-      <template v-for="(item, index) in Comments?.commentTagVo" :key="index">
-        <div><span class="ft">{{ item.text }}</span></div>
+      <template v-for="item in Comments.houseThree" :key="item.id">
+        <div><span class="ft">{{ item.text }}({{ item.textNumber }})</span></div>
       </template>
     </div>
     <!-- 用户信息以及点评信息 -->
     <div class="CommentsSection">
       <div class="UserMessage">
         <!-- 用户头像 -->
-        <img :src="Comments?.comment?.userAvatars" alt="">
+        <img :src="Comments.houseUser[0].userAvatars" alt="">
         <!-- 用户信息 -->
         <div class="UserMessageContent">
-          <span>{{ Comments?.comment?.userName }}</span>
-          <span>{{ Comments?.comment?.checkInDate }}</span>
+          <span>{{ Comments?.houseUser[0].username }}</span>
+          <span>{{ Comments?.houseUser[0].checkInDate }}</span>
         </div>
       </div>
       <!-- 点评 -->
       <div class="EvaluationDescription">
         <div>
-          {{ Comments.comment?.commentDetail }}
+          {{ Comments?.houseUser[0].memberLevelIcon }}
         </div>
       </div>
 
@@ -191,14 +197,15 @@ defineProps({
 
 
   }
+
   .EvaluationDescriptionMessage {
-      display: flex;
-      justify-content: right;
-      font-size: 5.6667vw;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 3.3333vw;
-    }
+    display: flex;
+    justify-content: right;
+    font-size: 5.6667vw;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 3.3333vw;
+  }
 
 
 }

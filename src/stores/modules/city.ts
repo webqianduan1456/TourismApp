@@ -1,8 +1,9 @@
 import { getCityData } from "@/network";
 import { defineStore } from "pinia";
+import type { City } from "../type/type";
 
 const useCityStore = defineStore("city", {
-  state: () => ({
+  state: (): City => ({
     // 获取所有城市数据
     getCityAllD: {
       Domestic: {
@@ -10,7 +11,7 @@ const useCityStore = defineStore("city", {
         title: "",
         cityInfo: [
           {
-            cityId: 0,
+            cityId: 45,
             cityName: "",
             gangAoTai: "",
             hot: "true",
@@ -39,7 +40,10 @@ const useCityStore = defineStore("city", {
 
     // 获取当前选择的城市数据
     CurrentCity: {
-      cityName: "北京",
+      id: 45,
+      cityName: "广州",
+      longitude:'113.271',
+      latitude:'23.1354',
     },
   }),
   actions: {

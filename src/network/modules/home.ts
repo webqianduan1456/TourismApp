@@ -1,56 +1,64 @@
 // 导入默认的 Axios 实例
 import { AxiosHeaders } from "axios";
-import { DefaultAxios } from ".."
+import { DefaultAxios } from "..";
 // 获取轮播图数据
 export function getSwiperImg() {
   return DefaultAxios.get({
     url: "home/swiperimg",
     headers: new AxiosHeaders(),
-  }).then(res => {
-    return res; // 返回响应数据
-  }).catch(err => {
-    return err; // 返回错误信息
-  });
+  })
+    .then((res) => {
+      return res; // 返回响应数据
+    })
+    .catch((err) => {
+      return err; // 返回错误信息
+    });
 }
 
 // 获取民宿数据
-export function getHomeData() {
+export function getHomeData(id: number) {
   return DefaultAxios.get({
     url: "/home/citiesArea",
     headers: new AxiosHeaders(),
-  }).then(res => {
-    return res; // 返回响应数据
-  }).catch(err => {
-    return err; // 返回错误信息
-  });
+    params: {
+      id,
+    },
+  })
+    .then((res) => {
+      return res; // 返回响应数据
+    })
+    .catch((err) => {
+      return err; // 返回错误信息
+    });
 }
 
 // 获取便捷导航数据
 export function getHomeCategories() {
   return DefaultAxios.get({
-    url: "/home/Categories",
+    url: "/home/resource",
     headers: new AxiosHeaders(),
-  }).then(res => {
-    return res; // 返回响应数据
-  }).catch(err => {
-    return err; // 返回错误信息
-  });
+  })
+    .then((res) => {
+      return res; // 返回响应数据
+    })
+    .catch((err) => {
+      return err; // 返回错误信息
+    });
 }
 // 获取热门精选数据
-export function getHomeHouseList(PageNumber:number) {
+export function getHomeHouseList(id: number, PageNumber: number ) {
   return DefaultAxios.get({
-    url: "/home/houselist",
+    url: "/home/cityHouseList",
     headers: new AxiosHeaders(),
     params: {
-      page: PageNumber
+      id,
+      PageNumber,
     },
-
-  }).then(res => {
-    return res; // 返回响应数据
-  }).catch(err => {
-    return err; // 返回错误信息
-  });
+  })
+    .then((res) => {
+      return res; // 返回响应数据
+    })
+    .catch((err) => {
+      return err; // 返回错误信息
+    });
 }
-
-
-

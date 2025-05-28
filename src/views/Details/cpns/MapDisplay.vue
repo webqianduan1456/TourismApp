@@ -7,6 +7,7 @@ const props =  defineProps({
     type: Object,
   }
 })
+console.log(props.positionMaps?.longitude);
 
 // 地图生成
 const mapInit = () => {
