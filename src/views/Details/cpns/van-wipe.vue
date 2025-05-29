@@ -39,7 +39,7 @@ onMounted(() => {
         </template>
       </template>
       <!-- 自定义指示器 -->
-      <template #indicator="{ active, total }">
+      <template #indicator="{ active }">
         <div class="indicator">
           <template v-for="item in Detail" :key="item.orderIndex">
             <div

@@ -47,7 +47,7 @@ defineProps({
   &>i {
     width: 100%;
     height: .1333vw;
-    background-color: aqua;
+    background-color: rgb(0, 0, 0);
   }
 
   &>div {
