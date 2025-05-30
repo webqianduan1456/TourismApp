@@ -2,7 +2,7 @@
 import router from '@/router';
 import UserDetailStore from '@/stores/modules/detail';
 import VanWipe from '@/views/Details/cpns/van-wipe.vue'
-import { onBeforeMount } from 'vue';
+import { computed, onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import DetailedMessage from '@/views/Details/cpns/DetailedMessage.vue'
 import HouseFacilities from '@/views/Details/cpns/HouseFacilities.vue'
@@ -13,7 +13,8 @@ import MapDisplay from "@/views/Details/cpns/MapDisplay.vue"
 import PriceExplanation from "@/views/Details/cpns/PriceExplanation.vue"
 import { storeToRefs } from 'pinia';
 import { useCityStore } from '@/stores/modules/city';
-
+import HeadNav from './cpns/HeadNav.vue';
+import { useScroll } from '@/hooks/scroll';
 const route = useRoute()
 const UserDetailStores = UserDetailStore()
 const { HousingResourceData, HouseKeyImgs } = storeToRefs(UserDetailStores)
@@ -32,12 +33,68 @@ onBeforeMount(async () => {
   await UserDetailStores.fetchAllHouseKeyImg(Number(route.params.id))
 })
 
+// 获取ref
+const rf = ref()
+const HeadNavRef = ref()
+// 解决滚动后点击切换乱跳问题
+const isClick = ref(false)
+const isFlag = ref()
+const { scrollTop } = useScroll(() => { }, rf)
+const newScorllTop = computed(() => {
+  return scrollTop.value >= 100
+})
 
+// 获取re上的getDetailsRef上的key:name以及value:offsetTop
+const getDetailsRefArr = ref<{ [key: string]: HTMLElement }>({})
+//(特殊情况注释)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getDetailsRef = (el: any) => {
+  const name = el?.$el?.getAttribute('name')
+  if (el) {
+    getDetailsRefArr.value[name] = el?.$el
+  }
+}
+// 接收子组件传过来的getEmit
+const getEmit = (index: number) => {
+  const key = Object.keys(getDetailsRefArr.value)[index]
+  const el = getDetailsRefArr.value[key]
 
+  isClick.value = true
+  // 记录滚动到的位置开启滚动
+  isFlag.value = el.offsetTop - 35
+  // 滚动到指定el元素位置
+  rf.value.scrollTo({
+    top: (index == 2 ? (el.offsetTop - 35) : el.offsetTop),
+    behavior: 'smooth',
+    easing: 'linear'
+  })
+}
+// 监听滚动位置动态加上样式
+watch(scrollTop, (newvalue) => {
+  // 控制滚动
+  if(newvalue == isFlag.value){
+    isClick.value = false
+  }
+  // 切换状态关闭滚动
+  if (isClick.value) return
+  const getDetails = Object.values(getDetailsRefArr.value)
+  const getvalue = getDetails.map(value => value.offsetTop)
+  let index = 0
+  for (let i = 0; i < getvalue.length; i++) {
+    if (newvalue + 50> getvalue[i]) {
+      index = i
+    }
+  }
+  if(HeadNavRef.value){
+    HeadNavRef.value.trigger = index
+  }
+})
 </script>
 
 <template>
-  <div class="Details">
+  <div class="Details" ref="rf">
+    <!-- 头部固定导航 -->
+    <HeadNav :HeadData="getDetailsRefArr" v-if="newScorllTop" @getEmit="getEmit" ref="HeadNavRef" ></HeadNav>
     <!-- 详情页头部 -->
     <van-nav-bar title="商品" left-text="返回" left-arrow @click-left="Rollback">
       <template #right>
@@ -45,11 +102,11 @@ onBeforeMount(async () => {
       </template>
     </van-nav-bar>
     <!-- 轮播图 -->
-    <VanWipe :Detail="HouseKeyImgs.HouseKeyImg"></VanWipe>
+    <VanWipe :Detail="HouseKeyImgs?.HouseKeyImg"></VanWipe>
     <!-- 简述描述 -->
-    <DetailedMessage :Detail="HousingResourceData?.HousingResource"></DetailedMessage>
+    <DetailedMessage :Detail="HousingResourceData?.HousingResource" name="描述" :ref="getDetailsRef"></DetailedMessage>
     <!-- 房屋设施 -->
-    <HouseFacilities>
+    <HouseFacilities name="设施" :ref="getDetailsRef">
       <template #top>
         <span>房屋设施</span>
       </template>
@@ -78,7 +135,8 @@ onBeforeMount(async () => {
     <!-- 房东介绍界面 -->
     <LandlordView :Landlord="HousingResourceData?.HousingResource"></LandlordView>
     <!-- 评分区域界面 -->
-    <DetailedComments :Comments="HousingResourceData?.HousingResource"></DetailedComments>
+    <DetailedComments :Comments="HousingResourceData?.HousingResource" name="评分" :ref="getDetailsRef">
+    </DetailedComments>
     <!-- 用户评论区 -->
     <ReserveNotice :note="HousingResourceData?.HousingResource.houserNotice"></ReserveNotice>
     <!-- 高德地图 -->
@@ -88,4 +146,9 @@ onBeforeMount(async () => {
   </div>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.Details {
+  overflow-y: scroll;
+  height: 100vh
+}
+</style>

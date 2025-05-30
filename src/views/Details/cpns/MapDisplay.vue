@@ -2,12 +2,11 @@
 import { onMounted } from 'vue';
 import AMapLoader from '@amap/amap-jsapi-loader';
 
-const props =  defineProps({
+const props = defineProps({
   positionMaps: {
     type: Object,
   }
 })
-console.log(props.positionMaps?.longitude);
 
 // 地图生成
 const mapInit = () => {
@@ -37,12 +36,15 @@ onMounted(() => {
 </script>
 
 <template>
+
   <div class="MapDisplay">
-    <h1>地图周边</h1>
-    <div id="MapContent">
-    </div>
-    <div class="MapText">
-      <span>查看更多周边信息 ></span>
+    <div>
+      <h1>地图周边</h1>
+      <div id="MapContent">
+      </div>
+      <div class="MapText">
+        <span>查看更多周边信息 ></span>
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +59,7 @@ onMounted(() => {
     font-size: 4.7777vw;
   }
 
-  #MapContent{
+  #MapContent {
     height: 53.3333vw;
     margin: 3.6667vw 0;
   }

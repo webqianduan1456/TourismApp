@@ -1,9 +1,9 @@
 import { getDetaHouseKeyImg, getDetailsDate } from "@/network/modules/Details";
 import { defineStore } from "pinia";
-import type { HousingResourceS } from "../type/type";
+import type { Detail } from "../type/type";
 
 const UserDetailStore = defineStore("Detail", {
-  state: (): HousingResourceS => ({
+  state: (): Detail => ({
     // 详情商品数据
     HousingResourceData: {
       HousingResource: {

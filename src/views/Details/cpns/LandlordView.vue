@@ -54,6 +54,8 @@ defineProps({
 
 <style scoped lang="less">
 .landlord-view {
+  margin-bottom: 5.66667vw;
+
   &>span {
     display: inline-block;
     width: 100%;

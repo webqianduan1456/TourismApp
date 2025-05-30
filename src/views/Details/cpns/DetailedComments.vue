@@ -7,7 +7,7 @@ const HomeHouseLists = userHomeStore()
 const { HomeHouseList } = storeToRefs(HomeHouseLists)
 // 保持响应
 const star = computed(()=>{
-  return Number(HomeHouseList?.value?.SelectedS[0 + 1].commentScore)
+  return Number(HomeHouseList?.value?.SelectedS[0 + 1]?.commentScore)
 })
 
 defineProps({
@@ -78,8 +78,6 @@ defineProps({
 
 <style scoped lang="less">
 .DetailedComments {
-  margin-top: 5.6667vw;
-
   .InformationDes {
     display: flex;
     justify-content: space-between;

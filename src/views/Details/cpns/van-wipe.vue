@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { onMounted, ref, } from 'vue';
 // props
-interface HouseKeyImgSection {
+
+interface HouseKeyImg {
   orderIndex: number;
   title: string;
   orderSum: number;
-  houseimg: [{
-    id: number,
-    url: string
-  }]
+  houseimg: Array<{
+    id: number;
+    url: string;
+  }>;
 }
+
 defineProps({
   Detail: {
-    type: Array as () => HouseKeyImgSection[],
+    type: Array as () => HouseKeyImg[],
     default: () => []
   }
 });
@@ -47,7 +49,7 @@ onMounted(() => {
               {{ item.title }}
               <span
                 v-if="(active + 1) + item.houseimg.length > item.orderSum && (active + 1) < item.orderSum || (active + 1) == item.orderSum">{{
-                active + 1 }}/{{ item.orderSum }}</span>
+                  active + 1 }}/{{ item.orderSum }}</span>
 
             </div>
           </template>

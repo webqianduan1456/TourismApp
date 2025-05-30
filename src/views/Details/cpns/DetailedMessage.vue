@@ -19,7 +19,7 @@ onBeforeMount(async () => {
 
 <template>
   <div class="container">
-    <h1>{{ HomeHouseList?.SelectedS[0 + 1]?.houseName }}</h1>
+    <h1>{{ HomeHouseList?.SelectedS[0]?.houseName }}</h1>
     <!-- 地理位置优势描述 -->
     <div class="Description">
       <!-- 描述 -->

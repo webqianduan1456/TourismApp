@@ -8,9 +8,9 @@ const userHomeStores = userHomeStore();
 const UserMainStores = UserMainStore();
 // @ts-expect-error (不需要检测)
 // 鼠标滚动到底部时触发
-const { scrollTop } = useScroll(() => {
-  userHomeStores.fetchAllHomeHouseList();
-});
+  const { scrollTop } = useScroll(() => {
+    userHomeStores.fetchAllHomeHouseList();
+  });
 
 </script>
 
