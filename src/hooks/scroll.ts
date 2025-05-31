@@ -10,8 +10,9 @@ export function useScroll(fetchMoreData: () => void = () => {}, elemt: Ref<HTMLE
 
   // 滚动事件处理函数
   const handleScroll = () => {
-    if (isThrottled.value) return; // 如果处于节流状态，直接返回
+    if (isThrottled.value) return;
     isThrottled.value = true;
+     // 如果处于节流状态，直接返回
     setTimeout(() => {
       if (el === window) {
         clientHeight.value = document.documentElement.clientHeight; // 可视区域高度
@@ -24,10 +25,10 @@ export function useScroll(fetchMoreData: () => void = () => {}, elemt: Ref<HTMLE
       } else {
         clientHeight.value = Math.ceil((el as HTMLElement).clientHeight);
         scrollTop.value = Math.ceil((el as HTMLElement).scrollTop);
-        scrollHeight.value = Math.ceil((el as HTMLElement).scrollHeight);
+        scrollHeight.value = (el as HTMLElement).scrollHeight
         // 判断是否滚动到底部（考虑偏移量）
-        if (clientHeight.value + Math.ceil(scrollTop.value) >= scrollHeight.value) {
-          isThrottled.value = true;
+        if (clientHeight.value + Math.ceil(scrollTop.value + 2) >= scrollHeight.value) {
+          fetchMoreData()
         }
       }
       isThrottled.value = false; // 重置节流标志

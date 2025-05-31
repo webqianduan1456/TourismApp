@@ -1,4 +1,7 @@
 <script setup lang="ts">
+defineOptions({
+  name: 'HomeView'
+})
 import router from '@/router';
 import UserDetailStore from '@/stores/modules/detail';
 import VanWipe from '@/views/Details/cpns/van-wipe.vue'
@@ -22,7 +25,6 @@ const { HousingResourceData, HouseKeyImgs } = storeToRefs(UserDetailStores)
 const useCityStoreS = useCityStore()
 const { CurrentCity } = storeToRefs(useCityStoreS)
 
-
 // 回到上一页
 const Rollback = () => {
   router.back()
@@ -38,14 +40,16 @@ const rf = ref()
 const HeadNavRef = ref()
 // 解决滚动后点击切换乱跳问题
 const isClick = ref(false)
-const isFlag = ref()
+const isFlag = ref(0)
+
 const { scrollTop } = useScroll(() => { }, rf)
 const newScorllTop = computed(() => {
   return scrollTop.value >= 100
 })
 
-// 获取re上的getDetailsRef上的key:name以及value:offsetTop
+// 获取ref上的getDetailsRef上的key:name以及value:offsetTop
 const getDetailsRefArr = ref<{ [key: string]: HTMLElement }>({})
+//HeadNav组件点击切换触发的getDetailsRef和getEmit
 //(特殊情况注释)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getDetailsRef = (el: any) => {
@@ -58,21 +62,20 @@ const getDetailsRef = (el: any) => {
 const getEmit = (index: number) => {
   const key = Object.keys(getDetailsRefArr.value)[index]
   const el = getDetailsRefArr.value[key]
-
   isClick.value = true
   // 记录滚动到的位置开启滚动
   isFlag.value = el.offsetTop - 35
   // 滚动到指定el元素位置
   rf.value.scrollTo({
-    top: (index == 2 ? (el.offsetTop - 35) : el.offsetTop),
+    top: (index !== 1 ? (el.offsetTop - 50) : el.offsetTop),
     behavior: 'smooth',
     easing: 'linear'
   })
 }
 // 监听滚动位置动态加上样式
-watch(scrollTop, (newvalue) => {
+watch(scrollTop, (newvalue, oldValue) => {
   // 控制滚动
-  if(newvalue == isFlag.value){
+  if (newvalue - 50 >= isFlag.value && oldValue - 50 <= isFlag.value) {
     isClick.value = false
   }
   // 切换状态关闭滚动
@@ -81,11 +84,11 @@ watch(scrollTop, (newvalue) => {
   const getvalue = getDetails.map(value => value.offsetTop)
   let index = 0
   for (let i = 0; i < getvalue.length; i++) {
-    if (newvalue + 50> getvalue[i]) {
+    if (newvalue + 50 > getvalue[i]) {
       index = i
     }
   }
-  if(HeadNavRef.value){
+  if (HeadNavRef.value) {
     HeadNavRef.value.trigger = index
   }
 })
@@ -94,7 +97,7 @@ watch(scrollTop, (newvalue) => {
 <template>
   <div class="Details" ref="rf">
     <!-- 头部固定导航 -->
-    <HeadNav :HeadData="getDetailsRefArr" v-if="newScorllTop" @getEmit="getEmit" ref="HeadNavRef" ></HeadNav>
+    <HeadNav :HeadData="getDetailsRefArr" v-if="newScorllTop" @getEmit="getEmit" ref="HeadNavRef"></HeadNav>
     <!-- 详情页头部 -->
     <van-nav-bar title="商品" left-text="返回" left-arrow @click-left="Rollback">
       <template #right>

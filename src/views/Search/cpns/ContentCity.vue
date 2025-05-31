@@ -21,10 +21,12 @@ const newSymbol = computed(() => {
 })
 
 // 更改当前城市返回上一级
-const ObtainCity = (item:{cityName:string,id:number,longitude:string,latitude:string}) => {
+const ObtainCity = (item:{
+  cityId: number;cityName:string,id:number,longitude:string,latitude:string
+}) => {
   // 返回城市名字和id
   useCityStores.CurrentCity.cityName = item.cityName
-  useCityStores.CurrentCity.id = item.id
+  useCityStores.CurrentCity.id = item.cityId
   useCityStores.CurrentCity.longitude = item.longitude
   useCityStores.CurrentCity.latitude = item.latitude
   router.back()

@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { userHomeStore } from '@/stores/modules/home';
-import { useScroll } from '@/hooks/scroll';
 import UserMainStore from '@/stores/common/mainStore';
 import dayjs from 'dayjs';
 // store
-const userHomeStores = userHomeStore();
 const UserMainStores = UserMainStore();
-// @ts-expect-error (不需要检测)
-// 鼠标滚动到底部时触发
-  const { scrollTop } = useScroll(() => {
-    userHomeStores.fetchAllHomeHouseList();
-  });
-
+defineProps({
+  scrollTop: {
+    type: Number,
+    default: () => 0
+  }
+})
 </script>
 
 <template>

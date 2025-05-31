@@ -1,9 +1,11 @@
 <script setup lang="ts">
+defineOptions({
+  name: 'HomeView'
+})
 import router from '@/router';
-// import getAssetUrl from '@/utils/getAssetUrl';
 import TNavBar from '@/views/Home/cpns/TNavBar.vue';
 import StayDays from '@/views/Home/cpns/StayDays.vue';
-import { ref } from 'vue';
+import { onActivated, ref } from 'vue';
 import HotPicks from '@/views/Home/cpns/HotPicks.vue';
 import LocationView from '@/views/Home/cpns/LocationView.vue';
 import { storeToRefs } from 'pinia';
@@ -11,12 +13,21 @@ import { userHomeStore } from '@/stores/modules/home';
 import HeadFixation from '@/views/Home/cpns/HeadFixation.vue';
 import SwiperView from '@/views/Home/cpns/SwiperView.vue';
 import { useCityStore } from '@/stores/modules/city';
+import { useScroll } from '@/hooks/scroll';
+
 const useCityStores = useCityStore();
 // 请求首页数据
 const userHomeStores = userHomeStore();
 userHomeStores.fetchAllHomeData(useCityStores.CurrentCity.id);
 userHomeStores.fetchAllHomeCategories();
 userHomeStores.fetchAllSwiperDate();
+const HomeViewRef = ref()
+// 鼠标滚动到底部时触发
+
+const { scrollTop } = useScroll(() => {
+  userHomeStores.fetchAllHomeHouseList();
+}, HomeViewRef);
+
 // 获取stores数据
 const { HomeStayDate, SwiperImg } = storeToRefs(userHomeStores);
 // defineEmits数据
@@ -36,14 +47,19 @@ const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
     }
   })
 }
+// 回到首页记录当前位置
+onActivated(() =>
+  HomeViewRef?.value?.scrollTo({
+    top: scrollTop?.value
+  })
+)
 // 景点查询
 const getAttractions = ref('')
-
 </script>
 
 <template>
   <!-- 标题 -->
-  <div>
+  <div class="HomeView" ref="HomeViewRef">
     <TNavBar v-once></TNavBar>
     <!-- 轮播图 -->
     <SwiperView :SwiperData="SwiperImg || []"></SwiperView>
@@ -79,7 +95,7 @@ const getAttractions = ref('')
       </div>
     </div>
     <!-- 头部固定搜索栏 -->
-    <HeadFixation />
+    <HeadFixation :scrollTop="scrollTop" />
     <!-- 热门精选 -->
     <HotPicks></HotPicks>
   </div>
@@ -90,16 +106,10 @@ const getAttractions = ref('')
 
 .HomeView {
   position: relative;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
-.imges {
-  height: 35vw;
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
 
 .Content {
 

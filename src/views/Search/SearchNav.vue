@@ -1,4 +1,7 @@
 <script setup lang="ts">
+defineOptions({
+  name: 'SearchNav'
+})
 import router from '@/router';
 import { useCityStore } from '@/stores/modules/city';
 import { storeToRefs } from 'pinia';
