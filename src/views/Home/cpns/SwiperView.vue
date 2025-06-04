@@ -15,6 +15,7 @@ defineProps<{
 
 <template>
   <div>
+    <!-- 首页轮播图展示 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#skyblue">
       <template v-for="(item, index) in SwiperData" :key="index">
         <van-swipe-item>

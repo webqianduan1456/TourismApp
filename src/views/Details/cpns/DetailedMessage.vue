@@ -13,7 +13,7 @@ defineProps({
 })
 // 刷新获取当前数据
 onBeforeMount(async () => {
-  await userHomeStoreData.fetchAllHomeHouseList()
+  await userHomeStoreData.fetchAllHomeHouseList(null)
 })
 </script>
 
@@ -26,7 +26,7 @@ onBeforeMount(async () => {
       <template v-for="(item, index) in Detail?.houseText1" :key="index">
         <span>{{ item?.Recruitment }}</span>
         <template v-for="ite in item.houseText" :key="ite">
-          <span :class="{ blueKey:ite?.text.startsWith('有')   }">{{ ite?.text }}</span>
+          <span :class="{ blueKey: ite?.text.startsWith('有') }">{{ ite?.text }}</span>
         </template>
       </template>
     </div>

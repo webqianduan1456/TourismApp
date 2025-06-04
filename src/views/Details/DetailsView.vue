@@ -1,11 +1,11 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'HomeView'
+  name: 'DetailsView'
 })
 import router from '@/router';
 import UserDetailStore from '@/stores/modules/detail';
 import VanWipe from '@/views/Details/cpns/van-wipe.vue'
-import { computed, onBeforeMount, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import DetailedMessage from '@/views/Details/cpns/DetailedMessage.vue'
 import HouseFacilities from '@/views/Details/cpns/HouseFacilities.vue'
@@ -18,38 +18,73 @@ import { storeToRefs } from 'pinia';
 import { useCityStore } from '@/stores/modules/city';
 import HeadNav from './cpns/HeadNav.vue';
 import { useScroll } from '@/hooks/scroll';
+import { userHomeStore } from '@/stores/modules/home';
 const route = useRoute()
 const UserDetailStores = UserDetailStore()
 const { HousingResourceData, HouseKeyImgs } = storeToRefs(UserDetailStores)
+const itemData = ref()
 
 const useCityStoreS = useCityStore()
 const { CurrentCity } = storeToRefs(useCityStoreS)
+const setcolor = ref(false)
+const setcolorRed = ref(['#ff1313 !important', '#c1bebe !important'])
+
+const userHomeStores = userHomeStore()
+
+const { HomeHouseList, HomeHouseListCopy } = storeToRefs(userHomeStores)
 
 // 回到上一页
-const Rollback = () => {
+const Rollback = async () => {
+
+  // 收藏图标样式切换状态执行
+  if (setcolor.value == true) {
+    // 获取第一次首页已经存储的数据,对远程服务器进行添加数据
+    itemData.value = HomeHouseList.value.SelectedS.find((item) =>
+      item.id === Number(route.params.id)
+    )
+    // 添加收藏数据
+    if (itemData.value) {
+      await userHomeStores.fetchAllHomeHouseListAdd(itemData.value)
+    }
+  } else {
+    // 删除数据
+    await userHomeStores.fetchAllHomeHouseListDelete(Number(route.params.id))
+    // 通过id删除热门副本数据
+    const CopyIndex = HomeHouseListCopy?.value?.findIndex(item => item.id === Number(route.params.id))
+    if (CopyIndex !== -1 && CopyIndex !== undefined) {
+      HomeHouseListCopy?.value?.splice(CopyIndex, 1)
+    }
+  }
   router.back()
 }
 // 刷新获取当前数据
-onBeforeMount(async () => {
+onMounted(async () => {
+  // 获取详情的数据与轮播图图片
   await UserDetailStores.fetchAllDetailsDate(Number(route.params.id))
   await UserDetailStores.fetchAllHouseKeyImg(Number(route.params.id))
+  // 获取路由传过来的id决定收藏样式显示还是隐藏
+  setcolor.value = route.params.flay === 'false' ? !Boolean(route.params.flay) : Boolean(route.params.flay)
 })
+
 
 // 获取ref
 const rf = ref()
 const HeadNavRef = ref()
-// 解决滚动后点击切换乱跳问题
+// 解决滚动后点击切换乱跳问题(isClick开关,isFlag获取元素位置)
 const isClick = ref(false)
 const isFlag = ref(0)
 
 const { scrollTop } = useScroll(() => { }, rf)
+// 滚动到指定位置显示头部
 const newScorllTop = computed(() => {
-  return scrollTop.value >= 100
+  return scrollTop.value >= 300
 })
+
+
 
 // 获取ref上的getDetailsRef上的key:name以及value:offsetTop
 const getDetailsRefArr = ref<{ [key: string]: HTMLElement }>({})
-//HeadNav组件点击切换触发的getDetailsRef和getEmit
+//------HeadNav组件点击切换触发的getDetailsRef和getEmit----
 //(特殊情况注释)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getDetailsRef = (el: any) => {
@@ -80,18 +115,24 @@ watch(scrollTop, (newvalue, oldValue) => {
   }
   // 切换状态关闭滚动
   if (isClick.value) return
+  // 获取所有引用元素的DOM节点
   const getDetails = Object.values(getDetailsRefArr.value)
+  // 映射出所有元素的垂直偏移量
   const getvalue = getDetails.map(value => value.offsetTop)
   let index = 0
+  // 遍历所有偏移量，找出当前滚动位置对应的区域索引
   for (let i = 0; i < getvalue.length; i++) {
     if (newvalue + 50 > getvalue[i]) {
       index = i
     }
   }
+  // 如果头部导航存在，更新其激活项
   if (HeadNavRef.value) {
     HeadNavRef.value.trigger = index
   }
 })
+
+
 </script>
 
 <template>
@@ -101,7 +142,8 @@ watch(scrollTop, (newvalue, oldValue) => {
     <!-- 详情页头部 -->
     <van-nav-bar title="商品" left-text="返回" left-arrow @click-left="Rollback">
       <template #right>
-        <van-icon name="search" size="18" />
+        <van-icon name="star" size="7vw !important" @click="setcolor = !setcolor"
+          :color="setcolor ? setcolorRed[0] : setcolorRed[1]" />
       </template>
     </van-nav-bar>
     <!-- 轮播图 -->

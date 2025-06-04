@@ -23,7 +23,7 @@ const router = createRouter({
     {
       name: 'collect',
       path: '/collect',
-      component: () => import('@/views/Collect/CollectV.vue')
+      component: () => import('@/views/Collect/CollectView.vue')
     },
     {
       name: 'message',
@@ -53,7 +53,7 @@ const router = createRouter({
     },
     {
       name:'DetailsView',
-      path:'/DetailsView/:id',
+      path:'/DetailsView/:id/:flay',
       component: ()=> import('@/views/Details/DetailsView.vue'),
       meta:{
         isHide:true,

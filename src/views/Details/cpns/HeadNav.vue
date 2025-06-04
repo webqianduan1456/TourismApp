@@ -17,7 +17,6 @@ defineExpose({
   trigger,
 })
 
-
 </script>
 
 <template>

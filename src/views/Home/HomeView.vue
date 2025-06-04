@@ -25,7 +25,7 @@ const HomeViewRef = ref()
 // 鼠标滚动到底部时触发
 
 const { scrollTop } = useScroll(() => {
-  userHomeStores.fetchAllHomeHouseList();
+  userHomeStores.fetchAllHomeHouseList(null);
 }, HomeViewRef);
 
 // 获取stores数据

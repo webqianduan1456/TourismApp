@@ -1,72 +1,94 @@
 export interface City {
- // 获取所有城市数据
-getCityAllD: {
-  Domestic: {
-    id: number;
-    title: string;
-    cityInfo: Array<{
-      cityId: number;
-      cityName: string;
-      gangAoTai: string;
-      hot: string;
-      latitude: string;
-      longitude: string;
-      pinYin: string;
-    }>;
+  // 获取所有城市数据
+  getCityAllD: {
+    Domestic: {
+      id: number;
+      title: string;
+      cityInfo: Array<{
+        cityId: number;
+        cityName: string;
+        gangAoTai: string;
+        hot: string;
+        latitude: string;
+        longitude: string;
+        pinYin: string;
+      }>;
+    };
+    Abroad: {
+      id: number;
+      title: string;
+      cityInfo: Array<{
+        cityId: number;
+        cityName: string;
+        gangAoTai: string;
+        hot: string;
+        latitude: string;
+        longitude: string;
+        pinYin: string;
+      }>;
+    };
   };
-  Abroad: {
-    id: number;
-    title: string;
-    cityInfo: Array<{
-      cityId: number;
-      cityName: string;
-      gangAoTai: string;
-      hot: string;
-      latitude: string;
-      longitude: string;
-      pinYin: string;
-    }>;
-  };
-};
 
-CurrentCity: {
-  id: number;
-  cityName: string;
-  longitude: string;
-  latitude: string;
-};
+  CurrentCity: {
+    id: number;
+    cityName: string;
+    longitude: string;
+    latitude: string;
+  };
 }
 
 export interface Home {
-// 轮播图数据
-SwiperImg: Array<{
-  id: number;
-  img_url: string;
-  img_message: string;
-}>;
-
-// 民宿数据获取
-HomeStayDate: {
-  cityId: number;
-  cityName: string;
-  citiesArea: Array<{
+  // 轮播图数据
+  SwiperImg: Array<{
     id: number;
-    area: string;
+    img_url: string;
+    img_message: string;
   }>;
-};
 
-// 获取海量房源数据图片
-HomeCategories: {
-  mergedData: Array<{
-    id: number;
-    title: string;
-    img: string;
-  }>;
-};
+  // 民宿数据获取
+  HomeStayDate: {
+    cityId: number;
+    cityName: string;
+    citiesArea: Array<{
+      id: number;
+      area: string;
+    }>;
+  };
 
-// 热门精选
-HomeHouseList: {
-  SelectedS: Array<{
+  // 获取海量房源数据图片
+  HomeCategories: {
+    mergedData: Array<{
+      id: number;
+      title: string;
+      img: string;
+    }>;
+  };
+
+  // 热门精选
+  HomeHouseList: {
+    SelectedS: Array<{
+      id: number;
+      productPrice: number;
+      houseId: number;
+      text: string;
+      houseName: string;
+      commentScore: number;
+      summaryText: string;
+      location: string;
+      finalPrice: number;
+      url: string;
+      discoveryContentType: number;
+      Suggestion: string;
+      Discount: string;
+      Discount1: string;
+      Discount2: string;
+      DiscountMessage: string;
+      Comment: number;
+      flay: number;
+    }>;
+  };
+  // 获取指定id热门精选副本
+  HomeHouseListCopy?: Array<{
     id: number;
     productPrice: number;
     houseId: number;
@@ -78,12 +100,90 @@ HomeHouseList: {
     finalPrice: number;
     url: string;
     discoveryContentType: number;
+    Suggestion: string;
+    Discount: string;
+    Discount1: string;
+    Discount2: string;
+    DiscountMessage: string;
+    Comment: number;
+    flay: number;
+    houseKeyimg: Array<{
+      orderIndex: number;
+      title: string;
+      orderSum: number;
+      cityId: number;
+      houseimg: Array<{
+        id: number;
+        url: string;
+      }>;
+    }>;
   }>;
-};
+  // 获取热门精选副本全部数据
+  HomeHouseListCopyS?: Array<{
+    id: number;
+    productPrice: number;
+    houseId: number;
+    text: string;
+    houseName: string;
+    commentScore: string;
+    summaryText: string;
+    location: string;
+    finalPrice: number;
+    url: string | null;
+    discoveryContentType: number;
+    Suggestion: string;
+    Discount: string;
+    Discount1: string;
+    Discount2: string;
+    DiscountMessage: string;
+    Comment: number;
+    flay: number;
+    houseKeyimg: Array<{
+      orderIndex: number;
+      title: string;
+      orderSum: number;
+      cityId: number;
+      houseimg: Array<{
+        id: number;
+        url: string;
+      }>;
+    }>;
+  }>;
 
-// 页数
-PageNumber: number;
-id: number;
+  // 获取历史记录
+  HomeHouseListHistory?: Array<{
+    id: number;
+    productPrice: number;
+    houseId: number;
+    text: string;
+    houseName: string;
+    commentScore: string;
+    summaryText: string;
+    location: string;
+    finalPrice: number;
+    url: string | null;
+    discoveryContentType: number;
+    Suggestion: string;
+    Discount: string;
+    Discount1: string;
+    Discount2: string;
+    DiscountMessage: string;
+    Comment: number;
+    flay: number;
+    houseKeyimg: Array<{
+      orderIndex: number;
+      title: string;
+      orderSum: number;
+      cityId: number;
+      houseimg: Array<{
+        id: number;
+        url: string;
+      }>;
+    }>;
+  }>;
+  // 页数
+  PageNumber: number;
+  id: number;
 }
 
 export interface Detail {

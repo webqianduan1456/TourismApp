@@ -3,6 +3,9 @@ import {
   getHomeCategories,
   getHomeHouseList,
   getSwiperImg,
+  getHomeHouseListCopy,
+  getHomeHouseListAdd,
+  getHomeHouseListDelete,
 } from "@/network/modules/home";
 import { defineStore } from "pinia";
 import type { Home } from "../type/type";
@@ -54,9 +57,22 @@ const userHomeStore = defineStore("home", {
           finalPrice: 0,
           url: "",
           discoveryContentType: 0,
+          Suggestion: "",
+          Discount: "",
+          Discount1: "",
+          Discount2: "",
+          DiscountMessage: "",
+          Comment: 0,
+          flay: 0,
         },
       ],
     },
+    // 添加热门精选副本
+    HomeHouseListCopy: [],
+    // 添加热门精选副本全部数据
+    HomeHouseListCopyS: [],
+    // 获取历史记录
+    HomeHouseListHistory: [],
     // 页数
     PageNumber: 1,
     id: cityStore?.CurrentCity.id, // 获取当前城市ID
@@ -78,10 +94,43 @@ const userHomeStore = defineStore("home", {
       this.HomeCategories = res.data;
     },
     // 热门精选List
-    async fetchAllHomeHouseList() {
-      const res = await getHomeHouseList(this.id, this.PageNumber);
-      this.HomeHouseList?.SelectedS.push(...res.data.SelectedS);
-      this.PageNumber++; // 安全递增页数
+    async fetchAllHomeHouseList(flay: number | null, ids?: number | null) {
+      const res = await getHomeHouseList(this.id, this.PageNumber, flay, ids);
+      // 获取历史记录
+      if (!ids && flay) {
+        this.HomeHouseListHistory = res?.data;
+      } else {
+        // 获取首页热门List数据
+        if (res?.data?.SelectedS) {
+          this.HomeHouseList?.SelectedS?.push(...res.data.SelectedS);
+        }
+        this.PageNumber++; // 安全递增页数
+      }
+    },
+    // 获取副本精选
+    async fetchAllHomeHouseListCopy(id: number | null = null) {
+      const res = await getHomeHouseListCopy(id);
+      if (id) {
+        // 解决数据重复
+        const isDuplicate = this.HomeHouseListCopy?.some((item) => {
+          return item?.id === res?.data?.id;
+        });
+        // 获取收藏数据的指定id
+        if (!isDuplicate && res?.data && res?.data !== undefined) {
+          this.HomeHouseListCopy?.push(res?.data);
+        }
+      } else {
+       // 获取全部收藏数据
+        this.HomeHouseListCopyS = res?.data;
+      }
+    },
+    // 添加收藏
+    async fetchAllHomeHouseListAdd(itemDates: object) {
+      await getHomeHouseListAdd(itemDates);
+    },
+    // 删除收藏
+    async fetchAllHomeHouseListDelete(id: number) {
+      await getHomeHouseListDelete(id);
     },
   },
 });

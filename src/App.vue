@@ -10,12 +10,12 @@ const route = useRoute()
   <div class="app">
     <!-- 保持活跃 -->
     <router-view v-slot="{ Component }" >
-      <keep-alive includes="['HomeView','SearchNav','Details']" :max="5">
+      <keep-alive includes="['HomeView','SearchNav']" exclude="DetailsView" :max="5" >
         <component :is="Component"></component>
       </keep-alive>
     </router-view>
 
-    <TabBar v-if="!route.meta.isHide"></TabBar>
+    <TabBar v-show="!route.meta.isHide"></TabBar>
     <LoadingView></LoadingView>
   </div>
 </template>

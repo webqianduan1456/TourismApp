@@ -23,9 +23,9 @@ const Days = computed(() => StayCount(UserMainStores.MainBeforeDate, UserMainSto
 
 // 重置数据
 const ResetDate = () => {
-
   UserMainStores.MainBeforeDate = dayjs(Date()).format('YYYY-MM-DD')
   UserMainStores.MainBehindDate = dayjs(dayjs().add(AddDefaultStay.value, 'day')).format('YYYY-MM-DD')
+  // 错误提示
   showFailToast({
     message: '停留天数不能为负',
     duration: 3000

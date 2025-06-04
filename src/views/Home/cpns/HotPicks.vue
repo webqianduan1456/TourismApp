@@ -4,17 +4,32 @@ import HomeHouseV3 from '@/components/HomeHouse-v3/HomeHouse-v3.vue'
 import HomeHouseV9 from '@/components/HomeHouse-v9/HomeHouse-v9.vue'
 import router from '@/router'
 import UserDetailStore from '@/stores/modules/detail'
+import { storeToRefs } from 'pinia'
+// 数据1
 const UserDetailStores = UserDetailStore()
-// 获取用户首页的 store
+// 数据2
 const userHomeStores = userHomeStore()
-userHomeStores.fetchAllHomeHouseList()
+userHomeStores.fetchAllHomeHouseList(null)
+const { HomeHouseListCopy } = storeToRefs(userHomeStores)
 
 // 跳转详情界面
 const Details = async (item: { id: number }) => {
-  await UserDetailStores.fetchAllDetailsDate(item.id)
-  console.log(item.id);
 
-  router.push("/DetailsView/" + item.id)
+  if (!item.id) return
+  // 跳转之前进行当前详情页面的数据获取
+  await UserDetailStores.fetchAllDetailsDate(item?.id)
+  // 跳转之前获取热门精选副本数据
+  await userHomeStores.fetchAllHomeHouseListCopy(item?.id)
+  // 跳转前记录用户历史记录
+   userHomeStores.fetchAllHomeHouseList(1,item?.id)
+
+  //  查找出热门副本的数据flay通过路由传到详情页面控制收藏图标状态
+  const n = HomeHouseListCopy?.value && Array.isArray(HomeHouseListCopy.value)
+    ? HomeHouseListCopy.value.map((ite) => ite?.id === item?.id)
+    : []
+  const flay = n.includes(true)
+//  跳转
+  router.push(`/DetailsView/${item.id}/${flay}`)
 }
 </script>
 

@@ -16,7 +16,11 @@
   --van-search-input-height: 5.0667vw !important;
   /* 表单取消大小 */
   --van-font-size-md: 3.2vw !important;
-
+  /* 导航栏title字体颜色 */
+  --van-nav-bar-text-color: red !important;
+  --van-font-size-lg: 3vw !important;
+  /* 切换栏滚轮颜色 */
+  --van-primary-color: red !important;
 
   /* 给<van-cell/>额外添加样式 */
   .van-cell {
@@ -26,6 +30,7 @@
   /* 修改搜索放大镜颜色,大小,文本 */
   .van-icon {
     color: #ff1313 !important;
+    font-size: 4vw !important;
   }
 
   .van-field__left-icon>i {
@@ -54,6 +59,21 @@
     font-size: 4.6667vw !important;
     margin: 0.2604vw 0;
   }
+
+  /* 导航栏样式 */
+  .van-nav-bar__left,
+  .van-nav-bar__title,
+  .van-nav-bar__right {
+    color: #ff1313 !important;
+    font-size: 5vw !important;
+    padding-left: 0;
+  }
+
+  .van-nav-bar__left {
+    padding-right: 0.6667vw;
+  }
+
+
 }
 
 /* 媒体查询 */
@@ -159,6 +179,10 @@ h1 {
 /* 应用到段落 p 元素 */
 p {
   font-family: "宋体", SimSun, Arial, "Helvetica Neue", Helvetica, Times New Roman, sans-serif;
+}
+
+i {
+  display: inline-block !important;
 }
 
 /* 应用到代码 code 元素 */
