@@ -37,7 +37,7 @@ const TabBar_Navigation_Value: TabBarNavigationItem[] = [
     CssName: "order",
     TabBar_Navigation_ImgSrc: `order.svg`,
     TabBar_Navigation_ImgSrcS: `orderActive.svg`,
-    path: "/order"
+    path: "/order/:id"
   },
 ]
 

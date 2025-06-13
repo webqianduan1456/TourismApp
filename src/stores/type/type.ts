@@ -184,6 +184,10 @@ export interface Home {
   // 页数
   PageNumber: number;
   id: number;
+  // 获取首页时间和天数
+  StartDate: string;
+  EndDate: string;
+  Days: number;
 }
 
 export interface Detail {
@@ -264,4 +268,52 @@ export interface Detail {
       }>;
     }>;
   };
+}
+
+export interface Order {
+  AllOrder: Array<{
+    id: number;
+    title: string;
+    url: string;
+    StartTime: string;
+    EndTime: string;
+    totalPrice: number;
+    Overall: number;
+    houseId: number;
+    StartTimeWeek: string;
+    StartTimeTime: string;
+    EndTimeWeek: string;
+    EndTimeTime: string;
+    time: number;
+  }>;
+  CompletedOrder: Array<{
+    id: number;
+    title: string;
+    url: string;
+    StartTime: string;
+    EndTime: string;
+    totalPrice: number;
+    Overall: number;
+    houseId: number;
+    StartTimeWeek: string;
+    StartTimeTime: string;
+    EndTimeWeek: string;
+    EndTimeTime: string;
+    time: number;
+  }>;
+  WaitingOrder: Array<{
+    id: number;
+    title: string;
+    url: string;
+    StartTime: string;
+    EndTime: string;
+    totalPrice: number;
+    Overall: number;
+    houseId: number;
+    StartTimeWeek: string;
+    StartTimeTime: string;
+    EndTimeWeek: string;
+    EndTimeTime: string;
+    time: number;
+  }>;
 }

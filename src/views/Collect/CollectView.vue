@@ -34,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div style="width: 100vw; height: 100vh;">
+  <div style="width: 100vw; height: 100vw;">
     <div style="width: 100%; position: fixed;">
       <!-- 详情页头部 -->
       <van-nav-bar left-text="返回" left-arrow @click-left="Rollback">
@@ -46,11 +46,11 @@ onMounted(() => {
           </div>
         </template>
         <template #right>
-          <van-icon name="star" size="18" />
+          <van-icon name="bell" size="6vw !important" color="" />
         </template>
       </van-nav-bar>
       <!-- 切换栏 -->
-      <van-tabs animated title-active-color="#ff5722" title-inactive-color="#ff5722" line-height="1.4vw"
+      <van-tabs animated title-active-color="#ff5722" line-height="1.4vw"
         line-width="10.3vw" :swipeable="true" :sticky="true">
         <!-- 房屋 -->
         <van-tab title="房屋">
@@ -101,7 +101,8 @@ onMounted(() => {
   .House {
     width: 100vw;
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: scroll ;
+
   }
 }
 </style>

@@ -22,7 +22,7 @@ const TN_Switch_Page: (item: TabBarNavigationItem, index: number) => void = (ite
         <!-- 切换图片活跃与休眠状态 -->
         <img v-if="currentIndex === index" :src=getAssetUrl(item.TabBar_Navigation_ImgSrcS) alt="">
         <img v-else :src=getAssetUrl(item.TabBar_Navigation_ImgSrc) alt="">
-         <!-- 文本内容 -->
+        <!-- 文本内容 -->
         <span>{{ item.TabBar_Navigation_Text }}</span>
       </div>
     </template>

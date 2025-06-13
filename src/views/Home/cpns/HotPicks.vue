@@ -21,14 +21,14 @@ const Details = async (item: { id: number }) => {
   // 跳转之前获取热门精选副本数据
   await userHomeStores.fetchAllHomeHouseListCopy(item?.id)
   // 跳转前记录用户历史记录
-   userHomeStores.fetchAllHomeHouseList(1,item?.id)
+  await userHomeStores.fetchAllHomeHouseList(1, item?.id)
 
   //  查找出热门副本的数据flay通过路由传到详情页面控制收藏图标状态
   const n = HomeHouseListCopy?.value && Array.isArray(HomeHouseListCopy.value)
     ? HomeHouseListCopy.value.map((ite) => ite?.id === item?.id)
     : []
   const flay = n.includes(true)
-//  跳转
+  //  跳转
   router.push(`/DetailsView/${item.id}/${flay}`)
 }
 </script>

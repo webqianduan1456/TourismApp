@@ -19,6 +19,7 @@ import { useCityStore } from '@/stores/modules/city';
 import HeadNav from './cpns/HeadNav.vue';
 import { useScroll } from '@/hooks/scroll';
 import { userHomeStore } from '@/stores/modules/home';
+import BottomPrice from './cpns/BottomPrice.vue';
 const route = useRoute()
 const UserDetailStores = UserDetailStore()
 const { HousingResourceData, HouseKeyImgs } = storeToRefs(UserDetailStores)
@@ -35,7 +36,6 @@ const { HomeHouseList, HomeHouseListCopy } = storeToRefs(userHomeStores)
 
 // 回到上一页
 const Rollback = async () => {
-
   // 收藏图标样式切换状态执行
   if (setcolor.value == true) {
     // 获取第一次首页已经存储的数据,对远程服务器进行添加数据
@@ -79,8 +79,6 @@ const { scrollTop } = useScroll(() => { }, rf)
 const newScorllTop = computed(() => {
   return scrollTop.value >= 300
 })
-
-
 
 // 获取ref上的getDetailsRef上的key:name以及value:offsetTop
 const getDetailsRefArr = ref<{ [key: string]: HTMLElement }>({})
@@ -188,12 +186,14 @@ watch(scrollTop, (newvalue, oldValue) => {
     <MapDisplay :positionMaps="CurrentCity"></MapDisplay>
     <!-- 底部其他信息补充 -->
     <PriceExplanation :Price="HousingResourceData?.HousingResource.housMessage"></PriceExplanation>
+    <!-- 预定当前房源 -->
+    <BottomPrice></BottomPrice>
   </div>
 </template>
 
 <style scoped lang="less">
 .Details {
   overflow-y: scroll;
-  height: 100vh
+  height: 100vh;
 }
 </style>

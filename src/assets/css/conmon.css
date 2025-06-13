@@ -21,18 +21,25 @@
   --van-font-size-lg: 3vw !important;
   /* 切换栏滚轮颜色 */
   --van-primary-color: red !important;
-
+  /* 控制底部详情页面预约样式 */
+  --van-font-size-xs: 4vw !important;
   /* 给<van-cell/>额外添加样式 */
+  --van-action-bar-height: 15.6667vw !important;
+  /* 预约遮罩层的z-index  */
+  --van-overlay-z-index:999 !important;
+  /* 预约时间表字体大小 */
+  --van-picker-option-font-size: 4.6667vw !important;
+
   .van-cell {
     cursor: pointer;
   }
 
   /* 修改搜索放大镜颜色,大小,文本 */
   .van-icon {
-    color: #ff1313 !important;
-    font-size: 4vw !important;
+    color: #ff1313;
+    font-size: 4vw ;
   }
-
+  
   .van-field__left-icon>i {
     font-size: 5vw !important;
   }
@@ -66,13 +73,18 @@
   .van-nav-bar__right {
     color: #ff1313 !important;
     font-size: 5vw !important;
+    line-height: 5vw !important;
     padding-left: 0;
   }
 
   .van-nav-bar__left {
     padding-right: 0.6667vw;
   }
+ /* 修改切换栏的样式 */
+ .van-tab{
+  font-weight: 800 !important;
 
+ }
 
 }
 

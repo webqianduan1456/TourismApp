@@ -37,6 +37,7 @@ const StayDaysDates = (NewBeforeDate: string, NewBehindDate: string) => {
   NewBeforeDates.value = NewBeforeDate
   NewBehindDates.value = NewBehindDate
 }
+
 // 跳转住宿选着区
 const ResidenceSearch = (BeforeDate: string, BehindDate: string) => {
   router.push({

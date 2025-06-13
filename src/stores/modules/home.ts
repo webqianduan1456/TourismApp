@@ -76,8 +76,13 @@ const userHomeStore = defineStore("home", {
     // 页数
     PageNumber: 1,
     id: cityStore?.CurrentCity.id, // 获取当前城市ID
-  }),
-  actions: {
+
+    // 获取首页时间(存在本地避免刷新消失)
+    StartDate: sessionStorage.getItem('startDate') || '',
+    EndDate: sessionStorage.getItem('endDate') || '',
+    Days: Number(sessionStorage.getItem('days')) || 0,
+    }),
+    actions: {
     // 获取轮播图
     async fetchAllSwiperDate() {
       const res = await getSwiperImg();

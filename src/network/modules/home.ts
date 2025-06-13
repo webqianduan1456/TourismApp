@@ -50,7 +50,7 @@ export function getHomeHouseList(
   id: number,
   PageNumber: number,
   flay: number | null,
-  ids?: number | null,
+  ids?: number | null
 ) {
   return DefaultAxios.get({
     url: "/home/cityHouseList",

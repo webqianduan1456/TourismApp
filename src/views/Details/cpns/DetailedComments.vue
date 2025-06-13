@@ -33,7 +33,7 @@ defineProps({
       <div class="DetailedCommentsContent">
         <span>{{ Comments?.housMessage[0]?.scoreTitle }}</span>
         <span>{{ Comments?.housMessage[0]?.totalCount }}条评论</span>
-        <van-rate v-model="star" size="3.3333vw" allow-half color="#ffeb3b" />
+        <van-rate v-model="star" size="3.3333vw" allow-half  />
       </div>
       <!-- 评分描述 -->
       <div class="DetailedCommentsContents">

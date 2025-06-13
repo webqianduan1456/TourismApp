@@ -23,7 +23,7 @@ defineProps({
 
           <!-- 星级评分 -->
           <van-rate :model-value="itemData?.commentScore ? Number(itemData?.commentScore) : 0" allow-half readonly
-            icon="star" :size="3.3333 + `vw`" color="#ffd21e" />
+            icon="star" size="3.3333vw"  />
           <!-- 房屋价格 -->
           <div class="price">¥{{ itemData?.productPrice }}</div>
         </div>
