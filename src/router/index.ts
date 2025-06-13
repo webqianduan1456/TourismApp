@@ -5,61 +5,61 @@ const router = createRouter({
   routes: [
     // 重定向
     {
-      path: '/',
-      redirect: '/home'
+      path: "/",
+      redirect: "/home",
     },
     // 不存在的路径跳转
     {
-      path: '/:pathMatch(.*)*',
-      name: 'NotFound',
-      component: () => import('@/views/Home/HomeView.vue')
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () => import("@/views/Home/HomeView.vue"),
     },
     // 路由配置映射表
     {
-      name: 'home',
-      path: '/home',
-      component: () => import('@/views/Home/HomeView.vue'),
+      name: "home",
+      path: "/home",
+      component: () => import("@/views/Home/HomeView.vue"),
     },
     {
-      name: 'collect',
-      path: '/collect',
-      component: () => import('@/views/Collect/CollectView.vue')
+      name: "collect",
+      path: "/collect",
+      component: () => import("@/views/Collect/CollectView.vue"),
     },
     {
-      name: 'message',
-      path: '/message',
-      component: () => import('@/views/Message/message.vue')
+      name: "message",
+      path: "/message",
+      component: () => import("@/views/Message/message.vue"),
     },
     {
-      name: 'order',
-      path: '/order/:id',
-      component: () => import('@/views/Order/Order.vue')
+      name: "order",
+      path: "/order/:id",
+      component: () => import("@/views/Order/Order.vue"),
     },
     {
-      name: 'Search',
-      path: '/Search',
-      component: () => import('@/views/Search/SearchNav.vue'),
-      meta:{
-        isHide:true,
-      }
+      name: "Search",
+      path: "/Search",
+      component: () => import("@/views/Search/SearchNav.vue"),
+      meta: {
+        isHide: true,
+      },
     },
     {
-      name:'ResidenceSearch',
-      path:'/ResidenceSearch',
-      component: ()=> import('@/views/ResidenceSearch/ResidenceSearch.vue'),
-      meta:{
-        isHide:true,
-      }
+      name: "ResidenceSearch",
+      path: "/ResidenceSearch",
+      component: () => import("@/views/ResidenceSearch/ResidenceSearch.vue"),
+      meta: {
+        isHide: true,
+      },
     },
     {
-      name:'DetailsView',
-      path:'/DetailsView/:id/:flay',
-      component: ()=> import('@/views/Details/DetailsView.vue'),
-      meta:{
-        isHide:true,
-      }
-    }
-  ]
-})
+      name: "DetailsView",
+      path: "/DetailsView/:id/:flay",
+      component: () => import("@/views/Details/DetailsView.vue"),
+      meta: {
+        isHide: true,
+      },
+    },
+  ],
+});
 
-export default router
+export default router;
