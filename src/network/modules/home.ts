@@ -14,7 +14,6 @@ export function getSwiperImg() {
       return err; // 返回错误信息
     });
 }
-
 // 获取民宿数据
 export function getHomeData(id: number) {
   return DefaultAxios.get({
@@ -31,7 +30,6 @@ export function getHomeData(id: number) {
       return err; // 返回错误信息
     });
 }
-
 // 获取便捷导航数据
 export function getHomeCategories() {
   return DefaultAxios.get({
