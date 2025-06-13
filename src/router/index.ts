@@ -33,7 +33,7 @@ const router = createRouter({
     {
       name: "order",
       path: "/order/:id",
-      component: () => import("@/views/Order/Order.vue"),
+      component: () => import("@/views/Order/orderView.vue"),
     },
     {
       name: "Search",
