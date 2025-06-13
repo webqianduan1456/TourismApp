@@ -3,6 +3,10 @@
     {
       "source": "/home/:path*",
       "destination": "http://47.122.47.101:8889/home/:path*"
+    },
+    {
+      "source": "/order/:path*",
+      "destination": "http://47.122.47.101:8889/order/:path*"
     }
   ]
 }
