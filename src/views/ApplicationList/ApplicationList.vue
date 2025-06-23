@@ -4,14 +4,17 @@ import { UserMessage } from '@/stores/modules/login';
 import { onBeforeMount, onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
-
+// 后端nest
 const socket = io('https://your-vercel-app.vercel.app', {
-  path: '/socket.io',
-  transports: ['websocket']
+  path: '/api/socket-proxy/socket.io',
+  transports: ['websocket'],
+  // 调试选项
+  reconnectionAttempts: 3,
+  timeout: 20000
 });
 // 添加错误监听
 socket.on('connect_error', (err) => {
-    console.error('Socket error:', err);
+  console.error('Socket error:', err);
 });
 const UserMessages = UserMessage()
 const toUp = () => {
