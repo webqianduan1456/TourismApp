@@ -15,6 +15,10 @@
     {
       "source": "/user/:path*",
       "destination": "http://47.122.47.101:8889/user/:path*"
+    },
+    {
+      "source": "/socket.io/:path*",
+      "destination": "http://47.122.47.101:8889/socket.io/:path*"
     }
   ]
 }
