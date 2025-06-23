@@ -4,7 +4,7 @@ import { UserMessage } from '@/stores/modules/login';
 import { onBeforeMount, onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
-const socket = io('https://project.yqqlike.xin/api/websocket-proxy', {
+const socket = io('https://project.yqqlike.xin/api/websocket-proxy:3001', {
   transports: ['websocket']
 });
 const UserMessages = UserMessage()
