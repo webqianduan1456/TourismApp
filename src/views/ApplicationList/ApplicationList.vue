@@ -5,7 +5,6 @@ import { onBeforeMount, onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
 const socket = io('https://project.yqqlike.xin/api/websocket-proxy', {
-  path: '', // 清空默认路径，使用根路径
   transports: ['websocket']
 });
 const UserMessages = UserMessage()
