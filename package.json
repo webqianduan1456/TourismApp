@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "@types/socket.io-client": "^3.0.0",
     "axios": "^1.8.3",
     "dayjs": "^1.11.13",
     "mitt": "^3.0.1",
@@ -20,7 +21,7 @@
     "pinia": "^3.0.1",
     "socket.io-client": "^4.8.1",
     "vant": "^4.9.17",
-    "vue": "^3.5.13",
+    "vue": "^3.5.17",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {

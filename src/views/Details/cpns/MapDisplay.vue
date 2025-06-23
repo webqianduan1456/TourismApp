@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import AMapLoader from '@amap/amap-jsapi-loader';
+import { AMapLoader } from '@amap/amap-jsapi-loader';
 
 const props = defineProps({
   positionMaps: {
