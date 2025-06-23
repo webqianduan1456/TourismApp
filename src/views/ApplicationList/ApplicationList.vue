@@ -4,7 +4,8 @@ import { UserMessage } from '@/stores/modules/login';
 import { onBeforeMount, onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
-const socket = io('https://project.yqqlike.xin:3001/chats', {
+const socket = io('https://your-vercel-app.vercel.app', {
+  path: '/socket.io',
   transports: ['websocket']
 });
 const UserMessages = UserMessage()

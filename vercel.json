@@ -18,7 +18,7 @@
     },
     {
       "source": "/socket.io/:path*",
-      "destination": "http://47.122.47.101:8889/socket.io/:path*"
+      "destination": "/api/socket-proxy"
     }
   ]
 }
