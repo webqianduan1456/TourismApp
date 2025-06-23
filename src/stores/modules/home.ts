@@ -6,11 +6,15 @@ import {
   getHomeHouseListCopy,
   getHomeHouseListAdd,
   getHomeHouseListDelete,
+  GetDataHistory,
+  AddDataHistory,
 } from "@/network/modules/home";
 import { defineStore } from "pinia";
 import type { Home } from "../type/type";
 import { useCityStore } from "./city";
+import { UserMessage } from "./login";
 const cityStore = useCityStore();
+const UserMessages = UserMessage();
 const userHomeStore = defineStore("home", {
   state: (): Home => ({
     // 轮播图数据
@@ -63,7 +67,6 @@ const userHomeStore = defineStore("home", {
           Discount2: "",
           DiscountMessage: "",
           Comment: 0,
-          flay: 0,
         },
       ],
     },
@@ -72,17 +75,20 @@ const userHomeStore = defineStore("home", {
     // 添加热门精选副本全部数据
     HomeHouseListCopyS: [],
     // 获取历史记录
-    HomeHouseListHistory: [],
+    getHistory: [],
     // 页数
     PageNumber: 1,
     id: cityStore?.CurrentCity.id, // 获取当前城市ID
 
     // 获取首页时间(存在本地避免刷新消失)
-    StartDate: sessionStorage.getItem('startDate') || '',
-    EndDate: sessionStorage.getItem('endDate') || '',
-    Days: Number(sessionStorage.getItem('days')) || 0,
-    }),
-    actions: {
+    StartDate: sessionStorage.getItem("startDate") || "",
+    EndDate: sessionStorage.getItem("endDate") || "",
+    Days: Number(sessionStorage.getItem("days")),
+    // 控制登录界面显示
+    Login: false,
+  }),
+
+  actions: {
     // 获取轮播图
     async fetchAllSwiperDate() {
       const res = await getSwiperImg();
@@ -99,22 +105,17 @@ const userHomeStore = defineStore("home", {
       this.HomeCategories = res.data;
     },
     // 热门精选List
-    async fetchAllHomeHouseList(flay: number | null, ids?: number | null) {
-      const res = await getHomeHouseList(this.id, this.PageNumber, flay, ids);
-      // 获取历史记录
-      if (!ids && flay) {
-        this.HomeHouseListHistory = res?.data;
-      } else {
-        // 获取首页热门List数据
-        if (res?.data?.SelectedS) {
-          this.HomeHouseList?.SelectedS?.push(...res.data.SelectedS);
-        }
-        this.PageNumber++; // 安全递增页数
+    async fetchAllHomeHouseList() {
+      const res = await getHomeHouseList(this.id, this.PageNumber);
+      // 获取首页热门List数据
+      if (res?.data?.SelectedS) {
+        this.HomeHouseList?.SelectedS?.push(...res.data.SelectedS);
       }
+      this.PageNumber++; // 安全递增页数
     },
     // 获取副本精选
     async fetchAllHomeHouseListCopy(id: number | null = null) {
-      const res = await getHomeHouseListCopy(id);
+      const res = await getHomeHouseListCopy(id, Number(UserMessages.id));
       if (id) {
         // 解决数据重复
         const isDuplicate = this.HomeHouseListCopy?.some((item) => {
@@ -125,17 +126,28 @@ const userHomeStore = defineStore("home", {
           this.HomeHouseListCopy?.push(res?.data);
         }
       } else {
-       // 获取全部收藏数据
+        // 获取全部收藏数据
         this.HomeHouseListCopyS = res?.data;
       }
     },
     // 添加收藏
-    async fetchAllHomeHouseListAdd(itemDates: object) {
-      await getHomeHouseListAdd(itemDates);
+    async fetchAllHomeHouseListAdd(itemDates: { id: number }) {
+      await getHomeHouseListAdd(itemDates, Number(UserMessages.id));
     },
     // 删除收藏
     async fetchAllHomeHouseListDelete(id: number) {
-      await getHomeHouseListDelete(id);
+      await getHomeHouseListDelete(id, Number(UserMessages.id));
+    },
+    // 获取历史记录
+    async fetchAllGetDataHistory() {
+      const res = await GetDataHistory(Number(UserMessages.id));
+      if (res?.data) {
+        this.getHistory = res.data;
+      }
+    },
+    // 创建历史记录
+    async fetchAllAddDataHistory(itemDates: { id: number }) {
+      await AddDataHistory(itemDates, Number(UserMessages.id));
     },
   },
 });

@@ -3,21 +3,20 @@ defineOptions({
   name: 'UserOrder'
 })
 import { onMounted, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
 import OrderContent from './cpns/OrderContent.vue';
 import UserOrder from '@/stores/modules/Order';
 import { storeToRefs } from 'pinia';
 import { showDialog } from 'vant';
-const route = useRoute();
 // 订单相关数据
 const UserOrders = UserOrder()
 const { AllOrder, CompletedOrder, WaitingOrder } = storeToRefs(UserOrders)
 // 获取时间戳改成秒
 const nows = Date.now();
 const secondes = Math.floor((nows / 1000) % 60);
-// 是否支付弹出框显示隐藏 和 当前活跃栏
+// 是否支付弹出框显示隐藏,当前活跃栏,城市id
 const show = ref(false);
 const active = ref(0);
+const cityId = ref(0)
 // 处于用户频繁请求
 const requestCount = ref(0);
 const lastRequestTime = ref(secondes);
@@ -68,14 +67,16 @@ watch(active, async (newActive) => {
   lastRequestTime.value = seconds;
 })
 // 用户展示提示
-const payment = (data: boolean) => {
+const payment = (data: boolean,id:number) => {
+  cityId.value = id
   show.value = data;
 }
 // 获取子组件传递过来的数据
-const confirm = async () => {
+const confirm = async (cityId:number) => {
   show.value = false;
+  console.log(cityId);
   // 获取更新后的数据
-  await UserOrders.fetchUpdateOrder(Number(route.params.id))
+  await UserOrders.fetchUpdateOrder(cityId)
   await UserOrders.fetchWaitingOrder()
   await UserOrders.fetchAllOrder(1)
 }
@@ -130,7 +131,7 @@ onMounted(async () => {
         </van-tab>
       </van-tabs>
       <!-- 是否支付提示展示 -->
-      <van-dialog v-model:show="show" show-cancel-button @confirm="confirm">
+      <van-dialog v-model:show="show" show-cancel-button @confirm="confirm(cityId)">
         <div style="text-align: center; margin: 2.6667vw;">是否支付?</div>
       </van-dialog>
     </div>

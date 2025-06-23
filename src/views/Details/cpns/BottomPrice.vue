@@ -19,15 +19,17 @@ const show = ref(false);
 const currentTimeStart = ref(['12', '00']);
 const currentTimeEEnd = ref(['00', '00']);
 // 用户待支付订单
+
 const OrderData = {
-  title: HomeHouseList.value.SelectedS.find(item => item.id === Number(route.params.id))?.houseName || '',
-  url: HomeHouseList.value.SelectedS.find(item => item.id === Number(route.params.id))?.url || '',
+  title: HomeHouseList.value.SelectedS.find(item => item.id === Number(route.params.keyId))?.houseName || '',
+  url: HomeHouseList.value.SelectedS.find(item => item.id === Number(route.params.keyId))?.url || '',
   StartTime: new Date(`${new Date().getUTCFullYear()}-${StartDate.value.replace('月', '-').replace('日', '')} ${currentTimeStart.value[0]}:${currentTimeStart.value[1]}`),
   EndTime: new Date(`${new Date().getUTCFullYear()}-${EndDate.value.replace('月', '-').replace('日', '')} ${currentTimeEEnd.value[0]}:${currentTimeEEnd.value[1]}`),
   totalPrice: (HomeHouseList.value.SelectedS.find(item => item.id ===
-    Number(route.params.id))?.finalPrice ?? 0) * Number(Days.value),
+    Number(route.params.keyId))?.finalPrice ?? 0) * Number(Days.value),
   Overall: 0,
-  houseId: Number(route.params.id)
+  houseId: Number(route.params.keyId),
+  userid: sessionStorage.getItem('userid')
 }
 // 触发预定事件
 const ReservationHouse = () => {
@@ -39,16 +41,31 @@ const confirm = async () => {
   show.value = false
   // 调用创建待支付方法
   const res = await UserOrders.fetchCreateOrder(OrderData)
+
+  // 未登录
+  if (res?.code === 401) {
+    // 订单重复提示
+    showDialog({
+      message: '请先登录!!!!!!!!!',
+      theme: 'round-button',
+    })
+    return
+  }
+  // 数据未支付
   if (res?.code === 400) {
     // 订单重复提示
-   showDialog({
+    showDialog({
       message: '订单已存在请前往支付',
       theme: 'round-button',
     })
+
   } else {
     // 如果创建成功，跳转到订单详情页面
     router.push(`/order/${route.params.id}`)
   }
+
+
+
 
 };
 // 取消按钮事件
@@ -70,7 +87,7 @@ onMounted(() => {
   // 存储数据到本地
   sessionStorage.setItem('startDate', StartDate.value)
   sessionStorage.setItem('endDate', EndDate.value)
-  sessionStorage.setItem('days', String(Days.value))
+  sessionStorage.setItem('days', Days.value)
 
 })
 
@@ -82,7 +99,7 @@ onMounted(() => {
       <!-- 客服和价格 -->
       <van-action-bar-icon icon="chat-o" text="客服" color="#000000" />
       <van-action-bar-icon>
-        {{HomeHouseList.SelectedS.find(item => item.id === Number(route.params.id))?.finalPrice || 0}}元/晚
+        {{HomeHouseList.SelectedS.find(item => item.id === Number(route.params.keyId))?.finalPrice || 0}}元/晚
       </van-action-bar-icon>
       <!-- 预定当前房源 -->
       <van-action-bar-button type="danger" text="预定当前房源" @click="ReservationHouse" />
@@ -91,8 +108,8 @@ onMounted(() => {
   <van-overlay :show="show">
     <div class="subscribe">
       <!-- 文本 -->
-      <div class="title">{{HomeHouseList.SelectedS.find(item => item.id === Number(route.params.id))?.houseName || '无'
-        }}</div>
+      <div class="title">{{HomeHouseList.SelectedS.find(item => item.id === Number(route.params.keyId))?.houseName || '无'
+      }}</div>
       <!-- 日期 -->
       <div class="date">
         <div class="titles"><span>{{ StartDate }} </span>- <span>{{ EndDate }}</span></div>
@@ -107,7 +124,7 @@ onMounted(() => {
       <!-- 天数和总价 -->
       <div class="sky">共{{ Days }}天</div>
       <div class="price">总价: <span>{{(HomeHouseList.SelectedS.find(item => item.id ===
-        Number(route.params.id))?.finalPrice ?? 0) * Days }}</span>元</div>
+        Number(route.params.keyId))?.finalPrice ?? 0) * Days }}</span>元</div>
       <!-- 按钮 -->
       <div class="decision">
         <van-button type="primary" round color="#4796f2" @click="confirm">立刻预约</van-button>

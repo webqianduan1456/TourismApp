@@ -29,10 +29,10 @@ const useCityStoreS = useCityStore()
 const { CurrentCity } = storeToRefs(useCityStoreS)
 const setcolor = ref(false)
 const setcolorRed = ref(['#ff1313 !important', '#c1bebe !important'])
-
 const userHomeStores = userHomeStore()
 
 const { HomeHouseList, HomeHouseListCopy } = storeToRefs(userHomeStores)
+
 
 // 回到上一页
 const Rollback = async () => {
@@ -40,17 +40,18 @@ const Rollback = async () => {
   if (setcolor.value == true) {
     // 获取第一次首页已经存储的数据,对远程服务器进行添加数据
     itemData.value = HomeHouseList.value.SelectedS.find((item) =>
-      item.id === Number(route.params.id)
+      item.houseId === Number(route.params.id)
     )
     // 添加收藏数据
     if (itemData.value) {
       await userHomeStores.fetchAllHomeHouseListAdd(itemData.value)
+      await userHomeStores.fetchAllAddDataHistory(itemData.value)
     }
   } else {
     // 删除数据
     await userHomeStores.fetchAllHomeHouseListDelete(Number(route.params.id))
     // 通过id删除热门副本数据
-    const CopyIndex = HomeHouseListCopy?.value?.findIndex(item => item.id === Number(route.params.id))
+    const CopyIndex = HomeHouseListCopy?.value?.findIndex(item => item.houseId === Number(route.params.id))
     if (CopyIndex !== -1 && CopyIndex !== undefined) {
       HomeHouseListCopy?.value?.splice(CopyIndex, 1)
     }
@@ -60,8 +61,8 @@ const Rollback = async () => {
 // 刷新获取当前数据
 onMounted(async () => {
   // 获取详情的数据与轮播图图片
-  await UserDetailStores.fetchAllDetailsDate(Number(route.params.id))
-  await UserDetailStores.fetchAllHouseKeyImg(Number(route.params.id))
+  await UserDetailStores.fetchAllDetailsDate(Number(route.params.keyId))
+  await UserDetailStores.fetchAllHouseKeyImg(Number(route.params.keyId))
   // 获取路由传过来的id决定收藏样式显示还是隐藏
   setcolor.value = route.params.flay === 'false' ? !Boolean(route.params.flay) : Boolean(route.params.flay)
 })

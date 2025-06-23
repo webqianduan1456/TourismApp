@@ -7,9 +7,9 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="app">
+  <div id="app">
     <!-- 保持活跃 -->
-    <router-view v-slot="{ Component }" >
+    <router-view v-slot="{ Component }">
       <keep-alive :include="['HomeView', 'SearchNav']" :exclude="['DetailsView']" :max="5">
         <component :is="Component" />
       </keep-alive>
@@ -17,6 +17,8 @@ const route = useRoute()
 
     <TabBar v-show="!route.meta.isHide"></TabBar>
     <LoadingView></LoadingView>
+
+
   </div>
 </template>
 

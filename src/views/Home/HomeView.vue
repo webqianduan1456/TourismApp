@@ -25,7 +25,7 @@ const HomeViewRef = ref()
 // 鼠标滚动到底部时触发
 
 const { scrollTop } = useScroll(() => {
-  userHomeStores.fetchAllHomeHouseList(null);
+  userHomeStores.fetchAllHomeHouseList();
 }, HomeViewRef);
 
 // 获取stores数据
@@ -61,7 +61,7 @@ const getAttractions = ref('')
 <template>
   <!-- 标题 -->
   <div class="HomeView" ref="HomeViewRef">
-    <TNavBar v-once></TNavBar>
+    <TNavBar></TNavBar>
     <!-- 轮播图 -->
     <SwiperView :SwiperData="SwiperImg || []"></SwiperView>
     <!-- 位置 -->
@@ -108,7 +108,7 @@ const getAttractions = ref('')
 .HomeView {
   position: relative;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: scroll ;
 }
 
 

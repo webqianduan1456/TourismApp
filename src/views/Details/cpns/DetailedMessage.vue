@@ -13,7 +13,7 @@ defineProps({
 })
 // 刷新获取当前数据
 onBeforeMount(async () => {
-  await userHomeStoreData.fetchAllHomeHouseList(null)
+  await userHomeStoreData.fetchAllHomeHouseList()
 })
 </script>
 

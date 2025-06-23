@@ -16,7 +16,7 @@ export interface CollectChild {
   Discount2: string;
   DiscountMessage: string;
   Comment: number;
-  flay: number;
+  userid: number;
   houseKeyimg: Array<{
     orderIndex: number;
     title: string;

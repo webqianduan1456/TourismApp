@@ -26,9 +26,11 @@
   /* 给<van-cell/>额外添加样式 */
   --van-action-bar-height: 15.6667vw !important;
   /* 预约遮罩层的z-index  */
-  --van-overlay-z-index:999 !important;
+  --van-overlay-z-index: 999 !important;
   /* 预约时间表字体大小 */
   --van-picker-option-font-size: 4.6667vw !important;
+  /* 按钮大小 */
+  --van-font-size-sm: 2vw !important;
 
   .van-cell {
     cursor: pointer;
@@ -37,9 +39,9 @@
   /* 修改搜索放大镜颜色,大小,文本 */
   .van-icon {
     color: #ff1313;
-    font-size: 4vw ;
+    font-size: 4vw;
   }
-  
+
   .van-field__left-icon>i {
     font-size: 5vw !important;
   }
@@ -74,17 +76,17 @@
     color: #ff1313 !important;
     font-size: 5vw !important;
     line-height: 5vw !important;
-    padding-left: 0;
   }
 
   .van-nav-bar__left {
     padding-right: 0.6667vw;
   }
- /* 修改切换栏的样式 */
- .van-tab{
-  font-weight: 800 !important;
 
- }
+  /* 修改切换栏的样式 */
+  .van-tab {
+    font-weight: 800 !important;
+
+  }
 
 }
 
@@ -126,7 +128,6 @@
   :root {
     --van-index-bar-index-font-size: 16px !important;
     --van-font-size: 1.446vw !important;
-
   }
 
   .van-tab__text--ellipsis {
@@ -177,10 +178,14 @@
 }
 
 /* 应用到 body 元素，设置整体页面的字体 */
-body {
+body,
+html ，#app {
+  height: 100%;
   font-size: 1.8667vw;
   font-family: "楷体", "微软雅黑", "Microsoft YaHei", "宋体", SimSun, Arial, "Helvetica Neue", Helvetica, Times New Roman, sans-serif;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* 应用到 h1 标题元素 */

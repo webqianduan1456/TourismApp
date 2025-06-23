@@ -5,7 +5,7 @@ import CollectChild from './CollectView/CollectChild.vue';
 import { storeToRefs } from 'pinia';
 import { userHomeStore } from '@/stores/modules/home';
 const userHomeStores = userHomeStore()
-const { HomeHouseListCopyS, HomeHouseListHistory } = storeToRefs(userHomeStores)
+const { HomeHouseListCopyS,getHistory } = storeToRefs(userHomeStores)
 const router = useRouter()
 
 // 返回上一页
@@ -23,13 +23,12 @@ const VanBarClick = async (index: number) => {
   if (VanBarShow.value === 0) {
     await userHomeStores.fetchAllHomeHouseListCopy()
   } else {
-    await userHomeStores.fetchAllHomeHouseList(1, null)
+    await userHomeStores.fetchAllGetDataHistory()
   }
 }
 // 首次挂载显示
 onMounted(() => {
   userHomeStores.fetchAllHomeHouseListCopy()
-  userHomeStores.fetchAllHomeHouseList(1, null)
 })
 </script>
 
@@ -50,8 +49,8 @@ onMounted(() => {
         </template>
       </van-nav-bar>
       <!-- 切换栏 -->
-      <van-tabs animated title-active-color="#ff5722" line-height="1.4vw"
-        line-width="10.3vw" :swipeable="true" :sticky="true">
+      <van-tabs animated title-active-color="#ff5722" line-height="1.4vw" line-width="10.3vw" :swipeable="true"
+        :sticky="true">
         <!-- 房屋 -->
         <van-tab title="房屋">
           <!-- 房屋内容 -->
@@ -63,7 +62,7 @@ onMounted(() => {
           </div>
           <!-- -------历史模块------ -->
           <div v-else class="House">
-            <template v-for="(item, index) in HomeHouseListHistory" :key="index">
+            <template v-for="(item, index) in getHistory" :key="index">
               <CollectChild :CopyDate="item"></CollectChild>
             </template>
           </div>
@@ -101,7 +100,7 @@ onMounted(() => {
   .House {
     width: 100vw;
     height: 100vh;
-    overflow-y: scroll ;
+    overflow-y: scroll;
 
   }
 }

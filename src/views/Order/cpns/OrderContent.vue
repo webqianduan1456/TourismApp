@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-defineProps<{
+const props = defineProps<{
   items: {
     id: number;
     title: string;
@@ -23,7 +23,7 @@ const show = ref(false)
 // 支付提示
 const payment = () => {
   show.value = true;
-  emit('payment', show.value);
+  emit('payment', show.value,props?.items?.houseId);
 }
 // emit
 const emit = defineEmits(['payment']);
@@ -38,7 +38,7 @@ const emit = defineEmits(['payment']);
     </div>
     <!-- 日期以及图片信息 -->
     <div class="content">
-      <img src="../../../assets/img/xjiang.jpg" alt="">
+      <img :src="items.url" alt="">
       <div class="contents">
         <div class="DateContent">
           <div class="StartDate">

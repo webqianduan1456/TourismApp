@@ -7,6 +7,8 @@ import {
 } from "@/network/modules/Order";
 import { defineStore } from "pinia";
 import type { Order } from "../type/type";
+import { UserMessage } from "./login";
+const UserMessages = UserMessage();
 
 const UserOrder = defineStore("Order", {
   state: (): Order => ({
@@ -17,17 +19,17 @@ const UserOrder = defineStore("Order", {
   actions: {
     // 获取全部订单信息
     async fetchAllOrder(Overall: number) {
-      const res = await getAllOrder(Overall);
+      const res = await getAllOrder(Overall, Number(UserMessages.id));
       this.AllOrder = res.data;
     },
     // 获取近期订单
     async fetchCompletedOrder() {
-      const res = await getCompletedOrder();
+      const res = await getCompletedOrder(Number(UserMessages.id));
       this.CompletedOrder = res.data;
     },
     // 获取待支付订单
     async fetchWaitingOrder() {
-      const res = await getWaitingOrder();
+      const res = await getWaitingOrder(Number(UserMessages.id));
       this.WaitingOrder = res.data;
     },
     // 创建待支付订单
@@ -37,7 +39,7 @@ const UserOrder = defineStore("Order", {
     },
     // 更新支付订单
     async fetchUpdateOrder(houseId: number) {
-      await getUpdateOrder(houseId);
+      await getUpdateOrder(houseId, Number(UserMessages.id));
     },
   },
 });

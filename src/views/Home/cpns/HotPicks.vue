@@ -1,36 +1,33 @@
 <script setup lang="ts">
-import { userHomeStore } from '@/stores/modules/home'
-import HomeHouseV3 from '@/components/HomeHouse-v3/HomeHouse-v3.vue'
-import HomeHouseV9 from '@/components/HomeHouse-v9/HomeHouse-v9.vue'
-import router from '@/router'
-import UserDetailStore from '@/stores/modules/detail'
-import { storeToRefs } from 'pinia'
+import { userHomeStore } from "@/stores/modules/home";
+import HomeHouseV3 from "@/components/HomeHouse-v3/HomeHouse-v3.vue";
+import HomeHouseV9 from "@/components/HomeHouse-v9/HomeHouse-v9.vue";
+import router from "@/router";
+import UserDetailStore from "@/stores/modules/detail";
+import { storeToRefs } from "pinia";
 // 数据1
-const UserDetailStores = UserDetailStore()
+const UserDetailStores = UserDetailStore();
 // 数据2
-const userHomeStores = userHomeStore()
-userHomeStores.fetchAllHomeHouseList(null)
-const { HomeHouseListCopy } = storeToRefs(userHomeStores)
+const userHomeStores = userHomeStore();
+userHomeStores.fetchAllHomeHouseList();
+const { HomeHouseListCopy } = storeToRefs(userHomeStores);
 
 // 跳转详情界面
-const Details = async (item: { id: number }) => {
-
-  if (!item.id) return
+const Details = async (item: { houseId: number,id:number }) => {
+  if (!item.id) return;
   // 跳转之前进行当前详情页面的数据获取
-  await UserDetailStores.fetchAllDetailsDate(item?.id)
+  await UserDetailStores.fetchAllDetailsDate(item?.id);
   // 跳转之前获取热门精选副本数据
-  await userHomeStores.fetchAllHomeHouseListCopy(item?.id)
-  // 跳转前记录用户历史记录
-  await userHomeStores.fetchAllHomeHouseList(1, item?.id)
-
+  await userHomeStores.fetchAllHomeHouseListCopy(item?.id);
   //  查找出热门副本的数据flay通过路由传到详情页面控制收藏图标状态
-  const n = HomeHouseListCopy?.value && Array.isArray(HomeHouseListCopy.value)
-    ? HomeHouseListCopy.value.map((ite) => ite?.id === item?.id)
-    : []
-  const flay = n.includes(true)
+  const n =
+    HomeHouseListCopy?.value && Array.isArray(HomeHouseListCopy.value)
+      ? HomeHouseListCopy.value.map((ite) => ite?.houseId === item?.houseId)
+      : [];
+  const flay = n.includes(true);
   //  跳转
-  router.push(`/DetailsView/${item.id}/${flay}`)
-}
+  router.push(`/DetailsView/${item.houseId}/${flay}/${item.id}`);
+};
 </script>
 
 <template>
@@ -41,12 +38,19 @@ const Details = async (item: { id: number }) => {
       <!-- 遍历 HomeHouseList，根据 discoveryContentType 渲染不同组件 -->
       <template v-for="(item, index) in userHomeStores?.HomeHouseList?.SelectedS" :key="index">
         <!-- 如果 discoveryContentType 为 3，渲染 HomeHouseV3 -->
-        <HomeHouseV3 v-if="item.discoveryContentType === 3" :item-data="item" @click="Details(item)" />
+        <HomeHouseV3
+          v-if="item.discoveryContentType === 3"
+          :item-data="item"
+          @click="Details(item)"
+        />
         <!-- 如果 discoveryContentType 为 9，渲染 HomeHouseV9 -->
-        <HomeHouseV9 v-else-if="item.discoveryContentType === 9" :item-data="item" @click="Details(item)" />
+        <HomeHouseV9
+          v-else-if="item.discoveryContentType === 9"
+          :item-data="item"
+          @click="Details(item)"
+        />
       </template>
     </div>
-
   </div>
 </template>
 

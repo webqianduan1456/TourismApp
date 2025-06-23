@@ -1,3 +1,4 @@
+// 首页选择城市类型
 export interface City {
   // 获取所有城市数据
   getCityAllD: {
@@ -36,7 +37,7 @@ export interface City {
     latitude: string;
   };
 }
-
+// 首页类型
 export interface Home {
   // 轮播图数据
   SwiperImg: Array<{
@@ -84,7 +85,6 @@ export interface Home {
       Discount2: string;
       DiscountMessage: string;
       Comment: number;
-      flay: number;
     }>;
   };
   // 获取指定id热门精选副本
@@ -106,7 +106,8 @@ export interface Home {
     Discount2: string;
     DiscountMessage: string;
     Comment: number;
-    flay: number;
+    housid: number;
+    userid: number;
     houseKeyimg: Array<{
       orderIndex: number;
       title: string;
@@ -137,7 +138,8 @@ export interface Home {
     Discount2: string;
     DiscountMessage: string;
     Comment: number;
-    flay: number;
+    housid: number;
+    userid: number;
     houseKeyimg: Array<{
       orderIndex: number;
       title: string;
@@ -151,7 +153,7 @@ export interface Home {
   }>;
 
   // 获取历史记录
-  HomeHouseListHistory?: Array<{
+  getHistory?: Array<{
     id: number;
     productPrice: number;
     houseId: number;
@@ -169,7 +171,8 @@ export interface Home {
     Discount2: string;
     DiscountMessage: string;
     Comment: number;
-    flay: number;
+    housid: number;
+    userid: number;
     houseKeyimg: Array<{
       orderIndex: number;
       title: string;
@@ -188,8 +191,10 @@ export interface Home {
   StartDate: string;
   EndDate: string;
   Days: number;
+  // 控制登录界面显示
+  Login: boolean;
 }
-
+// 商品详情
 export interface Detail {
   HousingResourceData: {
     HousingResource: {
@@ -269,7 +274,7 @@ export interface Detail {
     }>;
   };
 }
-
+// 订单类型
 export interface Order {
   AllOrder: Array<{
     id: number;
@@ -316,4 +321,28 @@ export interface Order {
     EndTimeTime: string;
     time: number;
   }>;
+}
+// 用户类型
+export interface User {
+  id: number | null;
+  token: string | null;
+  username: string | null;
+  avatar: string;
+  FindUses: {
+    id?: number | null;
+    username?: string;
+    url?: string;
+  };
+  UserFriendList: Array<{
+    username: string;
+    oppositeId: number;
+    userid: number;
+  }>
+  ApplicatioList:Array<{
+    username: string,
+    active: number,
+    avatarUrl: string,
+    oppositeId: number,
+    userid: number
+  }>
 }
