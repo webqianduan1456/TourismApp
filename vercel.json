@@ -15,6 +15,10 @@
     {
       "source": "/user/:path*",
       "destination": "http://47.122.47.101:8889/user/:path*"
+    },
+    {
+      "src": "/socket.io/(.*)",
+      "dest": "http://backend-server:3001/socket.io/$1"
     }
   ]
 }

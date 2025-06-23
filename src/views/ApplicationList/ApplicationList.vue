@@ -4,7 +4,7 @@ import { UserMessage } from '@/stores/modules/login';
 import { onBeforeMount, onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
-const socket = io('wss://your-domain.com/chats:3001', {
+const socket = io('http://project.yqqlike.xin:3001', {
   transports: ["websocket"],
 })
 const UserMessages = UserMessage()
