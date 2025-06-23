@@ -87,8 +87,7 @@ onMounted(() => {
   // 存储数据到本地
   sessionStorage.setItem('startDate', StartDate.value)
   sessionStorage.setItem('endDate', EndDate.value)
-  sessionStorage.setItem('days', Days.value)
-
+  sessionStorage.setItem('days', String(Days.value))
 })
 
 </script>
