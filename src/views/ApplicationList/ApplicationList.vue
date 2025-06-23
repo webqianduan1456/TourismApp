@@ -4,9 +4,10 @@ import { UserMessage } from '@/stores/modules/login';
 import { onBeforeMount, onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
-const socket = io('http://project.yqqlike.xin:3001', {
-  transports: ["websocket"],
-})
+const socket = io('https://project.yqqlike.xin/chats', {
+  path: '/socket.io', // Vercel代理路径
+  transports: ['websocket']
+});
 const UserMessages = UserMessage()
 const toUp = () => {
   router.push('/friend')
