@@ -64,9 +64,6 @@ const confirm = async () => {
     router.push(`/order/${route.params.id}`)
   }
 
-
-
-
 };
 // 取消按钮事件
 const cancel = () => {
