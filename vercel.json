@@ -17,8 +17,8 @@
       "destination": "http://47.122.47.101:8889/user/:path*"
     },
     {
-      "src": "/socket.io/(.*)",
-      "dest": "http://backend-server:3001/socket.io/$1"
+      "src": "/chats/:path*",
+      "dest": "http://project.yqqlike.xin:3001"
     }
   ]
 }
