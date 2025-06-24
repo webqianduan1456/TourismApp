@@ -17,7 +17,7 @@
       "destination": "http://47.122.47.101:8889/user/:path*"
     },
     {
-      "source": "/socket.io/:path*",
+      "source": "/api/socket-proxy/:path*",
       "destination": "/api/socket-proxy"
     }
   ]

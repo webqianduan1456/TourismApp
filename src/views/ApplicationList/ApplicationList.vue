@@ -4,14 +4,20 @@ import { UserMessage } from '@/stores/modules/login';
 import { onBeforeMount, onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
-// 后端nest
-const socket = io('https://your-vercel-app.vercel.app', {
-  path: '/api/socket-proxy/socket.io',
+
+
+
+const socket = io('https://project.yqqlike.xin', {  // 直接使用前端域名
+  path: '/api/socket-proxy/socket.io',  // ✅ 保持完整路径
   transports: ['websocket'],
-  // 调试选项
-  reconnectionAttempts: 3,
-  timeout: 20000
+  reconnectionAttempts: 5,
+  timeout: 30000,
+  secure: true,  // 强制前端 HTTPS
+  rejectUnauthorized: false  // ⚠️ 跳过证书验证（仅开发环境，生产需删除）
 });
+
+
+
 // 添加错误监听
 socket.on('connect_error', (err) => {
   console.error('Socket error:', err);

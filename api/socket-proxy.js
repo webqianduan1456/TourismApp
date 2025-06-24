@@ -1,13 +1,9 @@
 // api/socket-proxy.js
-import { createProxyMiddleware } from 'http-proxy-middleware';
-
-export default function (req, res) {
-  createProxyMiddleware({
-    target: 'http://project.yqqlike.xin:8889', // 你的后端 HTTP 地址
-    changeOrigin: true,
-    ws: true, // 关键：启用 WebSocket 代理
-    pathRewrite: {
-      '^/api/socket-proxy': '/socket.io' // 关键：重写路径
-    }
-  })(req, res);
-}
+export default createProxyMiddleware({
+  target: 'http://47.122.47.101',  // 明文 HTTP 后端
+  changeOrigin: true,
+  ws: true,  // 必须启用 WebSocket
+  pathRewrite: {
+    '^/api/socket-proxy': '/socket.io'  // ✅ 精准重写路径
+  }
+});
