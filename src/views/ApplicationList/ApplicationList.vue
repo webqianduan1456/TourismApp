@@ -7,13 +7,17 @@ import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
 
 
 
-const socket = io('https://project.yqqlike.xin', {  // 直接使用前端域名
-  path: '/api/socket-proxy/socket.io',  // ✅ 保持完整路径
+const socket = io('https://project.yqqlike.xin:3001', {  // 直接使用前端域名
+  // path: '/api/socket-proxy/socket.io',  // ✅ 保持完整路径
   transports: ['websocket'],
+  host: '0.0.0.0',
   reconnectionAttempts: 5,
   timeout: 30000,
 });
-
+// {
+//       "source": "/api/socket-proxy/:path*",
+//       "destination": "/api/socket-proxy"
+//     }
 
 
 // 添加错误监听

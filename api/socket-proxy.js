@@ -1,6 +1,6 @@
 // api/socket-proxy.js
 export default createProxyMiddleware({
-  target: 'http://47.122.47.101:8889',  // 明文 HTTP 后端
+  target: 'http://localhost:3001',  // 明文 HTTP 后端
   changeOrigin: true,
   ws: true,  // 必须启用 WebSocket
   pathRewrite: {
