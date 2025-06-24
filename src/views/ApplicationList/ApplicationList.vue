@@ -7,7 +7,7 @@ import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
 
 
 
-const socket = io('https://project.yqqlike.xin:3001', {  // 直接使用前端域名
+const socket = io('https://76.76.21.21:3001', {  // 直接使用前端域名
   // path: '/api/socket-proxy/socket.io',  // ✅ 保持完整路径
   transports: ['websocket'],
   host: '0.0.0.0',
