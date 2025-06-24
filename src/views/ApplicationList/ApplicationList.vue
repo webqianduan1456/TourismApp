@@ -7,7 +7,7 @@ import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
 
 
 
-const socket = io('wss://47.122.47.101:8889', {  // 直接使用前端域名
+const socket = io('ws://47.122.47.101:8889', {  // 直接使用前端域名
   // path: '/api/socket-proxy/socket.io',  // ✅ 保持完整路径
   transports: ['websocket'],
   host: '0.0.0.0',
