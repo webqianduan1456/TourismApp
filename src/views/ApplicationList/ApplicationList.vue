@@ -5,19 +5,11 @@ import { onBeforeMount, onMounted } from 'vue';
 import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
 
-
-
 const socket = io('ws://47.122.47.101:8889', {  // 直接使用前端域名
-  // path: '/api/socket-proxy/socket.io',  // ✅ 保持完整路径
   transports: ['websocket'],
   host: '0.0.0.0',
   reconnection: true,
 });
-// {
-//       "source": "/api/socket-proxy/:path*",
-//       "destination": "/api/socket-proxy"
-//     }
-
 
 // 添加错误监听
 socket.on('connect_error', (err) => {
