@@ -12,8 +12,6 @@ const socket = io('https://project.yqqlike.xin', {  // 直接使用前端域名
   transports: ['websocket'],
   reconnectionAttempts: 5,
   timeout: 30000,
-  secure: true,  // 强制前端 HTTPS
-  rejectUnauthorized: false  // ⚠️ 跳过证书验证（仅开发环境，生产需删除）
 });
 
 
