@@ -13,6 +13,7 @@ import "@vant/touch-emulator";
 // 导入socket
 
 const app = createApp(App);
+
 app.use(router);
 app.use(Pinia);
 
