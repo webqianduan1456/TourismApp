@@ -6,7 +6,7 @@ import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
 
 const UserMessages = UserMessage()
 const toUserSurfaces = () => {
-  router.push('/message')
+  router.push('/home')
 }
 
 const SearchMessage = ref()
