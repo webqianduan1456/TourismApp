@@ -32,9 +32,7 @@
   /* 按钮大小 */
   --van-font-size-sm: 2vw !important;
 
-  .van-cell {
-    cursor: pointer;
-  }
+
 
   /* 修改搜索放大镜颜色,大小,文本 */
   .van-icon {
@@ -51,6 +49,8 @@
   .van-field__control {
     height: 10vh !important;
   }
+
+
 
   .van-van-cell__value,
   .van-field__body {

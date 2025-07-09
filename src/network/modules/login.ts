@@ -140,3 +140,21 @@ export function CreateApplication(
       return err; // 返回错误信息
     });
 }
+// 获取用户历史消息记录
+export function GetChatMessage(room: number) {
+  return DefaultAxios.get({
+    url: "/user/getChatMessage",
+    headers: new AxiosHeaders({
+      "Content-Type": "application/json",
+    }),
+    params: {
+      room,
+    },
+  })
+    .then((res) => {
+      return res; // 返回响应数据
+    })
+    .catch((err) => {
+      return err; // 返回错误信息
+    });
+}

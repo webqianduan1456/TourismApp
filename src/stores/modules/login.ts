@@ -2,6 +2,7 @@ import {
   CreateApplication,
   DeleteFriend,
   getApplicationList,
+  GetChatMessage,
   getFindFriendList,
   getFindUser,
   getLogin,
@@ -30,6 +31,12 @@ const UserMessage = defineStore("User", {
     UserFriendList: [],
     // 申请列表
     ApplicatioList: [],
+    // 用户历史信息
+    HistoryMessage: [],
+    // 用户发送的消息
+    Message: [],
+    // 合并的历史记录和当前消息
+    mergeMessages: [],
   }),
   actions: {
     // 登录
@@ -85,8 +92,20 @@ const UserMessage = defineStore("User", {
       return res;
     },
     // 同意好友
-    async fetchCreateApplication(oppositeId: number | null, userid: number | null, active: number,username:string | null) {
-      await CreateApplication(oppositeId,userid,active,username);
+    async fetchCreateApplication(
+      oppositeId: number | null,
+      userid: number | null,
+      active: number,
+      username: string | null
+    ) {
+      await CreateApplication(oppositeId, userid, active, username);
+    },
+    // 查看用户历史消息记录
+    async fetchGetChatMessage(room: number) {
+      const res = await GetChatMessage(room);
+      if (res?.data) {
+        this.HistoryMessage = res.data;
+      }
     },
   },
 });

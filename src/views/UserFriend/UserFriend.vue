@@ -3,10 +3,7 @@ import router from '@/router';
 import { UserMessage } from '@/stores/modules/login';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
-// import { io } from 'socket.io-client';
-// const socket = io('http://localhost:3001/chats', {
-//   transports: ["websocket"],
-// })
+
 const UserMessages = UserMessage()
 const toUserSurfaces = () => {
   router.push('/message')
@@ -37,8 +34,8 @@ const clearUser = () => {
 const ApplicationList = () => {
   router.push('/applicationList')
 }
-onMounted(()=>{
- UserMessages.fetchFindFriendList(UserMessages?.id, 1)
+onMounted(() => {
+  UserMessages.fetchFindFriendList(UserMessages?.id, 1)
 })
 // 组件销毁之前
 onBeforeUnmount(() => {

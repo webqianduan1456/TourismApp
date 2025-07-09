@@ -101,6 +101,15 @@ const router = createRouter({
         isHide: true,
       },
     },
+    // 聊天界面
+    {
+      name: "Chat",
+      path: "/chat/:oppositeId",
+      component: () => import("@/views/chatUi/chatUi.vue"),
+      meta: {
+        isHide: true,
+      },
+    },
   ],
 });
 

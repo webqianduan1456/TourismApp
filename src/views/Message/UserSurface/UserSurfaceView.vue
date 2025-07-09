@@ -1,18 +1,35 @@
 <script setup lang="ts">
+import router from '@/router';
 import { UserMessage } from '@/stores/modules/login';
 const UserMessages = UserMessage()
-interface userType {
-  id?: number | null,
-  username?: string,
-  url?: string,
+
+// 跳转到聊天界面
+const toChat = async (oppositeId: number) => {
+  // 获取当前用户与好友的历史消息
+  if (UserMessages.id) {
+    await UserMessages.fetchGetChatMessage(UserMessages.id + oppositeId);
+  }
+  // 合并历史记录和当前消息
+  UserMessages.mergeMessages = [
+    ...(Array.isArray(UserMessages.HistoryMessage) ? UserMessages.HistoryMessage : []),
+    ...(Array.isArray(UserMessages.Message) ? UserMessages.Message : [])
+  ]
+  router.push(`/chat/${oppositeId}`)
 }
 defineProps<{
-  FriendDate?: userType,
+  // 查找朋友
+  FriendDate?: {
+    id?: number | null,
+    username?: string,
+    url?: string
+  },
+  // 朋友列表
   FriendList?: {
     username: string;
     oppositeId: number;
     userid: number;
   },
+  // 申请列表
   ApplicatioLists?: {
     username: string,
     active: number,
@@ -24,7 +41,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="UserSurface">
+  <div class="UserSurface" @click="toChat(FriendList?.oppositeId || 0)">
     <!-- 用户头像 -->
     <div class="imgs">
       <img src="../../../assets/img/xjiang.jpg" alt="">

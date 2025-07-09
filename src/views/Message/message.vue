@@ -13,7 +13,7 @@ const AddFriend = () => {
 }
 // 搜索消息
 const SearchMessage = ref('');
-// 连接成功
+
 onMounted(async () => {
   await UserMessages.fetchFindFriendList(UserMessages?.id, 1)
 });

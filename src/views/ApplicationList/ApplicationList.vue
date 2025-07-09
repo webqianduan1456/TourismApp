@@ -2,19 +2,10 @@
 import router from '@/router';
 import { UserMessage } from '@/stores/modules/login';
 import { onBeforeMount, onMounted } from 'vue';
-import { io } from 'socket.io-client';
 import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
+import socket from '@/socket';
 
-const socket = io('ws://47.122.47.101:8889', {  // 直接使用前端域名
-  transports: ['websocket'],
-  host: '0.0.0.0',
-  reconnection: true,
-});
 
-// 添加错误监听
-socket.on('connect_error', (err) => {
-  console.error('Socket error:', err);
-});
 const UserMessages = UserMessage()
 const toUp = () => {
   router.push('/friend')
@@ -33,9 +24,10 @@ const refuse = async () => {
     await UserMessages.fetchFindFriendList(UserMessages.id, 0)
   }
 }
+
 onMounted(async () => {
   await UserMessages.fetchFindFriendList(UserMessages.id, 0)
-  // 连接成功发送token
+  // 连接成功发送toke验证同时拿到redis里面的申请列表
   await socket.emit('auth', { data: UserMessages.token }, async (Data: Array<{
     active: number,
     avatarUrl: string,
@@ -49,10 +41,6 @@ onMounted(async () => {
         await UserMessages.ApplicatioList.push(Data[i])
     }
   })
-
-  socket.on('roomMessage', (data) => {
-    console.log('收到消息:', data);
-  });
 })
 onBeforeMount(() => {
   UserMessages.ApplicatioList = []

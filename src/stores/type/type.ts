@@ -337,12 +337,34 @@ export interface User {
     username: string;
     oppositeId: number;
     userid: number;
-  }>
-  ApplicatioList:Array<{
-    username: string,
-    active: number,
-    avatarUrl: string,
-    oppositeId: number,
-    userid: number
-  }>
+  }>;
+  ApplicatioList: Array<{
+    username: string;
+    active: number;
+    avatarUrl: string;
+    oppositeId: number;
+    userid: number;
+  }>;
+
+  HistoryMessage: Array<{
+    Message: string;
+    time: string | Date;
+    active: number;
+    room: number;
+    userid: number;
+  }>;
+  Message: Array<{
+    Message: string;
+    time: string | Date;
+    active: number;
+    room: number;
+    userid: number;
+  }>;
+  mergeMessages: Array<{
+    Message: string;
+    time: string | Date;
+    active: number;
+    room: number;
+    userid: number;
+  }>;
 }
