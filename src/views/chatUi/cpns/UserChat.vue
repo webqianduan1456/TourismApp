@@ -17,7 +17,7 @@ defineProps({
     <template v-if="Number(item.userid) !== Number(route.params.oppositeId)">
       <div class="left">
         <!-- 用户头像 -->
-        <img src="../../assets/img/xjiang.jpg" alt="">
+        <img src="../../../assets/img/xjiang.jpg" alt="">
         <!-- 内容 -->
         <div class="contents">
           <div></div>
@@ -34,7 +34,7 @@ defineProps({
           <div></div>
         </div>
         <!-- 用户头像 -->
-        <img src="../../assets/img/xjiang.jpg" alt="">
+        <img src="../../../assets/img/xjiang.jpg" alt="">
       </div>
     </template>
   </div>
