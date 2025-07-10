@@ -6,7 +6,7 @@ import UserSurfaceView from '../Message/UserSurface/UserSurfaceView.vue';
 
 const UserMessages = UserMessage()
 const toUserSurfaces = () => {
-  router.push('/home')
+  router.push('/message')
 }
 
 const SearchMessage = ref()
@@ -25,6 +25,7 @@ const AddFriend = async () => {
   }
   // 触发申请
   await UserMessages.fetchApplicationList(data)
+  router.push('/home')
 }
 // 失去焦点将查到的姓名除掉
 const clearUser = () => {

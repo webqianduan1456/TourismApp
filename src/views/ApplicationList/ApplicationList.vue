@@ -14,6 +14,8 @@ const toUp = () => {
 const consent = async () => {
   await UserMessages.fetchCreateApplication(UserMessages.ApplicatioList.map(item => item.oppositeId)[0], UserMessages.id, 1, UserMessages.username)
   await UserMessages.fetchFindFriendList(UserMessages.id, 0)
+  router.push('/home')
+
 }
 // 拒绝好友
 const refuse = async () => {
@@ -26,6 +28,16 @@ const refuse = async () => {
 }
 
 onMounted(async () => {
+  socket.on('connect', () => {
+    console.log('✅ Socket 连接成功');
+  });
+  socket.on('connect_error', (error) => {
+    console.log('❌ Socket 连接失败:', error.message);
+  });
+
+  socket.on('disconnect', (reason) => {
+    console.log('❌ Socket 断开连接:', reason);
+  });
   await UserMessages.fetchFindFriendList(UserMessages.id, 0)
   // 连接成功发送toke验证同时拿到redis里面的申请列表
   await socket.emit('auth', { data: UserMessages.token }, async (Data: Array<{
