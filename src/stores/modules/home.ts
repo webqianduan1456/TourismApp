@@ -147,6 +147,8 @@ const userHomeStore = defineStore("home", {
     },
     // 创建历史记录
     async fetchAllAddDataHistory(itemDates: { id: number }) {
+      console.log("执行力");
+
       await AddDataHistory(itemDates, Number(UserMessages.id));
     },
   },

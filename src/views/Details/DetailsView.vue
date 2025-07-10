@@ -36,26 +36,29 @@ const { HomeHouseList, HomeHouseListCopy } = storeToRefs(userHomeStores)
 
 // 回到上一页
 const Rollback = async () => {
+  // 获取第一次首页已经存储的数据,对远程服务器进行添加数据
+  itemData.value = HomeHouseList.value.SelectedS.find((item) =>
+    item.houseId === Number(route.params.id)
+  )
   // 收藏图标样式切换状态执行
   if (setcolor.value == true) {
-    // 获取第一次首页已经存储的数据,对远程服务器进行添加数据
-    itemData.value = HomeHouseList.value.SelectedS.find((item) =>
-      item.houseId === Number(route.params.id)
-    )
     // 添加收藏数据
     if (itemData.value) {
       await userHomeStores.fetchAllHomeHouseListAdd(itemData.value)
-      await userHomeStores.fetchAllAddDataHistory(itemData.value)
     }
   } else {
     // 删除数据
     await userHomeStores.fetchAllHomeHouseListDelete(Number(route.params.id))
+
     // 通过id删除热门副本数据
     const CopyIndex = HomeHouseListCopy?.value?.findIndex(item => item.houseId === Number(route.params.id))
     if (CopyIndex !== -1 && CopyIndex !== undefined) {
       HomeHouseListCopy?.value?.splice(CopyIndex, 1)
     }
   }
+  await userHomeStores.fetchAllAddDataHistory(itemData.value)
+  console.log(itemData.value);
+
   router.back()
 }
 // 刷新获取当前数据

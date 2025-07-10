@@ -47,7 +47,6 @@ watch(active, async (newActive) => {
     setTimeout(() => {
       // 控制请求时间(开)
       control.value = true
-      console.log('执行');
     }, 6000)
     return;
   }
@@ -74,7 +73,6 @@ const payment = (data: boolean,id:number) => {
 // 获取子组件传递过来的数据
 const confirm = async (cityId:number) => {
   show.value = false;
-  console.log(cityId);
   // 获取更新后的数据
   await UserOrders.fetchUpdateOrder(cityId)
   await UserOrders.fetchWaitingOrder()

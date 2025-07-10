@@ -141,6 +141,7 @@ export function GetDataHistory(userid: number) {
 
 // 创建历史记录
 export function AddDataHistory(itemDates: { id: number }, userid: number) {
+
   return DefaultAxios.post({
     url: "/home/AddHistory",
     headers: new AxiosHeaders({

@@ -27,7 +27,6 @@ const onSubmit = async (values: { username: string, password: string, phone: str
   }
   if (res.data.code === 409) {
     console.log('账号重复');
-
   }
 }
 defineOptions({
