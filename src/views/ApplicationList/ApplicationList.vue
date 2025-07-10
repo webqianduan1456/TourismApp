@@ -14,8 +14,7 @@ const toUp = () => {
 const consent = async () => {
   await UserMessages.fetchCreateApplication(UserMessages.ApplicatioList.map(item => item.oppositeId)[0], UserMessages.id, 1, UserMessages.username)
   await UserMessages.fetchFindFriendList(UserMessages.id, 0)
-  router.push('/home')
-
+  router.push('/message')
 }
 // 拒绝好友
 const refuse = async () => {
@@ -25,6 +24,7 @@ const refuse = async () => {
     await UserMessages.fetchDeleteFriend(UserMessages.id, UserMessages.ApplicatioList.map(item => item.oppositeId)[0])
     await UserMessages.fetchFindFriendList(UserMessages.id, 0)
   }
+  router.push('/message')
 }
 
 onMounted(async () => {
@@ -76,8 +76,8 @@ onBeforeMount(() => {
         <UserSurfaceView :ApplicatioLists="item">
           <template #right>
             <div class="hesitate">
-              <van-button round type="success" size="small" @click="consent">同 意 好 友 </van-button>
-              <van-button round type="danger" size="small" @click="refuse">拒 绝 好 友</van-button>
+              <van-button round type="success" size="small" @click.stop="consent">同 意 好 友 </van-button>
+              <van-button round type="danger" size="small" @click.stop="refuse">拒 绝 好 友</van-button>
             </div>
           </template>
         </UserSurfaceView>

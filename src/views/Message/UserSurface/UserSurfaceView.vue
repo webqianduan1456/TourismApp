@@ -14,6 +14,8 @@ const toChat = async (oppositeId: number) => {
     ...(Array.isArray(UserMessages.HistoryMessage) ? UserMessages.HistoryMessage : []),
     ...(Array.isArray(UserMessages.Message) ? UserMessages.Message : [])
   ]
+  console.log('执行');
+
   router.push(`/chat/${oppositeId}`)
 }
 defineProps<{

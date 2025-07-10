@@ -7,5 +7,4 @@ const socket = io("ws://47.122.47.101:8889", {
   reconnection: true,
 });
 socket.connect();
-
 export default socket;

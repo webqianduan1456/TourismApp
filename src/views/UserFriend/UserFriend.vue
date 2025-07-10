@@ -23,9 +23,11 @@ const AddFriend = async () => {
     oppositeId: UserMessages.id,
     userid: UserMessages.FindUses?.id
   }
+
   // 触发申请
   await UserMessages.fetchApplicationList(data)
-  router.push('/home')
+
+  router.push('/message')
 }
 // 失去焦点将查到的姓名除掉
 const clearUser = () => {
@@ -70,7 +72,7 @@ onBeforeUnmount(() => {
       <UserSurfaceView :FriendDate="UserMessages?.FindUses || {}" v-if="UserMessages?.FindUses.id">
         <template #right>
           <template v-if="!UserMessages.UserFriendList.some((items) => items.oppositeId == UserMessages.FindUses.id)">
-            <van-button round type="success" @click="AddFriend">添加朋友</van-button>
+            <van-button round type="success" @click.stop="AddFriend">添加朋友</van-button>
           </template>
           <template v-else>
             <div style="font-size: 3vw; font-weight: 600; ">
