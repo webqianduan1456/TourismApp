@@ -2,19 +2,19 @@
   "rewrites": [
     {
       "source": "/home/:path*",
-      "destination": "http://app.yqqlike.xin:8889/home/:path*"
+      "destination": "https://api.yqqlike.xin/home/:path*"
     },
     {
       "source": "/order/:path*",
-      "destination": "http://app.yqqlike.xin:8889/order/:path*"
+      "destination": "https://api.yqqlike.xin/order/:path*"
     },
     {
       "source": "/auth/:path*",
-      "destination": "http://app.yqqlike.xin:8889/auth/:path*"
+      "destination": "https://api.yqqlike.xin/auth/:path*"
     },
     {
       "source": "/user/:path*",
-      "destination": "http://app.yqqlike.xin:8889/user/:path*"
+      "destination": "https://api.yqqlike.xin/user/:path*"
     }
   ]
 }
