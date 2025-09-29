@@ -2,23 +2,23 @@
   "rewrites": [
     {
       "source": "/home/:path*",
-      "destination": "https://api.yqqlike.xin/home/:path*"
+      "destination": "http://47.118.17.138:8889/home/:path*"
     },
     {
       "source": "/order/:path*",
-      "destination": "https://api.yqqlike.xin/order/:path*"
+      "destination": "http://47.118.17.138:8889/order/:path*"
     },
     {
       "source": "/auth/:path*",
-      "destination": "https://api.yqqlike.xin/auth/:path*"
+      "destination": "http://47.118.17.138:8889/auth/:path*"
     },
     {
       "source": "/user/:path*",
-      "destination": "https://api.yqqlike.xin/user/:path*"
+      "destination": "http://47.118.17.138:8889/user/:path*"
     },
     {
       "source": "/socket.io/:path*",
-      "destination": "https://api.yqqlike.xin/socket.io/:path*"
+      "destination": "http://47.118.17.138:8889/socket.io/:path*"
     }
   ]
 }

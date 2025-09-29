@@ -1,9 +1,9 @@
-let BASE_URL: string = "https://api.yqqlike.xin";
+let BASE_URL: string = "http://47.118.17.138:8889";
 const SET_TIMEOUT: number = 8000;
 // http://codercba.com:1888/api
 if (import.meta.env.MODE === "development") {
   // 开发环境
-  BASE_URL = "https://api.yqqlike.xin";
+  BASE_URL = "http://47.118.17.138:8889";
 } else {
   // 生产环境
   BASE_URL = "";
