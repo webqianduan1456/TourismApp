@@ -5,7 +5,7 @@ defineOptions({
 import router from '@/router';
 import TNavBar from '@/views/Home/cpns/TNavBar.vue';
 import StayDays from '@/views/Home/cpns/StayDays.vue';
-import { onActivated, ref } from 'vue';
+import { onActivated, onMounted, ref } from 'vue';
 import HotPicks from '@/views/Home/cpns/HotPicks.vue';
 import LocationView from '@/views/Home/cpns/LocationView.vue';
 import { storeToRefs } from 'pinia';
@@ -18,12 +18,13 @@ import { useScroll } from '@/hooks/scroll';
 const useCityStores = useCityStore();
 // 请求首页数据
 const userHomeStores = userHomeStore();
-userHomeStores.fetchAllHomeData(useCityStores.CurrentCity.id);
-userHomeStores.fetchAllHomeCategories();
-userHomeStores.fetchAllSwiperDate();
+onMounted(() => {
+  userHomeStores.fetchAllHomeData(useCityStores.CurrentCity.id);
+  userHomeStores.fetchAllHomeCategories();
+  userHomeStores.fetchAllSwiperDate();
+})
 const HomeViewRef = ref()
 // 鼠标滚动到底部时触发
-
 const { scrollTop } = useScroll(() => {
   userHomeStores.fetchAllHomeHouseList();
 }, HomeViewRef);
@@ -108,7 +109,7 @@ const getAttractions = ref('')
 .HomeView {
   position: relative;
   height: 100vh;
-  overflow-y: scroll ;
+  overflow-y: scroll;
 }
 
 
